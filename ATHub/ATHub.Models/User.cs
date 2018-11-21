@@ -9,7 +9,7 @@ namespace ATHub.Models
     {
         //TODO Messages
 
-        public Role Role { get; set; }
+        //public Role Role { get; set; }
 
         public DateTime? Birthdate { get; set; }
 
@@ -17,7 +17,7 @@ namespace ATHub.Models
 
         public string Phone { get; set; }
 
-        public int ImageId { get; set; }
+        public int? ImageId { get; set; }
         public Image Image { get; set; }    
         public ICollection<Video> Videos { get; set; }
 

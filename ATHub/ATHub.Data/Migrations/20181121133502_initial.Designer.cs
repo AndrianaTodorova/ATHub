@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ATHub.Data.Migrations
 {
     [DbContext(typeof(ATHubDbContext))]
-    [Migration("20181120105635_DatabaseModels")]
-    partial class DatabaseModels
+    [Migration("20181121133502_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -108,7 +108,7 @@ namespace ATHub.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int>("ImageId");
+                    b.Property<int?>("ImageId");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -127,8 +127,6 @@ namespace ATHub.Data.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<int>("Role");
 
                     b.Property<string>("SecurityStamp");
 
@@ -255,11 +253,9 @@ namespace ATHub.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -290,11 +286,9 @@ namespace ATHub.Data.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 
@@ -325,8 +319,7 @@ namespace ATHub.Data.Migrations
                 {
                     b.HasOne("ATHub.Models.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ImageId");
                 });
 
             modelBuilder.Entity("ATHub.Models.Video", b =>

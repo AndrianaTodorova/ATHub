@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ATHub.Data;
-using ATHub.Services.Contracts;
+using ATHub.Models;
 using ATHub.Services;
+using ATHub.Services.Contracts;
+using System;
 
 namespace ATHub.Web
 {
@@ -39,23 +36,36 @@ namespace ATHub.Web
             services.AddDbContext<ATHubDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ATHubDbContext>();
 
-            // Add application services.
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IVideoService, VideoService>();
-            services.AddTransient<IPlayListService, PlayListService>();
-            services.AddTransient<ICommentService, CommentService>();
+            services.AddIdentity<User, IdentityRole>(
+                options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredLength = 6;
+                })
+                .AddEntityFrameworkStores<ATHubDbContext>()
+                .AddDefaultTokenProviders();
 
+            //// Add application services.
+            //services.AddTransient<IUserService, UserService>();
+            //services.AddTransient<IVideoService, VideoService>();
+            //services.AddTransient<IPlayListService, PlayListService>();
+            //services.AddTransient<ICommentService, CommentService>();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddSingleton<IEmailSender, EmailSender>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
+               // DbInitializer.Seed(serviceProvider);
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }

@@ -26,6 +26,5 @@ namespace ATHub.Data
         {
             base.OnModelCreating(modelBuilder);
            
-        }
-    }
+        }    }
 }
