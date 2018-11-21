@@ -7,7 +7,7 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+      <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -26,8 +26,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ATHub.Web</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ATHub</a>
             </div>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Account" asp-action="Edit">EditProfile</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Create">CreateVideo</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Playlist">Playlist</a></li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            }
+            @if(!User.Identity.IsAuthenticated)
+            {
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
@@ -36,6 +50,7 @@
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
+            }
         </div>
     </nav>
 
@@ -45,7 +60,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2018 - ATHub.Web</p>
+            <p>&copy; 2018 - ATHub</p>
         </footer>
     </div>
 
