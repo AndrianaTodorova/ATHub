@@ -7,13 +7,15 @@ namespace ATHub.Models
 {
     public class Video
     {
-        //Id, Name, Author, Description, Link, UploadDate, Uploader, Views, Comments, Category, Type
 
+        public Video()
+        {
+            this.Comments = new List<Comment>();
+            this.Playlists = new List<VideoPlaylist>();
+        }
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public string Performer { get; set; }
 
         public string Description { get; set; }
 
@@ -21,7 +23,7 @@ namespace ATHub.Models
 
         public DateTime UploadDate { get; set; }
 
-        //public int UploaderId { get; set; }
+        public string UploaderId { get; set; }
         public User Uploader { get; set; }
 
         public long Views { get; set; }

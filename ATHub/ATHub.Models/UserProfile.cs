@@ -15,5 +15,9 @@ namespace ATHub.Models
 
         public int? ImageId { get; set; }
         public Image Image { get; set; }
+
+        public string FacebookLink { get; set; }
+
+        public string InstagramLink { get; set; }
     }
 }

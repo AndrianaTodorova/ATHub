@@ -16,4 +16,10 @@
     <ProjectReference Include="..\ATHub.Services\ATHub.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Videos\Data\" />
+    <Folder Include="Areas\Videos\Models\" />
+    <Folder Include="wwwroot\lib\bootstrap\dist\css\" />
+  </ItemGroup>
+
 </Project>

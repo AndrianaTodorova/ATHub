@@ -6,12 +6,12 @@ namespace ATHub.Models
 {
     public class Comment
     {
-        //Id, Text, WrritenBy, WrittenDate
-
         public int Id { get; set; }
 
         public string Text { get; set; }
-        public User WrritenBy { get; set; }
+
+        public string AuthorId { get; set; }
+        public User Author { get; set; }
 
         public DateTime WrittenDate { get; set; }
 

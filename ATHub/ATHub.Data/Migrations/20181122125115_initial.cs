@@ -79,7 +79,9 @@ namespace ATHub.Data.Migrations
                     Birthdate = table.Column<DateTime>(nullable: true),
                     Country = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
-                    ImageId = table.Column<int>(nullable: true)
+                    ImageId = table.Column<int>(nullable: true),
+                    FacebookLink = table.Column<string>(nullable: true),
+                    InstagramLink = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -262,7 +264,6 @@ namespace ATHub.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    Performer = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Link = table.Column<string>(nullable: true),
                     UploadDate = table.Column<DateTime>(nullable: false),
@@ -295,7 +296,7 @@ namespace ATHub.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Text = table.Column<string>(nullable: true),
-                    WrritenById = table.Column<string>(nullable: true),
+                    AuthorId = table.Column<string>(nullable: true),
                     WrittenDate = table.Column<DateTime>(nullable: false),
                     VideoId = table.Column<int>(nullable: true)
                 },
@@ -303,15 +304,15 @@ namespace ATHub.Data.Migrations
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_Videos_VideoId",
-                        column: x => x.VideoId,
-                        principalTable: "Videos",
+                        name: "FK_Comments_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Comments_AspNetUsers_WrritenById",
-                        column: x => x.WrritenById,
-                        principalTable: "AspNetUsers",
+                        name: "FK_Comments_Videos_VideoId",
+                        column: x => x.VideoId,
+                        principalTable: "Videos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -387,14 +388,14 @@ namespace ATHub.Data.Migrations
                 column: "UserProfileId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_AuthorId",
+                table: "Comments",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_VideoId",
                 table: "Comments",
                 column: "VideoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_WrritenById",
-                table: "Comments",
-                column: "WrritenById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlayLists_UserId",

@@ -60,8 +60,9 @@ namespace ATHub.Web.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
-                var profile = user.UserProfile;
                 var profileId = user.UserProfileId;
+                var profile = db.UsersProfiles.FirstOrDefault(p => p.Id == profileId);
+             
                 if (profileId == null)
                 {
                     profile = new UserProfile()

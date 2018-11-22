@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+}
+
+@if (User.IsInRole("Admin"))
+{
+    <h2>Administrator Create</h2>
+}
+@if (!User.IsInRole("Admin"))
+{
+    <h2>Create</h2>
+}
+
+

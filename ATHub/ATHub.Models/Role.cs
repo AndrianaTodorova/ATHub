@@ -10,6 +10,7 @@ namespace ATHub.Models
         public Role()
             : this(null)
         {
+            this.Users = new List<UserRole>();
         }
 
         public Role(string name)

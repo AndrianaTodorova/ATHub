@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using ATHub.Services.Contracts;
+using ATHub.Data;
+using System.Linq;
 
 namespace ATHub.Web.Areas.Identity.Pages.Account
 {
@@ -18,19 +20,25 @@ namespace ATHub.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ATHubDbContext _db;
 
         public RegisterModel(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
+            RoleManager<Role> roleManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ATHubDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
+            _db = db;
         }
 
         [BindProperty]
@@ -40,6 +48,10 @@ namespace ATHub.Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -67,7 +79,17 @@ namespace ATHub.Web.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = Input.Email, Email = Input.Email };
+                var user = new User { UserName = Input.Username, Email = Input.Email };
+              
+               
+                    var role = new Role("Administrator");
+                    var usersRole = new UserRole()
+                    {
+                        Role = role,
+                        User = user
+                    };
+                    await _roleManager.CreateAsync(role);
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

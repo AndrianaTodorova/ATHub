@@ -11,6 +11,7 @@ using ATHub.Models;
 using ATHub.Services;
 using ATHub.Services.Contracts;
 using System;
+using System.Threading.Tasks;
 
 namespace ATHub.Web
 {
@@ -83,10 +84,32 @@ namespace ATHub.Web
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(name: "areaRoute", template: "{area:exists}/{controller=Home}/{action=Index}");
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            CreateUserRoles(serviceProvider).Wait();
+        }
+        private async Task CreateUserRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<User>>();
+
+            IdentityResult roleResult;
+            //Adding Admin Role
+            var roleCheck = await RoleManager.RoleExistsAsync("Admin");
+            if (!roleCheck)
+            {
+                //create the roles and seed them to the database
+                roleResult = await RoleManager.CreateAsync(new Role("Admin"));
+            }
+            //Assign Admin role to the main User here we have given our newly registered 
+            //login id for Admin management
+            User user = await UserManager.FindByEmailAsync("andriana@mail");
+            var User = new User();
+            await UserManager.AddToRoleAsync(user, "Admin");
         }
     }
 }

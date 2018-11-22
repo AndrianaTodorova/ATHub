@@ -6,8 +6,10 @@ namespace ATHub.Models
 {
     public class Category
     {
-        //Id, Name, Videos
-
+        public Category()
+        {
+            this.Videos = new List<Video>();
+        }
         public int Id { get; set; }
 
         public string Name { get; set; }

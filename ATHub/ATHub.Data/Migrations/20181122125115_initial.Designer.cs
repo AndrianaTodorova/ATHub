@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ATHub.Data.Migrations
 {
     [DbContext(typeof(ATHubDbContext))]
-    [Migration("20181122094312_initial")]
+    [Migration("20181122125115_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,19 +40,19 @@ namespace ATHub.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AuthorId");
+
                     b.Property<string>("Text");
 
                     b.Property<int?>("VideoId");
 
                     b.Property<DateTime>("WrittenDate");
 
-                    b.Property<string>("WrritenById");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("VideoId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("WrritenById");
+                    b.HasIndex("VideoId");
 
                     b.ToTable("Comments");
                 });
@@ -178,7 +178,11 @@ namespace ATHub.Data.Migrations
 
                     b.Property<string>("Country");
 
+                    b.Property<string>("FacebookLink");
+
                     b.Property<int?>("ImageId");
+
+                    b.Property<string>("InstagramLink");
 
                     b.Property<string>("Phone");
 
@@ -221,8 +225,6 @@ namespace ATHub.Data.Migrations
                     b.Property<string>("Link");
 
                     b.Property<string>("Name");
-
-                    b.Property<string>("Performer");
 
                     b.Property<int>("Type");
 
@@ -348,13 +350,13 @@ namespace ATHub.Data.Migrations
 
             modelBuilder.Entity("ATHub.Models.Comment", b =>
                 {
+                    b.HasOne("ATHub.Models.User", "Author")
+                        .WithMany("Comments")
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("ATHub.Models.Video")
                         .WithMany("Comments")
                         .HasForeignKey("VideoId");
-
-                    b.HasOne("ATHub.Models.User", "WrritenBy")
-                        .WithMany("Comments")
-                        .HasForeignKey("WrritenById");
                 });
 
             modelBuilder.Entity("ATHub.Models.Playlist", b =>
