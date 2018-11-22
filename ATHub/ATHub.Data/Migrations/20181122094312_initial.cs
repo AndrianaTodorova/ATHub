@@ -71,6 +71,28 @@ namespace ATHub.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UsersProfiles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Birthdate = table.Column<DateTime>(nullable: true),
+                    Country = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    ImageId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersProfiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UsersProfiles_Images_ImageId",
+                        column: x => x.ImageId,
+                        principalTable: "Images",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -89,18 +111,15 @@ namespace ATHub.Data.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Birthdate = table.Column<DateTime>(nullable: true),
-                    Country = table.Column<string>(nullable: true),
-                    Phone = table.Column<string>(nullable: true),
-                    ImageId = table.Column<int>(nullable: true)
+                    UserProfileId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Images_ImageId",
-                        column: x => x.ImageId,
-                        principalTable: "Images",
+                        name: "FK_AspNetUsers_UsersProfiles_UserProfileId",
+                        column: x => x.UserProfileId,
+                        principalTable: "UsersProfiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -211,6 +230,32 @@ namespace ATHub.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UsersRoles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(nullable: true),
+                    RoleId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersRoles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UsersRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UsersRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Videos",
                 columns: table => new
                 {
@@ -224,8 +269,7 @@ namespace ATHub.Data.Migrations
                     UploaderId = table.Column<string>(nullable: true),
                     Views = table.Column<long>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
-                    Type = table.Column<int>(nullable: false),
-                    PlaylistId = table.Column<int>(nullable: true)
+                    Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -236,12 +280,6 @@ namespace ATHub.Data.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Videos_PlayLists_PlaylistId",
-                        column: x => x.PlaylistId,
-                        principalTable: "PlayLists",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Videos_AspNetUsers_UploaderId",
                         column: x => x.UploaderId,
@@ -278,6 +316,32 @@ namespace ATHub.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "VideosPlaylists",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    VideoId = table.Column<int>(nullable: false),
+                    PlaylistId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VideosPlaylists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VideosPlaylists_PlayLists_PlaylistId",
+                        column: x => x.PlaylistId,
+                        principalTable: "PlayLists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_VideosPlaylists_Videos_VideoId",
+                        column: x => x.VideoId,
+                        principalTable: "Videos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -306,11 +370,6 @@ namespace ATHub.Data.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_ImageId",
-                table: "AspNetUsers",
-                column: "ImageId");
-
-            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -321,6 +380,11 @@ namespace ATHub.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_UserProfileId",
+                table: "AspNetUsers",
+                column: "UserProfileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_VideoId",
@@ -338,19 +402,39 @@ namespace ATHub.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UsersProfiles_ImageId",
+                table: "UsersProfiles",
+                column: "ImageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersRoles_RoleId",
+                table: "UsersRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersRoles_UserId",
+                table: "UsersRoles",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Videos_CategoryId",
                 table: "Videos",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Videos_PlaylistId",
-                table: "Videos",
-                column: "PlaylistId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Videos_UploaderId",
                 table: "Videos",
                 column: "UploaderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VideosPlaylists_PlaylistId",
+                table: "VideosPlaylists",
+                column: "PlaylistId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VideosPlaylists_VideoId",
+                table: "VideosPlaylists",
+                column: "VideoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -374,7 +458,16 @@ namespace ATHub.Data.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
+                name: "UsersRoles");
+
+            migrationBuilder.DropTable(
+                name: "VideosPlaylists");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "PlayLists");
 
             migrationBuilder.DropTable(
                 name: "Videos");
@@ -383,10 +476,10 @@ namespace ATHub.Data.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "PlayLists");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "UsersProfiles");
 
             migrationBuilder.DropTable(
                 name: "Images");

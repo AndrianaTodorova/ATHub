@@ -32,5 +32,7 @@ namespace ATHub.Models
         public Category Category { get; set; }
 
         public VideoType Type { get; set; }
+
+        public ICollection<VideoPlaylist> Playlists { get; set; }
     }
 }

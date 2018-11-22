@@ -42,7 +42,7 @@ namespace ATHub.Data
             {
                 UserName = email,
                 Email = email,
-               Country = country
+               
             };
 
             var userCreateResult = await userManager.CreateAsync(user, password);

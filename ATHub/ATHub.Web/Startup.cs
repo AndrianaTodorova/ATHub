@@ -37,7 +37,7 @@ namespace ATHub.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>(
+            services.AddIdentity<User, Role>(
                 options =>
                 {
                     options.Password.RequireDigit = false;

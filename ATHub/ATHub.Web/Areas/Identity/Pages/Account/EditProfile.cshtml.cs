@@ -15,7 +15,7 @@ namespace ATHub.Web.Areas.Identity.Pages.Account
 {
     public class EditProfileModel : PageModel
     {
-       
+
         private readonly UserManager<User> _userManager;
         private readonly ATHubDbContext db;
 
@@ -34,15 +34,18 @@ namespace ATHub.Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-          
-           
+
+
             [Display(Name = "PictureLink")]
             public string PictureLink { get; set; }
 
-            
-        
+
+
             [Display(Name = "Country")]
             public string Country { get; set; }
+
+            [Display(Name = "PhoneNumber")]
+            public string Phone { get; set; }
 
         }
 
@@ -57,16 +60,39 @@ namespace ATHub.Web.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
-                user.Country = Input.Country;
-                if(user.Image == null)
+                var profile = user.UserProfile;
+                var profileId = user.UserProfileId;
+                if (profileId == null)
+                {
+                    profile = new UserProfile()
+                    {
+                        Country = Input.Country,
+                        Phone = Input.Phone
+                    };
+                    db.UsersProfiles.Add(profile);
+                    user.UserProfile = profile;
+                }
+                else
+                {
+                    profile.Country = Input.Country;
+                    profile.Phone = Input.Phone;
+                }
+
+
+                if (profile.Image == null)
                 {
                     var image = new Image()
                     {
                         Url = Input.PictureLink
                     };
-                    user.Image = image;
+                    profile.Image = image;
                 }
-                user.Image.Url = Input.PictureLink;
+                else
+                {
+                    profile.Image.Url = Input.PictureLink;
+                }
+
+               
                 await db.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }

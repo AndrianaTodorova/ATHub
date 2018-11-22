@@ -8,21 +8,16 @@ namespace ATHub.Models
     public class User : IdentityUser
     {
         //TODO Messages
+        public int? UserProfileId { get; set; }
 
-        //public Role Role { get; set; }
-
-        public DateTime? Birthdate { get; set; }
-
-        public string Country { get; set; }
-
-        public string Phone { get; set; }
-
-        public int? ImageId { get; set; }
-        public Image Image { get; set; }    
+        public UserProfile UserProfile { get; set; }
         public ICollection<Video> Videos { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
 
         public ICollection<Playlist> Playlists { get; set; }
+
+        public ICollection<UserRole> Roles { get; set; }
+
     }
 }

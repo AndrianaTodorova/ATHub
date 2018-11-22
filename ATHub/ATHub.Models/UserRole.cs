@@ -4,17 +4,14 @@ using System.Text;
 
 namespace ATHub.Models
 {
-    public class Playlist
+    public class UserRole
     {
-        //Id, Videos, User, CreatedOn
-
         public int Id { get; set; }
 
+        public string UserId { get; set; }
         public User User { get; set; }
 
-        public DateTime CreatedOn { get; set; }
-
-
-        public ICollection<VideoPlaylist> Videos { get; set; }
+        public string RoleId { get; set; }
+        public Role Role { get; set; }
     }
 }
