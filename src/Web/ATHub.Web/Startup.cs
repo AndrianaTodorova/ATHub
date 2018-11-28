@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ATHub.Web.Models;
 using ATHub.Data;
 using ATHub.Data.Models;
+using ATHub.Data.Common;
 
 namespace ATHub.Web
 {
@@ -51,6 +52,7 @@ namespace ATHub.Web
                 .AddEntityFrameworkStores<ATHubContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +77,7 @@ namespace ATHub.Web
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(name: "areaRoute", template: "{area:exists}/{controller=Home}/{action=Index}");
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

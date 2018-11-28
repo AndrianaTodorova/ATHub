@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ATHub.Data.Common\ATHub.Data.Common.csproj" />
     <ProjectReference Include="..\ATHub.Data.Models\ATHub.Data.Models.csproj" />
   </ItemGroup>
 
