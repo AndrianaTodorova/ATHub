@@ -5,14 +5,36 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ATHub.Web.Models;
+using ATHub.Web.Models.Home;
+using ATHub.Data.Common;
+using ATHub.Data.Models;
+using System.Web;
 
 namespace ATHub.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IRepository<Video> videoRepository;
+
+        public HomeController(IRepository<Video> videoRepository)
+        {
+            this.videoRepository = videoRepository;
+        }
         public IActionResult Index()
         {
-            return View();
+
+            var videoModel = this.videoRepository.All().Select(x =>
+             new VideoModel()
+             {
+                 VideoLink = this.GetEmbed(x.Link),
+                 VideoDescription = x.Description
+             }).ToList();
+
+            var models = new VideoModels()
+            {
+                VideoModelss = videoModel
+            };
+            return View(models);
         }
 
         public IActionResult About()
@@ -38,6 +60,27 @@ namespace ATHub.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        private string GetEmbed(string link)
+        {
+
+            var uri = new Uri(link);
+
+            // you can check host here => uri.Host <= "www.youtube.com"
+
+            var query = HttpUtility.ParseQueryString(uri.Query);
+
+            var videoId = string.Empty;
+
+            if (query.AllKeys.Contains("v"))
+            {
+                videoId = query["v"];
+            }
+            else
+            {
+                videoId = uri.Segments.Last();
+            }
+            return videoId;
         }
     }
 }
