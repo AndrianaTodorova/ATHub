@@ -1,4 +1,5 @@
-﻿
+﻿@using ATHub.Web.Areas.Videos.Models
+@model VideoCreateModel
 @{
     ViewData["Title"] = "Create";
 }
@@ -6,7 +7,7 @@
 <h1 class="text-center text-torshia">Create Video</h1>
 <hr class="hr-2  w-50" />
 
-@using (Html.BeginForm("Create", "Videos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm(new { area = "Videos", controller = "Videos", action = "Create" }))
 {
     <form class="mx-auto w-50" method="post" action="/users/login">
         <div class="row d-flex justify-content-between">

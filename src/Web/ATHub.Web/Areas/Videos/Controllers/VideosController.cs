@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ATHub.Web.Areas.Videos.Controllers
 {
     
+    [Area("videos")]
     public class VideosController : Controller
     {
         private readonly IRepository<Video> videoRepository;
@@ -26,14 +27,15 @@ namespace ATHub.Web.Areas.Videos.Controllers
             this.categoryRepository = categoryRepository;
         }
 
-        [Area("Videos")]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
       
-        public IActionResult Create(VideoCreateModel model)
+        [HttpPost]
+        public async Task<IActionResult> Create(VideoCreateModel model)
         {
             var uploader =  _manager.GetUserAsync(HttpContext.User).Result;
             var video = new Video()
@@ -46,9 +48,9 @@ namespace ATHub.Web.Areas.Videos.Controllers
                 UploadDate = DateTime.UtcNow
             };
 
-            this.videoRepository.AddAsync(video);
-            this.videoRepository.SaveChangesAsync();
-            return this.RedirectToAction("/Index");
+            await this.videoRepository.AddAsync(video);
+            await this.videoRepository.SaveChangesAsync();
+            return this.RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }
