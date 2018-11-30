@@ -2,8 +2,16 @@
     ViewData["Title"] = "Home Page";
 }
 @model ATHub.Web.Models.Home.VideoModels
-@foreach (var video in Model.VideoModelss)
-{
-    <iframe src="https://www.youtube.com/embed/@video.VideoLink" width="560" height="315" frameborder="0" allowfullscreen></iframe>
-}
+<h2>Best of ATHub</h2>
+<div class="container">
+    <div class="row justify-content-between">
 
+        @foreach (var video in Model.VideoModelss)
+        {
+            <div class="col-4">
+                <iframe src="https://www.youtube.com/embed/@video.VideoLink" width="300" height="200" frameborder="0" allowfullscreen></iframe>
+                <h3>@video.VideoDescription</h3>
+            </div>
+        }
+    </div>
+</div>
