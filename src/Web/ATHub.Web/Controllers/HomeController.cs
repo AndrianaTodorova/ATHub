@@ -44,6 +44,15 @@ namespace ATHub.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Search(string searchParam)
+        {   
+            
+            ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
