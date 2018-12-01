@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATHub.Web", "Web\ATHub.Web\ATHub.Web.csproj", "{FF3030DC-C155-4549-8ABC-4898093D0ACE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATHub.Web", "Web\ATHub.Web\ATHub.Web.csproj", "{FF3030DC-C155-4549-8ABC-4898093D0ACE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATHub.Data", "Data\ATHub.Data\ATHub.Data.csproj", "{521C5016-6BBA-4240-BFF9-F9B8588BF467}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATHub.Data", "Data\ATHub.Data\ATHub.Data.csproj", "{521C5016-6BBA-4240-BFF9-F9B8588BF467}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATHub.Data.Models", "Data\ATHub.Data.Models\ATHub.Data.Models.csproj", "{EF3332DD-0EE2-4F24-AD65-ADA4B28A8D1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATHub.Data.Models", "Data\ATHub.Data.Models\ATHub.Data.Models.csproj", "{EF3332DD-0EE2-4F24-AD65-ADA4B28A8D1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATHub.Data.Common", "Data\ATHub.Data.Common\ATHub.Data.Common.csproj", "{8DBC4E98-13D0-45DD-9C84-DD042061A7B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATHub.Data.Common", "Data\ATHub.Data.Common\ATHub.Data.Common.csproj", "{8DBC4E98-13D0-45DD-9C84-DD042061A7B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

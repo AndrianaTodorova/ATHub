@@ -7,7 +7,7 @@ namespace ATHub.Web.Models.Home
 {
     public class VideoModel
     {
-        public string VideoLink { get; set; }
-        public string VideoDescription { get; set; }
+        public string Link { get; set; }
+        public string Title { get; set; }
     }
 }

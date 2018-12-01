@@ -1,4 +1,15 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function initYouTubeModal() {
+    $('.video').each(function () {
+        let src = $(this).data("src");
+        $(this).click(function () {
+            let modal = $('#myModal');
+            modal.on('show.bs.modal', function (e) {
+                $("#video").attr('src', src + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1");
+            });
+            $('#myModal').on('hide.bs.modal', function (b) {
+                $("#video").attr('src', src);
+            });
+        });
 
-// Write your JavaScript code.
+    });
+};

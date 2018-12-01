@@ -23,12 +23,12 @@ namespace ATHub.Web.Controllers
         public IActionResult Index()
         {
 
-            var videoModel = this.videoRepository.All().Select(x =>
+            var videoModel = this.videoRepository.All().OrderBy(x => Guid.NewGuid()).Select(x =>
              new VideoModel()
              {
-                 VideoLink = this.GetEmbed(x.Link),
-                 VideoDescription = x.Description
-             }).ToList();
+                 Link = this.GetEmbed(x.Link),
+                 Title = x.Name
+             }).Take(12).ToList();
 
             var models = new VideoModels()
             {
