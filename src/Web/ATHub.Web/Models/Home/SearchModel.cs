@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace ATHub.Web.Models.Home
 {
-    public class VideoModels
+    public class SearchModel
     {
-        public ICollection<VideoModel> VideoModelss { get; set; }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 }

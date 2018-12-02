@@ -14,6 +14,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\ATHub.Data.Models\ATHub.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\ATHub.Data\ATHub.Data.csproj" />
+    <ProjectReference Include="..\..\Services\ATHub.Services.Data.Models\ATHub.Services.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Services\ATHub.Services.DataServices\ATHub.Services.DataServices.csproj" />
   </ItemGroup>
 
   <ItemGroup>

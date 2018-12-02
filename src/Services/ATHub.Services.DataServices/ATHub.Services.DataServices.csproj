@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\ATHub.Data.Common\ATHub.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\ATHub.Data.Models\ATHub.Data.Models.csproj" />
+    <ProjectReference Include="..\ATHub.Services.Data.Models\ATHub.Services.Data.Models.csproj" />
+  </ItemGroup>
+
+</Project>

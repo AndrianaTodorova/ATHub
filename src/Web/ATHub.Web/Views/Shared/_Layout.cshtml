@@ -3,20 +3,37 @@
 @Html.Partial("../Base/Header")
 <body>
     <script>
-        $(document).ready(function () {
-            var ajax = new XMLHttpRequest();
-            ajax.open("GET", "https://restcountries.eu/rest/v1/lang/fr", true);
-            ajax.onload = function () {
-                var list = JSON.parse(ajax.responseText).map(function (i) { return i.name; });
-                new Awesomplete(document.getElementById('search'), { list: list });
-            };
-            ajax.send();
-            $('#startSearch').click(function () {
-                let text = $('#search').val();
-                console.log(text);
-            });
-            //let awesomeComplete = new Awesomplete();
-            //awesomeComplete.list = ["Ada", "Java", "JavaScript", "Brainfuck", "LOLCODE", "Node.js", "Ruby on Rails"];
+        //$(document).ready(function () {
+        //    var ajax = new XMLHttpRequest();
+        //    ajax.open("GET", "https://restcountries.eu/rest/v1/lang/fr", true);
+        //    ajax.onload = function () {
+        //        var list = JSON.parse(ajax.responseText).map(function (i) { return i.name; });
+        //        new Awesomplete(document.getElementById('search'), { list: list });
+        //    };
+        //    ajax.send();
+        //    $('#startSearch').click(function () {
+        //        let text = $('#search').val();
+        //        console.log(text);
+        //    });
+        //    //let awesomeComplete = new Awesomplete();
+        //    //awesomeComplete.list = ["Ada", "Java", "JavaScript", "Brainfuck", "LOLCODE", "Node.js", "Ruby on Rails"];
+        //});
+        $('#startSearch').autoComplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("GetSearchValue", "Home")',
+                    dataType: "json",
+                    data: { search: $('#startSearch').val() },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Name, value: item.Name };
+                        }));
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Error");
+                    }
+                });
+            }
         });
     </script>
     <div class="bs-component">
@@ -62,7 +79,6 @@
             <p>&copy; 2018 - ATHub</p>
         </footer>
     </div>
-
     @RenderSection("Scripts", required: false)
 </body>
 </html>

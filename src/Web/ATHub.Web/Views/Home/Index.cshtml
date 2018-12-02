@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@model ATHub.Web.Models.Home.VideoModels
+@model ATHub.Services.Data.Models.IndexViewModel
 <h2 style="text-align:center">Best of ATHub</h2>
 <div class="container">
     <script>
@@ -16,7 +16,7 @@
 
         @Html.Partial("../Modals/Video/SingleVideo")
 
-        @foreach (var video in Model.VideoModelss)
+        @foreach (var video in Model.Videos)
         {
             <div class="col-4">
                 <p style="word-break:break-word;padding-bottom:10px; height:auto;text-align:center">@video.Title</p>

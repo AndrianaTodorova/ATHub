@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ATHub.Web.Models.Home
+namespace ATHub.Services.Data.Models
 {
     public class VideoModel
     {

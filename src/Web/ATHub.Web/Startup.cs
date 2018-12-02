@@ -15,6 +15,7 @@ using ATHub.Web.Models;
 using ATHub.Data;
 using ATHub.Data.Models;
 using ATHub.Data.Common;
+using ATHub.Services.DataServices;
 
 namespace ATHub.Web
 {
@@ -53,6 +54,7 @@ namespace ATHub.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
+            services.AddScoped<IVideoService, VideoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

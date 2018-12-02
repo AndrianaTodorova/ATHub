@@ -9,30 +9,30 @@ using ATHub.Web.Models.Home;
 using ATHub.Data.Common;
 using ATHub.Data.Models;
 using System.Web;
+using ATHub.Services.DataServices;
+using ATHub.Services.Data.Models;
 
 namespace ATHub.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IRepository<Video> videoRepository;
+        public readonly IVideoService videoService;
 
-        public HomeController(IRepository<Video> videoRepository)
+        public HomeController(IRepository<Video> videoRepository, IVideoService videoService)
         {
             this.videoRepository = videoRepository;
+            this.videoService = videoService;
         }
+
+        
         public IActionResult Index()
         {
 
-            var videoModel = this.videoRepository.All().OrderBy(x => Guid.NewGuid()).Select(x =>
-             new VideoModel()
-             {
-                 Link = this.GetEmbed(x.Link),
-                 Title = x.Name
-             }).Take(12).ToList();
-
-            var models = new VideoModels()
+            var videoModel = this.videoService.GetRandomVideos(10);
+            var models = new IndexViewModel()
             {
-                VideoModelss = videoModel
+                Videos = videoModel
             };
             return View(models);
         }
@@ -46,11 +46,35 @@ namespace ATHub.Web.Controllers
 
         [HttpPost]
         public IActionResult Search(string searchParam)
-        {   
-            
-            ViewData["Message"] = "Your application description page.";
+        {
 
-            return View();
+            var searched = this.videoService.SearchVideos(searchParam).ToList();
+            if (searched.Count() == 0)
+            {
+                return View("NotFound");
+            }
+            var models = new IndexViewModel()
+            {
+                Videos = searched
+            };
+            return View(models);
+        }
+
+      
+        public JsonResult GetSearchValue(string searchParam)
+        {
+            List<SearchModel> modelList = this.videoRepository
+                .All()
+                .Where(x => x.Name.Contains(searchParam))
+                .Select(v => new SearchModel()
+                {
+                    Id = v.Id,
+                    Name = v.Name
+                })
+                .ToList();
+          
+
+            return new JsonResult(modelList);
         }
 
         public IActionResult Contact()
@@ -70,26 +94,6 @@ namespace ATHub.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        private string GetEmbed(string link)
-        {
-
-            var uri = new Uri(link);
-
-            // you can check host here => uri.Host <= "www.youtube.com"
-
-            var query = HttpUtility.ParseQueryString(uri.Query);
-
-            var videoId = string.Empty;
-
-            if (query.AllKeys.Contains("v"))
-            {
-                videoId = query["v"];
-            }
-            else
-            {
-                videoId = uri.Segments.Last();
-            }
-            return videoId;
-        }
+      
     }
 }
