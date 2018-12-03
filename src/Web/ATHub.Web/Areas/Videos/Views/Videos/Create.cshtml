@@ -1,5 +1,6 @@
 ﻿@using ATHub.Web.Areas.Videos.Models
 @model VideoCreateModel
+@inject ATHub.Services.DataServices.ICategoryService categoryService
 @{
     ViewData["Title"] = "Create";
 }
@@ -9,35 +10,41 @@
 
 @using (Html.BeginForm(new { area = "Videos", controller = "Videos", action = "Create" }))
 {
-    <form class="mx-auto w-50" method="post" action="/users/login">
-        <div class="row d-flex justify-content-between">
-            <div class="form-group col-md-5">
-                <label for="name" class="text-dark">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name..." name="name">
-            </div>
-            <div class="form-group col-md-5">
-                <label for="link" class="text-dark">Link</label>
-                <input type="text" class="form-control" id="link" placeholder="Link..." name="link">
-            </div>
+<form class="mx-auto" method="post" action="/users/login">
+   
+        <div class="form-group ">
+            <label for="name" class="text-dark">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name..." name="name">
         </div>
-        <div class="form-group">
-            <label for="description" class="text-dark">Description</label>
-            <textarea class="form-control" id="description" rows="4" placeholder="Description..."
-                      name="description"></textarea>
+        <div class="form-group ">
+            <label for="link" class="text-dark">Link</label>
+            <input type="text" class="form-control" id="link" placeholder="Link..." name="link">
         </div>
-        <div class="channel-tags-holder mt-4">
+    
+    <div class="form-group">
+        <label for="description" class="text-dark">Description</label>
+        <textarea class="form-control" id="description" rows="4" placeholder="Description..."
+                  name="description"></textarea>
+    </div>
+    @*<div class="channel-tags-holder mt-4">
             <div class="form-group">
                 <div class="d-flex justify-content-center">
                     <label for="category" class="text-dark">Category</label>
                 </div>
                 <input type="text" class="form-control" id="category" placeholder="Category..." name="category">
             </div>
-        </div>
-        <hr class="hr-2  w-50 mt-4" />
-        <div class="button-holder mt-2 d-flex justify-content-center">
-            <button type="submit" id="create-submit" class="btn btn-primary pull-right">Create</button>
-        </div>
-    </form>
+        </div>*@
+    <select class="form-control form-control-sm w-50 justify-content-around" id="category" name="category">
+      @foreach(var item in categoryService.GetCategories())
+      {
+            <option>@item</option>
+        }
+    </select>
+    <hr class="hr-2  w-50 mt-4" />
+    <div class="button-holder mt-2 d-flex justify-content-center">
+        <button type="submit" id="create-submit" class="btn btn-primary pull-right">Create</button>
+    </div>
+</form>
 }
 
 

@@ -1,4 +1,5 @@
-﻿    <!-- Modal -->
+﻿
+    <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -7,12 +8,17 @@
             <div class="modal-body">
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span style="color: white" aria-hidden="true">&times;</span>
                 </button>
                 <!-- 16:9 aspect ratio -->
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always" allowFullScreen='allowFullScreen'></iframe>
                 </div>
+                <form class="form-inline my-2 my-lg-0" asp-area="Videos" asp-controller="Videos" asp-action="Details">
+                    <input type="hidden" id="details" class="awesomplete form-control mr-sm-2" name="id" />
+                    <button id="startSearch" class="btn btn-secondary my-2 my-sm-0 center" type="submit">View</button>
+                </form>
+              
             </div>
 
         </div>

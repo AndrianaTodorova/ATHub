@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using ATHub.Data.Models;
+using ATHub.Services.Data.Models;
 using ATHub.Services.DataServices;
 using ATHub.Web.Areas.Videos.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -13,13 +15,16 @@ namespace ATHub.Web.Areas.Videos.Controllers
     public class VideosController : Controller
     {
         public readonly IVideoService videoService;
+        public readonly ICategoryService categoryService;
         private readonly UserManager<ATHubUser> _manager;
 
         public VideosController(IVideoService videoService
-            , UserManager<ATHubUser> _manager)
+            , UserManager<ATHubUser> _manager,
+            ICategoryService categoryService)
         {
             this.videoService = videoService;
             this._manager = _manager;
+            this.categoryService = categoryService;
 
         }
 
@@ -30,7 +35,12 @@ namespace ATHub.Web.Areas.Videos.Controllers
             return View();
         }
 
-
+        public IActionResult Details(int id)
+        {
+            var detailsModel = this.videoService.GetDetailsVideoModel(id);
+           
+            return View(detailsModel);
+        }
         [HttpPost]
         [Authorize]
         public  async Task<IActionResult> Create(VideoCreateModel model)

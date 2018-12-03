@@ -59,7 +59,7 @@
                         <a asp-area="Videos" asp-controller="Videos" asp-action="Create" class="nav-link">Create</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" asp-controller="Home" asp-action="Search">
+                <form class="form-inline my-2 my-lg-0" asp-area="" asp-controller="Home" asp-action="Search">
                     <input id="search" class="awesomplete form-control mr-sm-2" name="searchParam" />
                     <button id="startSearch" class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
@@ -74,9 +74,9 @@
     <div class="container body-content">
 
         @RenderBody()
-        <hr />
         <footer>
-            <p>&copy; 2018 - ATHub</p>
+            <hr class="my-1" style="background:white" />
+            <div class="footer-copyright text-center py-2" >&copy; CopyRight ATHub 2018. All rights reserved</div>
         </footer>
     </div>
     @RenderSection("Scripts", required: false)

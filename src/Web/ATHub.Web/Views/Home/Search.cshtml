@@ -4,12 +4,20 @@
 }
 @model ATHub.Services.Data.Models.IndexViewModel
 <div class="container">
+    <script>
+        $(document).ready(function () {
+            initYouTubeModal();
+        });
+
+    </script>
     <ul>
+        @Html.Partial("../Modals/Video/SingleVideo")
+
         @foreach (var video in Model.Videos)
         {
             <li>
                 <p style="text-align:left">@video.Title</p>
-                <img width="300" height="200" src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg" data-src="https://www.youtube.com/embed/@video.Link" />
+                <img width="300" height="200" data-target="#myModal" class="video" data-toggle="modal" src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg" data-src="https://www.youtube.com/embed/@video.Link" />
             </li>
         }
     </ul>

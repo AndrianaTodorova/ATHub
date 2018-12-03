@@ -1,0 +1,30 @@
+﻿@model ATHub.Services.Data.Models.DetailsVideoModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div>
+    <hr />
+    <iframe width="420" height="315"
+            src="https://www.youtube.com/embed/@Model.Link"></iframe>
+    <p style="word-break:break-word;padding-bottom:10px; height:auto;text-align:left">@Model.Title</p>
+    <p>@Model.Views Views</p>
+    <p>@Model.UploaderName</p>
+    <p>Uploaded on @Model.UploadDate</p>
+    <div class="form-group">
+        <label for="exampleTextarea">Add comment</label>
+        <textarea style="width:50%;padding:2%;font-size:1.2em;background-color:silver;" class="form-control" id="exampleTextarea" rows="3"></textarea>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Add</a>
+        </p>
+    </div>
+    @foreach (var comment in Model.Comments)
+    {
+        <p> @comment.UploaderName</p>
+        <p>@comment.Text</p>
+    }
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -12,5 +12,7 @@ namespace ATHub.Services.DataServices
         IEnumerable<VideoModel> GetRandomVideos(int count);
 
         IEnumerable<VideoModel> SearchVideos(string search);
+
+       DetailsVideoModel GetDetailsVideoModel(int id);
     }
 }

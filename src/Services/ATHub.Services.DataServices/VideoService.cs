@@ -46,6 +46,22 @@ namespace ATHub.Services.DataServices
             return video.Id;
         }
 
+        public DetailsVideoModel GetDetailsVideoModel(int id)
+        {
+            var model = this.videoRepository.All().Where(p => p.Id == id).Select(x => new DetailsVideoModel()
+            {
+                Title = x.Name,
+                Description = x.Description,
+                UploaderName = x.Uploader.UserName,
+                Views = x.Views + 1,
+                Link = this.GetEmbed(x.Link),
+                UploadDate = x.UploadDate.ToString(),
+                Comments = x.Comments.Select(c => new CommentsDetailsVideoModel() { Text = c.Text, Date = c.WrittenDate.ToString(), UploaderName = c.Author.UserName })
+            }).FirstOrDefault();
+
+            return model;
+        }
+
         public IEnumerable<VideoModel> GetRandomVideos(int count)
         {
             var videos = this.videoRepository.All()
@@ -53,6 +69,7 @@ namespace ATHub.Services.DataServices
                .Select(x =>
              new VideoModel()
              {
+                 Id = x.Id,
                  Link = this.GetEmbed(x.Link),
                  Title = x.Name
              }).Take(12).ToList();
