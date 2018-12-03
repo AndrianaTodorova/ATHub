@@ -15,3 +15,22 @@
 
     });
 };
+
+function search() {
+    let autocmoplete = new Awesomplete(document.getElementById('search'), { list: [] });
+    $('#search').keyup(function () {
+        let input = $(this).val();
+        if (input.length >= 3) {
+            $.ajax({
+                url: "/Home/GetSearchValue",
+                type: "GET",
+                data: { searchParam: $(this).val() },
+                success: function (data) {
+                    let list = data.map((i) => { return i.name; });
+                    autocmoplete.list = list;
+
+                }
+            })
+        }
+    });
+}

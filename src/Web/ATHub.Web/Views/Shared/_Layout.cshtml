@@ -3,37 +3,24 @@
 @Html.Partial("../Base/Header")
 <body>
     <script>
-        //$(document).ready(function () {
-        //    var ajax = new XMLHttpRequest();
-        //    ajax.open("GET", "https://restcountries.eu/rest/v1/lang/fr", true);
-        //    ajax.onload = function () {
-        //        var list = JSON.parse(ajax.responseText).map(function (i) { return i.name; });
-        //        new Awesomplete(document.getElementById('search'), { list: list });
-        //    };
-        //    ajax.send();
-        //    $('#startSearch').click(function () {
-        //        let text = $('#search').val();
-        //        console.log(text);
-        //    });
-        //    //let awesomeComplete = new Awesomplete();
-        //    //awesomeComplete.list = ["Ada", "Java", "JavaScript", "Brainfuck", "LOLCODE", "Node.js", "Ruby on Rails"];
-        //});
-        $('#startSearch').autoComplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: '@Url.Action("GetSearchValue", "Home")',
-                    dataType: "json",
-                    data: { search: $('#startSearch').val() },
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return { label: item.Name, value: item.Name };
-                        }));
-                    },
-                    error: function (xhr, status, error) {
-                        alert("Error");
-                    }
-                });
-            }
+        $(document).ready(function () {
+           
+           let autocmoplete = new Awesomplete(document.getElementById('search'), { list: [] });
+            $('#search').keyup(function () {
+                let input = $(this).val();
+                if (input.length >= 3) {
+                    $.ajax({
+                        url: "/Home/GetSearchValue",
+                        type: "GET",
+                        data: { searchParam: $(this).val() },
+                        success: function (data) {
+                            let list = data.map((i) => { return i.name; });
+                            autocmoplete.list = list;
+
+                        }
+                    })
+                }
+            });
         });
     </script>
     <div class="bs-component">
@@ -76,7 +63,7 @@
         @RenderBody()
         <footer>
             <hr class="my-1" style="background:white" />
-            <div class="footer-copyright text-center py-2" >&copy; CopyRight ATHub 2018. All rights reserved</div>
+            <div class="footer-copyright text-center py-2">&copy; CopyRight ATHub 2018. All rights reserved</div>
         </footer>
     </div>
     @RenderSection("Scripts", required: false)
