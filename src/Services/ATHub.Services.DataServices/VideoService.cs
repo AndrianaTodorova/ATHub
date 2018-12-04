@@ -58,7 +58,6 @@ namespace ATHub.Services.DataServices
                 UploadDate = x.UploadDate.ToString(),
                 Comments = x.Comments.Select(c => new CommentsDetailsVideoModel() { Text = c.Text, Date = c.WrittenDate.ToString(), UploaderName = c.Author.UserName })
             }).FirstOrDefault();
-
             return model;
         }
 
@@ -84,6 +83,7 @@ namespace ATHub.Services.DataServices
                .Select(x =>
              new VideoModel()
              {
+                 Id = x.Id,
                  Link = this.GetEmbed(x.Link),
                  Title = x.Name
              })
