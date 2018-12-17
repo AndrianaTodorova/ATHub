@@ -22,7 +22,7 @@ namespace ATHub.Data
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            builder.UseSqlServer(connectionString);
+            builder.UseSqlServer(connectionString).UseLazyLoadingProxies();
 
             // Stop client query evaluation
             builder.ConfigureWarnings(w => w.Throw(RelationalEventId.QueryClientEvaluationWarning));

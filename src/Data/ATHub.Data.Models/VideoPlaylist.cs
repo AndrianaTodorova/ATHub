@@ -10,10 +10,10 @@ namespace ATHub.Data.Models
 
         public int VideoId { get; set; }
 
-        public Video Video { get; set; }
+        public virtual Video Video { get; set; }
 
         public int PlaylistId { get; set; }
 
-        public Playlist Playlist { get; set; }
+        public virtual Playlist Playlist { get; set; }
     }
 }

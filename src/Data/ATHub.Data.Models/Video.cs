@@ -26,17 +26,17 @@ namespace ATHub.Data.Models
         public DateTime UploadDate { get; set; }
 
         public string UploaderId { get; set; }
-        public ATHubUser Uploader { get; set; }
+        public virtual ATHubUser Uploader { get; set; }
 
         public long Views { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
 
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
-        public VideoType Type { get; set; }
+        public virtual VideoType Type { get; set; }
 
-        public ICollection<VideoPlaylist> Playlists { get; set; }
+        public virtual ICollection<VideoPlaylist> Playlists { get; set; }
     }
 }

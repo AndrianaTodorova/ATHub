@@ -50,6 +50,7 @@ namespace ATHub.Services.DataServices
         {
             var model = this.videoRepository.All().Where(p => p.Id == id).Select(x => new DetailsVideoModel()
             {
+                Id = x.Id,
                 Title = x.Name,
                 Description = x.Description,
                 UploaderName = x.Uploader.UserName,

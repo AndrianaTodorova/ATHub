@@ -50,6 +50,8 @@ namespace ATHub.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<int>("PlaylistId");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -137,7 +139,9 @@ namespace ATHub.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("PlayLists");
                 });
@@ -367,8 +371,8 @@ namespace ATHub.Data.Migrations
             modelBuilder.Entity("ATHub.Data.Models.Playlist", b =>
                 {
                     b.HasOne("ATHub.Data.Models.ATHubUser", "User")
-                        .WithMany("Playlists")
-                        .HasForeignKey("UserId");
+                        .WithOne("Playlist")
+                        .HasForeignKey("ATHub.Data.Models.Playlist", "UserId");
                 });
 
             modelBuilder.Entity("ATHub.Data.Models.UserProfile", b =>

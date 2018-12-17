@@ -6,6 +6,7 @@ namespace ATHub.Services.Data.Models
 {
     public class DetailsVideoModel
     {
+        public int Id { get; set; }
         public string Title { get; set; }
 
         public long Views { get; set; }

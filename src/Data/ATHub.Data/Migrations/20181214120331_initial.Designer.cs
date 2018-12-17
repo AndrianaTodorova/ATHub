@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ATHub.Data.Migrations
 {
     [DbContext(typeof(ATHubContext))]
-    [Migration("20181128130815_ModelEntitiesAdded")]
-    partial class ModelEntitiesAdded
+    [Migration("20181214120331_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,6 +51,8 @@ namespace ATHub.Data.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<int>("PlaylistId");
 
                     b.Property<string>("SecurityStamp");
 
@@ -139,7 +141,9 @@ namespace ATHub.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("PlayLists");
                 });
@@ -369,8 +373,8 @@ namespace ATHub.Data.Migrations
             modelBuilder.Entity("ATHub.Data.Models.Playlist", b =>
                 {
                     b.HasOne("ATHub.Data.Models.ATHubUser", "User")
-                        .WithMany("Playlists")
-                        .HasForeignKey("UserId");
+                        .WithOne("Playlist")
+                        .HasForeignKey("ATHub.Data.Models.Playlist", "UserId");
                 });
 
             modelBuilder.Entity("ATHub.Data.Models.UserProfile", b =>

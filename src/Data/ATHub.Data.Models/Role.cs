@@ -19,6 +19,6 @@ namespace ATHub.Data.Models
            
         }
 
-        public ICollection<UserRole> Users { get; set; }
+        public virtual ICollection<UserRole> Users { get; set; }
     }
 }

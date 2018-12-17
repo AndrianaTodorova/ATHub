@@ -15,6 +15,6 @@ namespace ATHub.Data.Models
 
         public string Name { get; set; }
 
-        public ICollection<Video> Videos { get; set; }
+        public virtual ICollection<Video> Videos { get; set; }
     }
 }

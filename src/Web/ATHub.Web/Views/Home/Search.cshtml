@@ -3,22 +3,25 @@
     ViewData["Title"] = "Search";
 }
 @model ATHub.Services.Data.Models.IndexViewModel
+<script>
+    $(document).ready(function () {
+        initYouTubeModal();
+    });
+
+</script>
 <div class="container">
-    <script>
-        $(document).ready(function () {
-            initYouTubeModal();
-        });
-
-    </script>
-    <ul>
-        @Html.Partial("../Modals/Video/SingleVideo")
-
+    <div class="row justify-content-between">
         @foreach (var video in Model.Videos)
         {
-            <li>
-                <p style="text-align:left">@video.Title</p>
-                <img id="@video.Id" width="300" height="200" data-target="#myModal" class="video" data-toggle="modal" src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg" data-src="https://www.youtube.com/embed/@video.Link" />
-            </li>
+            <div class="col-12">
+                <p style="word-break:break-word;padding-bottom:10px; height:auto;text-align:center">@video.Title</p>
+                <div style="padding-top:220px; cursor:pointer">
+                    <img class="searchImg video" id="@video.Id" width="250" height="200" src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg"  data-toggle="modal" data-src="https://www.youtube.com/embed/@video.Link" data-target="#myModal" />
+                </div>
+            </div>
         }
-    </ul>
+    </div>
 </div>
+@Html.Partial("../Modals/Video/SingleVideo")
+
+

@@ -16,6 +16,8 @@ using ATHub.Data;
 using ATHub.Data.Models;
 using ATHub.Data.Common;
 using ATHub.Services.DataServices;
+using ATHub.Web.Middlewares;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace ATHub.Web
 {
@@ -40,8 +42,8 @@ namespace ATHub.Web
 
             services.AddDbContext<ATHubContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<ATHubUser>(
+                    Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies());
+            services.AddIdentity<ATHubUser, Role>(
                  options =>
                  {
                      options.Password.RequiredLength = 6;
@@ -51,11 +53,14 @@ namespace ATHub.Web
                      options.Password.RequireDigit = false;
                  })
                 .AddEntityFrameworkStores<ATHubContext>();
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
             services.AddScoped<IVideoService, VideoService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IPlaylistService, PlaylistService>();
+            services.AddScoped<ICommentsService, CommentsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +82,7 @@ namespace ATHub.Web
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+            app.UseSeedDataMiddlewareExtensions();
 
             app.UseMvc(routes =>
             {

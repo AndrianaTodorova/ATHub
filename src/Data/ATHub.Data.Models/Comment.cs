@@ -11,7 +11,7 @@ namespace ATHub.Data.Models
         public string Text { get; set; }
 
         public string AuthorId { get; set; }
-        public ATHubUser Author { get; set; }
+        public virtual ATHubUser Author { get; set; }
 
         public DateTime WrittenDate { get; set; }
 

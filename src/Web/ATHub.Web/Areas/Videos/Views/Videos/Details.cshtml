@@ -8,23 +8,29 @@
     <iframe width="550" height="315"
             src="https://www.youtube.com/embed/@Model.Link"></iframe>
     <p style="word-break:break-word;padding-bottom:10px; height:auto;text-align:left">@Model.Title</p>
+    <p class="lead">
+        <a asp-route-id="@Model.Id" asp-area="Videos" asp-action="AddToPlaylist" asp-controller="Playlists" class="btn btn-primary btn-lg"  role="button">Add To Playlist</a>
+    </p>
     <p>@Model.Views Views</p>
     <p>@Model.UploaderName</p>
     <p>Uploaded on @Model.UploadDate</p>
     <div class="form-group">
-        <label for="exampleTextarea">Add comment</label>
-        <textarea style="width:50%;padding:2%;font-size:1.2em;background-color:silver;" class="form-control" id="exampleTextarea" rows="3"></textarea>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Add</a>
-        </p>
+        @*<form class="form-inline my-2 my-lg-0" asp-area="" asp-controller="Home" asp-action="Search">
+            <input id="search" class="awesomplete form-control search-menu mr-sm-2" name="searchParam" />
+            <button id="startSearch" class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>*@
+        <form asp-area="Videos" asp-controller="Comments" asp-action="Add" asp-route-id="@Model.Id">
+            <label for="addComment">Add comment</label>
+            <textarea name="content" id="content" style="width:50%;padding:2%;font-size:1.2em;background-color:silver;" class="form-control" rows="3"></textarea>
+            <p class="lead">
+                <button id="add" class="btn btn-secondary my-2 my-sm-0" type="submit">Add</button>
+            </p>
+        </form>
+       
     </div>
     @foreach (var comment in Model.Comments)
     {
         <p> @comment.UploaderName</p>
         <p>@comment.Text</p>
     }
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
 </div>

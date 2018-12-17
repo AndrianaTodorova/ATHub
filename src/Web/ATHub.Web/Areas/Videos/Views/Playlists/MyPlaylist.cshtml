@@ -1,0 +1,24 @@
+﻿@model ATHub.Services.Data.Models.MyPlaylistViewModel
+@{
+    ViewData["Title"] = "MyPlaylist";
+}
+<script>
+        $(document).ready(function () {
+            initYouTubeModal();
+        });
+
+</script>
+
+<h2>MyPlaylist</h2>
+<h3>@Model.VideosCount videos</h3>
+@foreach (var video in @Model.Videos)
+{
+    @Html.Partial("../Modals/Video/SingleVideo")
+    <div class="col-12">
+        <p style="word-break:break-word;padding-bottom:10px; height:auto;text-align:left">@video.Title</p>
+        <div style="padding-top:220px; cursor:pointer;">
+            <img id="@video.Id" width="250" height="200" style="padding-top:3px" src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg" class="video" data-toggle="modal" data-src="https://www.youtube.com/embed/@video.Link" data-target="#myModal" />
+        </div>
+    </div>
+}
+
