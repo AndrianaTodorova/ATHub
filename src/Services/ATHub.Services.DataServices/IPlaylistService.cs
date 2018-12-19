@@ -11,5 +11,9 @@ namespace ATHub.Services.DataServices
     {
         Task<int> AddToPlaylist(int id, ATHubUser currentUser);
         MyPlaylistViewModel GetPlaylistModel(string username);
+
+        Task<int> Remove(int id, ATHubUser currentUser);
+
+
     }
 }

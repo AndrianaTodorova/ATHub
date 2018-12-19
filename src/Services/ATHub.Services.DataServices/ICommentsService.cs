@@ -10,5 +10,8 @@ namespace ATHub.Services.DataServices
     public interface ICommentsService
     {
         Task<int> Add(string content, ATHubUser uploader, int id);
+        Task<int> Edit(string content, int id);
+
+        Task<int> Delete(int id);
     }
 }

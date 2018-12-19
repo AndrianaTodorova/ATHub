@@ -82,7 +82,7 @@ namespace ATHub.Web
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-            app.UseSeedDataMiddlewareExtensions();
+           // app.UseSeedDataMiddlewareExtensions();
 
             app.UseMvc(routes =>
             {

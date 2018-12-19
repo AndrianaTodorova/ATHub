@@ -58,7 +58,10 @@ namespace ATHub.Services.DataServices
 
 
             }
-
+            if (currentUser.Playlist.Videos.Any(p => p.Id == id))
+            {
+                throw new ArgumentException("Video already exists in the playlist");
+            }
             currentUser.Playlist.Videos.Add(videoPlaylist);
             await this.userRepository.SaveChangesAsync();
             return videoPlaylist.Id;
@@ -80,6 +83,14 @@ namespace ATHub.Services.DataServices
             }).FirstOrDefault();
          
             return model;
+        }
+
+        public async Task<int> Remove(int id, ATHubUser currentUser)
+        {
+            var currentVideo = this.videoPlaylists.All().FirstOrDefault(v => v.VideoId == id);
+            currentUser.Playlist.Videos.Remove(currentVideo);
+            await this.userRepository.SaveChangesAsync();
+            return currentVideo.Id;
         }
 
         private string GetEmbed(string link)

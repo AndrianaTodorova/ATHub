@@ -40,5 +40,12 @@ namespace ATHub.Web.Areas.Videos.Controllers
 
             return  this.Redirect("MyPlaylist");
         }
+
+        public async Task<IActionResult> Remove(int id)
+        {
+            var currenUser = this._manager.GetUserAsync(HttpContext.User).Result;
+            await this.playlistService.Remove(id, currenUser);
+            return this.Redirect("MyPlaylist");
+        } 
     }
 }

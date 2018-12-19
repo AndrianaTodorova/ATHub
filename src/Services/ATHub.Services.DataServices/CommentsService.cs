@@ -40,5 +40,21 @@ namespace ATHub.Services.DataServices
 
             return comment.Id;
         }
+
+        public async Task<int> Delete(int id)
+        {
+            var comment = this.commentsRepository.All().FirstOrDefault(x => x.Id == id);
+            this.commentsRepository.Delete(comment);
+            await this.commentsRepository.SaveChangesAsync();
+            return comment.Id;
+        }
+      
+        public async Task<int> Edit(string content,int id)
+        {
+            var comment = this.commentsRepository.All().FirstOrDefault(c => c.Id == id);
+            comment.Text = content;
+            await this.commentsRepository.SaveChangesAsync();
+            return comment.Id;
+        }
     }
 }

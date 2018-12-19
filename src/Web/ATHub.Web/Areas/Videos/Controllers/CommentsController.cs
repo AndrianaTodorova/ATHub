@@ -36,5 +36,22 @@ namespace ATHub.Web.Areas.Videos.Controllers
             return this.RedirectToAction("Index", "Home", new { area = "" });
 
         }
+
+        public IActionResult Edit()
+        {
+            return this.View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(string content, int id)
+        {          
+            var commentId = await this.commentsService.Edit(content, id);
+            return this.RedirectToAction("Index", "Home", new { area = "" });
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var commentId = await this.commentsService.Delete(id);
+            return this.RedirectToAction("Index", "Home", new { area = "" });
+        }
     }
 }
