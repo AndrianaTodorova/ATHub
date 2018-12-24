@@ -48,17 +48,19 @@ namespace ATHub.Services.DataServices
 
         public DetailsVideoModel GetDetailsVideoModel(int id)
         {
+            this.UpdateViews(id);
             var model = this.videoRepository.All().Where(p => p.Id == id).Select(x => new DetailsVideoModel()
             {
                 Id = x.Id,
                 Title = x.Name,
                 Description = x.Description,
                 UploaderName = x.Uploader.UserName,
-                Views = x.Views + 1,
+                Views = x.Views,
                 Link = this.GetEmbed(x.Link),
                 UploadDate = x.UploadDate.ToShortDateString(),
                 Comments = x.Comments.OrderByDescending(c => c.WrittenDate).Select(c => new CommentsDetailsVideoModel() {Id=c.Id, Text = c.Text, Date = c.WrittenDate.ToShortDateString(), UploaderName = c.Author.UserName })
             }).FirstOrDefault();
+
             return model;
         }
 
@@ -113,6 +115,18 @@ namespace ATHub.Services.DataServices
                 videoId = uri.Segments.Last();
             }
             return videoId;
+        }
+
+        private void UpdateViews(int id)
+        {
+            var video = this.videoRepository.All().FirstOrDefault(x => x.Id == id);
+            if(video != null)
+            {
+                video.Views++;
+                this.videoRepository.SaveChangesAsync();
+            }
+            //TODO not found exception
+        
         }
 
     }
