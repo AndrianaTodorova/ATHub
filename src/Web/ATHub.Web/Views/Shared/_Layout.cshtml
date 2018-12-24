@@ -88,9 +88,7 @@
                     <a href="#">ATHub</a>
                 </div>
                 <div class="sidebar-header">
-                    @*<div class="user-pic">
-                            <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
-                        </div>*@
+                    
                     <div class="user-info">
                         <span class="user-name">
                             <partial name="_LoginPartial" />
@@ -141,6 +139,9 @@
                             </li>
                             <li>
                                 <a asp-area="Administrator" asp-controller="Categories" asp-action="ManageCategories" class="nav-link">Manage Categories</a>
+                            </li>
+                            <li>
+                                <a asp-area="Administrator" asp-controller="Users" asp-action="ManageUsers" class="nav-link">Manage Users</a>
                             </li>
                         }
 

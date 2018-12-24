@@ -18,6 +18,8 @@ using ATHub.Data.Common;
 using ATHub.Services.DataServices;
 using ATHub.Web.Middlewares;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace ATHub.Web
 {
@@ -61,6 +63,7 @@ namespace ATHub.Web
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IPlaylistService, PlaylistService>();
             services.AddScoped<ICommentsService, CommentsService>();
+            services.AddScoped<IProfileService, ProfileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,11 +81,18 @@ namespace ATHub.Web
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(); // For the wwwroot folder
+            string pth = Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles");
+            Console.WriteLine(pth);
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(pth ),
+                RequestPath = "/StaticFiles"
+            });
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-           // app.UseSeedDataMiddlewareExtensions();
+            app.UseSeedDataMiddlewareExtensions();
 
             app.UseMvc(routes =>
             {

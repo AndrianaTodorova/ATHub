@@ -69,7 +69,7 @@ div {
     }
 }
 
-div img {
+.video {
     position: absolute;
     top: 0;
     left: 0;
@@ -844,4 +844,10 @@ body {
         font-size: 24px;
         line-height: 1.33;
         border-radius: 35px;
+    }
+
+    .avatar-image {
+        border-radius:50% !important;
+        width: 35px;
+        height: 35px;
     }

@@ -1,0 +1,17 @@
+﻿@model ATHub.Web.Areas.Administrator.Models.AllUsersViewModel
+@{
+    ViewData["Title"] = "ManageUsers";
+}
+
+<h2>ManageUsers</h2>
+<div class="form-group col-md-5">
+    <label for="exampleFormControlSelect1">Select User</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+        @foreach (var user in @Model.Users)
+        {
+            <option>
+                @user.Username
+            </option>
+        }
+    </select>
+</div>

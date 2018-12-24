@@ -46,7 +46,7 @@ namespace ATHub.Web.Middlewares
 
         private static async Task SeedUserInRoles(UserManager<ATHubUser> userManager)
         {
-            if (userManager.Users.Count() == 0)
+            if (userManager.Users.Count() == 1)
             {
                 var user = new ATHubUser
                 {

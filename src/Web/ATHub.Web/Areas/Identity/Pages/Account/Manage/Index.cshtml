@@ -10,8 +10,15 @@
    
     <div class="col-md-8">
         <div class="text-center">
-            <h6>Upload a different photo...</h6>
-            <input type="file" class="btn btn-default btn-circle btn-lg">
+            @using (Html.BeginForm("FileUpload", "Profile", FormMethod.Post,
+                         new {enctype = "multipart/form-data" }))
+            {
+                <label for="file">Upload Image:</label>
+                <input type="file" name="file" id="file" style="width: 100%;" />
+                <input type="submit" value="Upload" class="submit" />
+            }
+            @*<h6>Upload a different photo...</h6>
+        <input type="file" class="btn btn-default btn-circle btn-lg">*@
 
         </div>
         <form id="profile-form" method="post">
