@@ -37,5 +37,10 @@ namespace ATHub.Web.Areas.Identity.Controllers
             // after successfully uploading redirect the user
             return RedirectToAction("Index", "Home", new { area = ""});
         }
+
+        public IActionResult MyProfile()
+        {
+            return this.View();
+        }
     }
 }

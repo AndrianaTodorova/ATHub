@@ -851,3 +851,69 @@ body {
         width: 35px;
         height: 35px;
     }
+
+    /*My profile*/
+.profile-usertitle {
+    text-align: center;
+    margin-top: 20px
+}
+
+.profile-usertitle-name {
+    color: #5a7391;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 7px
+}
+
+.profile-usertitle-job {
+    text-transform: uppercase;
+    color: #5b9bd1;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 7px
+}
+
+.profile-userbuttons {
+    text-align: center;
+    margin-top: 10px
+}
+
+    .profile-userbuttons .btn {
+        margin-right: 5px
+    }
+
+        .profile-userbuttons .btn:last-child {
+            margin-right: 0
+        }
+
+    .profile-userbuttons button {
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 6px 15px
+    }
+
+.profile-userpic img {
+    float: none;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+    display: block;
+    margin: 0 auto;
+}
+.portlet {
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding: 0;
+    border-radius: 4px
+}
+.profile-sidebar-portlet {
+    padding: 30px 0 0 !important
+}
+
+.portlet.light {
+    padding: 12px 20px 15px;
+}
