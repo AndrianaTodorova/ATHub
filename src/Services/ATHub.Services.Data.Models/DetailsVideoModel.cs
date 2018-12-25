@@ -19,6 +19,6 @@ namespace ATHub.Services.Data.Models
 
         public string UploaderName { get; set; }
 
-        public IEnumerable<CommentsDetailsVideoModel> Comments { get; set; }
+       
     }
 }

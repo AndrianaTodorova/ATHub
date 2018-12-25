@@ -53,8 +53,8 @@ namespace ATHub.Services.DataServices
         {
             var comment = this.commentsRepository.All().FirstOrDefault(c => c.Id == id);
             comment.Text = content;
-            await this.commentsRepository.SaveChangesAsync();
-            return comment.Id;
+           int x = await this.commentsRepository.SaveChangesAsync();
+            return x;
         }
     }
 }

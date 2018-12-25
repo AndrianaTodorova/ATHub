@@ -34,3 +34,75 @@ function search() {
         }
     });
 }
+
+
+function comments(videObject) { 
+
+    requester(`/Videos/Videos/Comments`, 'GET', { id: videObject }, (data) => {
+        let parrent = $('#all_comment');
+        for (comment of data) {
+            parrent.append(`
+        <div class="col-sm-8">
+
+            <div class="post-heading">
+
+                <div class="pull-left meta">
+                    <div class="title h5">
+                        <a href="#"><b>${comment.uploaderName}</b></a>
+                        made a post.
+
+                        <a id="${comment.id}_edit"><u>Edit</u></a>
+                        <a id="${comment.id}_delete"><u>Delete</u></a>
+
+                    </div>
+                    <h6 class="text-muted time">${comment.date}</h6>
+                </div>
+            </div>
+            <div class="post-description">
+                <p>${comment.text}</p>
+            </div>
+        </div>`);
+            $(`#${comment.id}_edit`).on('click', () => {
+                let postDesc = $('.post-description');
+                postDesc.html(`
+        <textarea name="content" id="${comment.id}_content" style="width:50%;padding:2%;font-size:1.2em;background-color:silver;" class="form-control" rows="3"></textarea>
+        <p class="lead">
+            <button id="${comment.id}_save" class="btn btn-secondary my-2 my-sm-0">Save</button>
+        </p>`);
+                $(`textarea#${comment.id}_content`).val(`${comment.text}`);
+
+                $(`#${comment.id}_save`).on('click', () => {
+                    let ctn = $(`textarea#${comment.id}_content`).val();
+                    console.log('=========================');
+                    console.log(ctn);
+                    requester('/Videos/Comments/Edit', 'POST', { content: ctn,id: `${comment.id}` }, (data) => {
+                        parrent.html('');
+                        comments(videObject);
+                        console.log(data);
+
+                    })
+                });
+            });
+            $(`#${comment.id}_delete`).on('click', () => {
+                requester('/Videos/Comments/Delete', 'POST', { id: `${comment.id}` }, (data) => {
+                    if (data.success) {
+                        parrent.html('');
+                        comments(videObject);
+                    } 
+                    
+                })
+            })
+        }
+    });
+
+}
+
+function requester(url, method, data,successFunction) {
+    $.ajax({
+        url: url,
+        type: method,
+        data:data,
+        success: successFunction
+
+        })
+}

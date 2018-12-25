@@ -13,6 +13,8 @@ namespace ATHub.Services.DataServices
 
         IEnumerable<VideoModel> SearchVideos(string search);
 
-       DetailsVideoModel GetDetailsVideoModel(int id);
+        DetailsVideoModel GetDetailsVideoModel(int id);
+
+        IEnumerable<CommentsDetailsVideoModel> GetComments(int id);
     }
 }

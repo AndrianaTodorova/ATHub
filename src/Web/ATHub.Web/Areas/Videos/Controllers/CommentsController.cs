@@ -37,21 +37,29 @@ namespace ATHub.Web.Areas.Videos.Controllers
 
         }
 
-        public IActionResult Edit()
-        {
-            return this.View();
-        }
+      
         [HttpPost]
-        public async Task<IActionResult> Edit(string content, int id)
+        public JsonResult Edit(string content, int id)
         {          
-            var commentId = await this.commentsService.Edit(content, id);
-            return this.RedirectToAction("Index", "Home", new { area = "" });
+            var commentId = this.commentsService.Edit(content, id).Result;
+            var asd = new
+            {
+                success = commentId > 0
+            };
+
+            return new JsonResult(asd);
+            
         }
 
-        public async Task<IActionResult> Delete(int id)
+        [HttpPost]
+        public async Task<JsonResult> Delete(int id)
         {
             var commentId = await this.commentsService.Delete(id);
-            return this.RedirectToAction("Index", "Home", new { area = "" });
+            var asd = new
+            {
+                success = commentId > 0
+            };
+            return new JsonResult(asd);
         }
     }
 }

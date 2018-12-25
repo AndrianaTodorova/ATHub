@@ -57,13 +57,18 @@ namespace ATHub.Services.DataServices
                 UploaderName = x.Uploader.UserName,
                 Views = x.Views,
                 Link = this.GetEmbed(x.Link),
-                UploadDate = x.UploadDate.ToShortDateString(),
-                Comments = x.Comments.OrderByDescending(c => c.WrittenDate).Select(c => new CommentsDetailsVideoModel() {Id=c.Id, Text = c.Text, Date = c.WrittenDate.ToShortDateString(), UploaderName = c.Author.UserName })
+                UploadDate = x.UploadDate.ToShortDateString(), 
             }).FirstOrDefault();
 
             return model;
         }
+        public IEnumerable<CommentsDetailsVideoModel> GetComments(int id)
+        {
+            var model = this.videoRepository.All().FirstOrDefault(v => v.Id == id);
+            var comments = model.Comments.OrderByDescending(c => c.WrittenDate).Select(c => new CommentsDetailsVideoModel() { Id = c.Id, Text = c.Text, Date = c.WrittenDate.ToShortDateString(), UploaderName = c.Author.UserName });
 
+            return comments;
+        }
         public IEnumerable<VideoModel> GetRandomVideos(int count)
         {
             var videos = this.videoRepository.All()

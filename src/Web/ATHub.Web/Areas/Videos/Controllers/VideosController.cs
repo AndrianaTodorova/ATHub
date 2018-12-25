@@ -41,6 +41,12 @@ namespace ATHub.Web.Areas.Videos.Controllers
            
             return View(detailsModel);
         }
+
+        public JsonResult Comments(int id)
+        {
+            var comments = this.videoService.GetComments(id);
+            return new JsonResult(comments);
+        }
         [HttpPost]
         [Authorize]
         public  async Task<IActionResult> Create(VideoCreateModel model)
