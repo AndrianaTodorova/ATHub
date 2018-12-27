@@ -2,13 +2,17 @@
     $('.video').each(function () {
         let src = $(this).data("src");
         let id = $(this).attr('id');
+       
         $(this).click(function () {
             let modal = $('#myModal');
-            modal.on('show.bs.modal', function (e) {
+            console.log(`src: ${src} id: ${id}`)
+            modal.on('show.bs.modal', () => {
+                
                 $('#details').val(id);
                 $("#video").attr('src', src + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1");
             });
             $('#myModal').on('hide.bs.modal', function (b) {
+               
                 $("#video").attr('src', src);
             });
         });
@@ -87,8 +91,9 @@ function comments(videObject) {
                     })
                 });
             });
-            $(`#${comment.id}_delete`).on('click', () => {
-                requester('/Videos/Comments/Delete', 'POST', { id: `${comment.id}` }, (data) => {
+            $(`#${commentId}_delete`).on('click', () => {
+                requester('/Videos/Comments/Delete', 'POST', { id: `${commentId}` }, (data) => {
+                    
                     if (data.success) {
                         parrent.html('');
                         comments(videObject);
