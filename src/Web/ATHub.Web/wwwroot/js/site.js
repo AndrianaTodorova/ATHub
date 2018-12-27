@@ -58,24 +58,28 @@ function comments(videObject) {
                     <h6 class="text-muted time">${comment.date}</h6>
                 </div>
             </div>
-            <div class="post-description">
-                <p>${comment.text}</p>
+            <div id="post-description-${comment.id}"class="post-description">
+                <p  id="comment-text-${comment.id}">${comment.text}</p>
             </div>
         </div>`);
-            $(`#${comment.id}_edit`).on('click', () => {
-                let postDesc = $('.post-description');
+            let commentId = comment.id;
+            console.log(commentId);
+            $(`#${commentId}_edit`).on('click', () => {
+                let text = $(`#comment-text-${commentId}`).text();
+                let postDesc = $(`#post-description-${commentId}`);
                 postDesc.html(`
-        <textarea name="content" id="${comment.id}_content" style="width:50%;padding:2%;font-size:1.2em;background-color:silver;" class="form-control" rows="3"></textarea>
+        <textarea name="content" id="${commentId}_content" style="width:50%;padding:2%;font-size:1.2em;background-color:silver;" class="form-control" rows="3"></textarea>
         <p class="lead">
-            <button id="${comment.id}_save" class="btn btn-secondary my-2 my-sm-0">Save</button>
+            <button id="${commentId}_save" class="btn btn-secondary my-2 my-sm-0">Save</button>
         </p>`);
-                $(`textarea#${comment.id}_content`).val(`${comment.text}`);
+               
+                $(`#${commentId}_content`).val(text);
 
-                $(`#${comment.id}_save`).on('click', () => {
-                    let ctn = $(`textarea#${comment.id}_content`).val();
+                $(`#${commentId}_save`).on('click', () => {
+                    let ctn = $(`textarea#${commentId}_content`).val();
                     console.log('=========================');
                     console.log(ctn);
-                    requester('/Videos/Comments/Edit', 'POST', { content: ctn,id: `${comment.id}` }, (data) => {
+                    requester('/Videos/Comments/Edit', 'POST', { content: ctn, id: `${commentId}` }, (data) => {
                         parrent.html('');
                         comments(videObject);
                         console.log(data);
