@@ -10,6 +10,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         comments(@Model.Id);
+        newCommentEvent(@Model.Id);
     });
 </script>
 <p class="lead">
@@ -23,11 +24,11 @@
             <input id="search" class="awesomplete form-control search-menu mr-sm-2" name="searchParam" />
             <button id="startSearch" class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>*@
-    <form asp-area="Videos" asp-controller="Comments" asp-action="Add" asp-route-id="@Model.Id">
+    <form id="add_new_comment">
         <label for="addComment">Add comment</label>
         <textarea name="content" id="content" style="width:50%;padding:2%;font-size:1.2em;background-color:silver;" class="form-control" rows="3"></textarea>
         <p class="lead">
-            <button id="add" class="btn btn-secondary my-2 my-sm-0" type="submit">Add</button>
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Add</button>
         </p>
     </form>
 </div>

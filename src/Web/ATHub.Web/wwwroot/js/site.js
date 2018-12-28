@@ -39,11 +39,29 @@ function search() {
     });
 }
 
-
+function newCommentEvent(videObject) {
+    if (videObject) {
+        let newCommentForm = $('#add_new_comment');
+        newCommentForm.on('submit', (e) => {
+            e.preventDefault();
+            let contentTextArea = $('textarea#content').val();
+            console.log(contentTextArea);
+            requester('/Videos/Comments/Add', 'POST', { content: contentTextArea, id: videObject }, (data) => {
+                if (data.success) {
+                    newCommentForm.reset;
+                    $('textarea#content').val('');
+                    comments(videObject);
+                }
+            })
+        });
+    }
+}
 function comments(videObject) { 
-
+    let parrent = $('#all_comment');
+    parrent.html('');
     requester(`/Videos/Videos/Comments`, 'GET', { id: videObject }, (data) => {
-        let parrent = $('#all_comment');
+       
+        
         for (comment of data) {
             parrent.append(`
         <div class="col-sm-8">
@@ -67,7 +85,6 @@ function comments(videObject) {
             </div>
         </div>`);
             let commentId = comment.id;
-            console.log(commentId);
             $(`#${commentId}_edit`).on('click', () => {
                 let text = $(`#comment-text-${commentId}`).text();
                 let postDesc = $(`#post-description-${commentId}`);
@@ -81,12 +98,10 @@ function comments(videObject) {
 
                 $(`#${commentId}_save`).on('click', () => {
                     let ctn = $(`textarea#${commentId}_content`).val();
-                    console.log('=========================');
-                    console.log(ctn);
+                   ;
                     requester('/Videos/Comments/Edit', 'POST', { content: ctn, id: `${commentId}` }, (data) => {
-                        parrent.html('');
+                        
                         comments(videObject);
-                        console.log(data);
 
                     })
                 });
@@ -95,7 +110,6 @@ function comments(videObject) {
                 requester('/Videos/Comments/Delete', 'POST', { id: `${commentId}` }, (data) => {
                     
                     if (data.success) {
-                        parrent.html('');
                         comments(videObject);
                     } 
                     

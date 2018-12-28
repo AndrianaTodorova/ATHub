@@ -29,11 +29,16 @@ namespace ATHub.Web.Areas.Videos.Controllers
     
         }
 
-        public async Task<IActionResult> Add(string content, int id)
+        [HttpPost]
+        public JsonResult Add(string content, int id)
         {
             var currenUser = this._manager.GetUserAsync(HttpContext.User).Result;
-            var commentId = await this.commentsService.Add(content, currenUser, id);
-            return this.RedirectToAction("Index", "Home", new { area = "" });
+            var commentId = this.commentsService.Add(content, currenUser, id).Result;
+            var asd = new
+            {
+                success = commentId > 0
+            };
+            return new JsonResult(asd);
 
         }
 
