@@ -34,6 +34,10 @@ namespace ATHub.Services.DataServices
         public async Task<int> AddToPlaylist(int id, ATHubUser currentUser)
         {
             var currentVideo = this.videoRepository.All().FirstOrDefault(v => v.Id == id);
+            if(currentVideo == null)
+            {
+                throw new NullReferenceException(string.Format(ServicesDataConstants.NullVideo, id));
+            }
             var videoPlaylist = new VideoPlaylist()
             {
                 Video = currentVideo,
@@ -60,7 +64,7 @@ namespace ATHub.Services.DataServices
             }
             if (currentUser.Playlist.Videos.Any(p => p.Id == id))
             {
-                throw new ArgumentException("Video already exists in the playlist");
+                throw new NullReferenceException(ServicesDataConstants.VideoAlreadyExists);
             }
             currentUser.Playlist.Videos.Add(videoPlaylist);
             await this.userRepository.SaveChangesAsync();
@@ -88,6 +92,10 @@ namespace ATHub.Services.DataServices
         public async Task<int> Remove(int id, ATHubUser currentUser)
         {
             var currentVideo = this.videoPlaylists.All().FirstOrDefault(v => v.VideoId == id);
+            if(currentVideo == null)
+            {
+                throw new NullReferenceException(ServicesDataConstants.VideoAlreadyExists);
+            }
             currentUser.Playlist.Videos.Remove(currentVideo);
             await this.userRepository.SaveChangesAsync();
             return currentVideo.Id;

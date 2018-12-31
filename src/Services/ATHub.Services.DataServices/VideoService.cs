@@ -29,7 +29,7 @@ namespace ATHub.Services.DataServices
 
         public async Task<int> Create(string name, string description, string link, string category, ATHubUser uploader)
         {
-           
+            
             var video = new Video()
             {
                 Name = name,
@@ -104,8 +104,6 @@ namespace ATHub.Services.DataServices
         {
 
             var uri = new Uri(link);
-
-            // you can check host here => uri.Host <= "www.youtube.com"
 
             var query = HttpUtility.ParseQueryString(uri.Query);
 

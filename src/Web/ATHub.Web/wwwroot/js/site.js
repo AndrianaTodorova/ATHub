@@ -2,17 +2,17 @@
     $('.video').each(function () {
         let src = $(this).data("src");
         let id = $(this).attr('id');
-       
+
         $(this).click(function () {
             let modal = $('#myModal');
             console.log(`src: ${src} id: ${id}`)
             modal.on('show.bs.modal', () => {
-                
+
                 $('#details').val(id);
                 $("#video").attr('src', src + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1");
             });
             $('#myModal').on('hide.bs.modal', function (b) {
-               
+
                 $("#video").attr('src', src);
             });
         });
@@ -56,27 +56,29 @@ function newCommentEvent(videObject) {
         });
     }
 }
-function comments(videObject) { 
+function comments(videObject) {
     let parrent = $('#all_comment');
     parrent.html('');
     requester(`/Videos/Videos/Comments`, 'GET', { id: videObject }, (data) => {
-       
-        
+
+        console.log($('#loggedInUser').html());
         for (comment of data) {
+
             parrent.append(`
         <div class="col-sm-8">
 
             <div class="post-heading">
 
                 <div class="pull-left meta">
-                    <div class="title h5">
+                    <div id="uploaderName" class="title h5">
                         <a href="#"><b>${comment.uploaderName}</b></a>
-                        made a post.
-
-                        <a id="${comment.id}_edit"><u>Edit</u></a>
-                        <a id="${comment.id}_delete"><u>Delete</u></a>
-
-                    </div>
+                        made a post.`);
+            console.log(comment.uploaderName);
+            if (comment.uploaderName + '!' === $('#loggedInUser').html()) {
+                $('#uploaderName').append(`<a id="${comment.id}_edit"><u>Edit</u></a>
+                        <a id="${comment.id}_delete"><u>Delete</u></a>`);
+            }
+            $('#uploaderName').after(`
                     <h6 class="text-muted time">${comment.date}</h6>
                 </div>
             </div>
@@ -84,6 +86,7 @@ function comments(videObject) {
                 <p  id="comment-text-${comment.id}">${comment.text}</p>
             </div>
         </div>`);
+
             let commentId = comment.id;
             $(`#${commentId}_edit`).on('click', () => {
                 let text = $(`#comment-text-${commentId}`).text();
@@ -93,14 +96,14 @@ function comments(videObject) {
         <p class="lead">
             <button id="${commentId}_save" class="btn btn-secondary my-2 my-sm-0">Save</button>
         </p>`);
-               
+
                 $(`#${commentId}_content`).val(text);
 
                 $(`#${commentId}_save`).on('click', () => {
                     let ctn = $(`textarea#${commentId}_content`).val();
-                   ;
+                    ;
                     requester('/Videos/Comments/Edit', 'POST', { content: ctn, id: `${commentId}` }, (data) => {
-                        
+
                         comments(videObject);
 
                     })
@@ -108,11 +111,11 @@ function comments(videObject) {
             });
             $(`#${commentId}_delete`).on('click', () => {
                 requester('/Videos/Comments/Delete', 'POST', { id: `${commentId}` }, (data) => {
-                    
+
                     if (data.success) {
                         comments(videObject);
-                    } 
-                    
+                    }
+
                 })
             })
         }
@@ -120,12 +123,12 @@ function comments(videObject) {
 
 }
 
-function requester(url, method, data,successFunction) {
+function requester(url, method, data, successFunction) {
     $.ajax({
         url: url,
         type: method,
-        data:data,
+        data: data,
         success: successFunction
 
-        })
+    })
 }

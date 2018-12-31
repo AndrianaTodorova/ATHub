@@ -22,6 +22,10 @@ namespace ATHub.Services.DataServices
         }
         public async Task<int> Add(string content, ATHubUser uploader, int id)
         {
+            if(content == null)
+            {
+                throw new NullReferenceException(ServicesDataConstants.NullContent);
+            }
             var comment = new Comment()
             {
                 Text = content,

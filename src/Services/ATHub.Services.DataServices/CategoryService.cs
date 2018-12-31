@@ -26,6 +26,10 @@ namespace ATHub.Services.DataServices
 
         public async Task<int> CreateCategory(string name)
         {
+            if(name == null)
+            {
+                throw new NullReferenceException(ServicesDataConstants.NullCategoryName);
+            }
             var category = new Category() { Name = name };
             await this.ctegoriesRepository.AddAsync(category);
             await this.ctegoriesRepository.SaveChangesAsync();
@@ -35,9 +39,9 @@ namespace ATHub.Services.DataServices
         public async Task<int> DeleteCategory(string name)
         {
             var category = this.ctegoriesRepository.All().FirstOrDefault(x => x.Name == name);
-            if(category == null)
+            if (category == null)
             {
-
+                throw new NullReferenceException(string.Format(ServicesDataConstants.InvalidCategoryName, name));
             }
             this.ctegoriesRepository.Delete(category);
             await this.ctegoriesRepository.SaveChangesAsync();
