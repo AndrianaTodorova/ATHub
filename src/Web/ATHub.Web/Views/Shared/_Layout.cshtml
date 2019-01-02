@@ -5,53 +5,10 @@
 <body>
     <script>
         $(document).ready(function () {
-
-            let autocmoplete = new Awesomplete(document.getElementById('search'), { list: [] });
-            $('#search').keyup(function () {
-                let input = $(this).val();
-                if (input.length >= 3) {
-                    $.ajax({
-                        url: "/Home/GetSearchValue",
-                        type: "GET",
-                        data: { searchParam: $(this).val() },
-                        success: function (data) {
-                            let list = data.map((i) => { return i.name; });
-                            autocmoplete.list = list;
-
-                        }
-                    })
-                }
-            });
+            search();
         });
 
-        //$(document).ready(function () {
-        //    var trigger = $('.hamburger'),
-        //        overlay = $('.overlay'),
-        //        isClosed = false;
-
-        //    trigger.click(function () {
-        //        hamburger_cross();
-        //    });
-
-        //    function hamburger_cross() {
-
-        //        if (isClosed == true) {
-        //            overlay.hide();
-        //            trigger.removeClass('is-open');
-        //            trigger.addClass('is-closed');
-        //            isClosed = false;
-        //        } else {
-        //            overlay.show();
-        //            trigger.removeClass('is-closed');
-        //            trigger.addClass('is-open');
-        //            isClosed = true;
-        //        }
-        //    }
-
-        //    $('[data-toggle="offcanvas"]').click(function () {
-        //        $('#wrapper').toggleClass('toggled');
-        //    });
-        //});
+      
         jQuery(function ($) {
 
             $(".sidebar-dropdown > a").click(function () {
@@ -100,8 +57,8 @@
                     <div>
                         <div class="input-group">
                             <form class="form-inline my-2 my-lg-0" asp-area="" asp-controller="Home" asp-action="Search">
-                                <input id="search" class="awesomplete form-control search-menu mr-sm-2" name="searchParam" />
-                                <button id="startSearch" class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                                <input id="search" class="awesomplete form-control search-menu mr-sm-2" name="searchParam" placeholder="Search..." />
+                             
                             </form>
                         </div>
                     </div>
@@ -163,116 +120,7 @@
         </main>
         <!-- page-content" -->
     </div>
-    @*<div id="wrapper">
-            <div class="overlay"></div>
-
-            <!-- Sidebar -->
-            <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-                <ul class="nav sidebar-nav">
-                    <li class="sidebar-brand">
-                        <a href="#">ATHub</a>
-                    </li>
-                    <li >
-                        <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li >
-                        <a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a>
-                    </li>
-                    <li >
-                        <a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a>
-                    </li>
-                    @if (this.User.Identity.IsAuthenticated)
-                    {
-                        <li >
-                            <a asp-area="Videos" asp-controller="Videos" asp-action="Create" class="nav-link">Create</a>
-                        </li>
-                    }
-
-                    @if (this.User.IsInRole("Admin"))
-                    {
-                        <li >
-                            <a asp-area="Administrator" asp-controller="Categories" asp-action="Create" class="nav-link">Create Category</a>
-                        </li>
-                    }
-                </ul>
-
-            </nav>
-            <!-- /#sidebar-wrapper -->
-            <!-- Page Content -->
-            <div id="page-content-wrapper">
-                <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
-                    <span class="hamb-top"></span>
-                    <span class="hamb-middle"></span>
-                    <span class="hamb-bottom"></span>
-                </button>
-                <form class="form-inline my-2 my-lg-0" asp-area="" asp-controller="Home" asp-action="Search">
-                    <input id="search" class="awesomplete form-control mr-sm-2" name="searchParam" />
-                    <button id="startSearch" class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
-
-                <partial name="_LoginPartial" />
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            @RenderBody()
-                            <hr />
-                            <footer>
-                                <hr class="my-1" style="background:white" />
-                                <div class="footer-copyright text-center py-2">&copy; CopyRight ATHub 2018. All rights reserved</div>
-                            </footer>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-    @*<div class="bs-component">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="#">ATHub</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarColor01">
-
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a>
-                        </li>
-                        @if (this.User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <a asp-area="Videos" asp-controller="Videos" asp-action="Create" class="nav-link">Create</a>
-                            </li>
-                        }
-
-                        @if (this.User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item">
-                                <a asp-area="Administrator" asp-controller="Categories" asp-action="Create" class="nav-link">Create Category</a>
-                            </li>
-                        }
-                    </ul>
-
-                    <form class="form-inline my-2 my-lg-0" asp-area="" asp-controller="Home" asp-action="Search">
-                        <input id="search" class="awesomplete form-control mr-sm-2" name="searchParam" />
-                        <button id="startSearch" class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-
-                    <partial name="_LoginPartial" />
-                </div>
-            </nav>
-        </div>*@
-
-    @*<partial name="_CookieConsentPartial" />*@
-
-
+ 
     @RenderSection("Scripts", required: false)
 
 </body>

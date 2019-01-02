@@ -48,6 +48,10 @@ namespace ATHub.Services.DataServices
 
         public DetailsVideoModel GetDetailsVideoModel(int id)
         {
+            if (id==3)
+            {
+                throw new ArgumentException("Fuck off");
+            }
             this.UpdateViews(id);
             var model = this.videoRepository.All().Where(p => p.Id == id).Select(x => new DetailsVideoModel()
             {

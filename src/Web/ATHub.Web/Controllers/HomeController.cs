@@ -8,6 +8,8 @@ using ATHub.Data.Common;
 using ATHub.Data.Models;
 using ATHub.Services.DataServices;
 using ATHub.Services.Data.Models;
+using Microsoft.AspNetCore.Http.Features;
+using System;
 
 namespace ATHub.Web.Controllers
 {
@@ -86,9 +88,17 @@ namespace ATHub.Web.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        
+        public IActionResult Error(int statusCode)
         {
+            HashSet<int> statuses = new HashSet<int>() { 400, 401, 403, 404, 500 };
+
+            int code = HttpContext.Features.Get<IHttpResponseFeature>().StatusCode;
+
+            if( code > 300 || statuses.Contains(statusCode))
+            {       
+                return View("Error-" + Math.Max(statusCode,code));
+            }
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
       

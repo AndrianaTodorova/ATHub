@@ -41,6 +41,7 @@ namespace ATHub.Web.Areas.Videos.Controllers
             {
                 //TODO return this.RedirectToAction("Log in", new { area = "Identity"});
             }
+            
             var detailsModel = this.videoService.GetDetailsVideoModel(id);
            
             return View(detailsModel);

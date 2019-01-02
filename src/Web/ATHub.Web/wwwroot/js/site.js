@@ -70,15 +70,15 @@ function comments(videObject) {
             <div class="post-heading">
 
                 <div class="pull-left meta">
-                    <div id="uploaderName" class="title h5">
+                    <div id="uploaderName${comment.id}" class="title h5">
                         <a href="#"><b>${comment.uploaderName}</b></a>
-                        made a post.`);
-            console.log(comment.uploaderName);
+                        made a post.`);         
             if (comment.uploaderName + '!' === $('#loggedInUser').html()) {
-                $('#uploaderName').append(`<a id="${comment.id}_edit"><u>Edit</u></a>
+                $(`#uploaderName${comment.id}`).append(`<a id="${comment.id}_edit"><u>Edit</u></a>
                         <a id="${comment.id}_delete"><u>Delete</u></a>`);
             }
-            $('#uploaderName').after(`
+            $(`#uploaderName${comment.id}`).append(`
+</div>
                     <h6 class="text-muted time">${comment.date}</h6>
                 </div>
             </div>

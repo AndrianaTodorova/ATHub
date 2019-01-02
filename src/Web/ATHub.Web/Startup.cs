@@ -57,7 +57,14 @@ namespace ATHub.Web
                 .AddEntityFrameworkStores<ATHubContext>();
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(
+            //    options =>
+            //options.Filters
+            //.Add(new CustomExceptionFilter())
+            )
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+
             services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
             services.AddScoped<IVideoService, VideoService>();
             services.AddScoped<ICategoryService, CategoryService>();
@@ -67,18 +74,22 @@ namespace ATHub.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
-            }
+            app.UseExceptionHandler("/Home/Error");
+            app.UseHsts();
+            app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //    app.UseDatabaseErrorPage();
+            //}
+            //else
+            //{
+
+            //    
+            //}
 
             app.UseHttpsRedirection();
             app.UseStaticFiles(); // For the wwwroot folder
@@ -86,7 +97,7 @@ namespace ATHub.Web
             Console.WriteLine(pth);
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(pth ),
+                FileProvider = new PhysicalFileProvider(pth),
                 RequestPath = "/StaticFiles"
             });
             app.UseCookiePolicy();

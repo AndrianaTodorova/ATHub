@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATHub.Data.Models", "Data\A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATHub.Data.Common", "Data\ATHub.Data.Common\ATHub.Data.Common.csproj", "{8DBC4E98-13D0-45DD-9C84-DD042061A7B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATHub.Services.DataServices", "Services\ATHub.Services.DataServices\ATHub.Services.DataServices.csproj", "{87585CCD-B0DC-4D27-AB8E-16A9071D7549}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATHub.Services.DataServices", "Services\ATHub.Services.DataServices\ATHub.Services.DataServices.csproj", "{87585CCD-B0DC-4D27-AB8E-16A9071D7549}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATHub.Services.Data.Models", "Services\ATHub.Services.Data.Models\ATHub.Services.Data.Models.csproj", "{D0E0CC60-D966-42F3-90B7-728A6A79ABDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATHub.Services.Data.Models", "Services\ATHub.Services.Data.Models\ATHub.Services.Data.Models.csproj", "{D0E0CC60-D966-42F3-90B7-728A6A79ABDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
