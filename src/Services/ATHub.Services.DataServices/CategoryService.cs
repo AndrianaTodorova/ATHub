@@ -62,5 +62,17 @@ namespace ATHub.Services.DataServices
 
             return model;
         }
+
+        public async Task<int> EditCategory(int id, string name)
+        {
+            var category = this.ctegoriesRepository.All().FirstOrDefault(x => x.Id == id);
+            if(category == null)
+            {
+                //TODO exception
+            }
+            category.Name = name;
+            await this.ctegoriesRepository.SaveChangesAsync();
+            return category.Id;
+        }
     }
 }

@@ -16,6 +16,7 @@
                 modal.on('show.bs.modal', () => {
 
                     $('#editCategoryName').val(src);
+                    $('#editCategoryId').val(id);
                   
                 });
                 //$('#editCategoryModal').on('hide.bs.modal', function (b) {
@@ -61,7 +62,7 @@
             <div class="modal-body">
                 <form id="editCategoryForm" class="form-inline my-2 my-lg-0" asp-area="Administrator" asp-controller="Categories" asp-action="Update">
                     <input required type="text" id="editCategoryName" class="awesomplete form-control mr-sm-2" name="name" />
-
+                    <input required type="hidden" id="editCategoryId" name="id" />
                 </form>
             </div>
             <div class="modal-footer">
