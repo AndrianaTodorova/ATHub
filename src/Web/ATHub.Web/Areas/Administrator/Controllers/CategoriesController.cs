@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ATHub.Services.Data.Models;
 using ATHub.Services.DataServices;
 using ATHub.Web.Areas.Administrator.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -22,7 +23,12 @@ namespace ATHub.Web.Areas.Administrator.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult ManageCategories()
         {
-            return this.View();
+            var model = new AllCategoriesVidewModel()
+            {
+                AllCategories = this.categoryService.GetAllCategories()
+            };
+           
+            return this.View(model);
         }
 
         [HttpPost]
@@ -30,14 +36,14 @@ namespace ATHub.Web.Areas.Administrator.Controllers
         public async Task<IActionResult> Create(CreateCategoryViewModel model) 
         {
             var id = await this.categoryService.CreateCategory(model.Name);
-            return this.RedirectToAction("Index", "Home", new { area = "" });
+            return this.RedirectToAction("ManageCategories", "Categories", new { area = "Administrator" });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(string name)
+        public async Task<IActionResult> Delete(int id)
         {
-            var categoryId = await this.categoryService.DeleteCategory(name);
-            return this.RedirectToAction("Index", "Home", new { area = "" });
+            var categoryId = await this.categoryService.DeleteCategory(id);
+            return this.RedirectToAction("ManageCategories", "Categories", new { area = "Administrator" });
         }
 
 

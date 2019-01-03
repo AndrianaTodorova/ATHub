@@ -77,7 +77,7 @@ namespace ATHub.Services.DataServices
             var model = this.userRepository.All().Where(u => u.UserName == username).Select(x => x.Playlist).Select(p => new MyPlaylistViewModel()
             {
                 VideosCount = p.Videos.Count,
-                Videos = p.Videos.Select(v => new VideoModel()
+                Videos = p.Videos.OrderBy(v => v.Video.UploadDate).Select(v => new VideoModel()
                 {
                     Title = v.Video.Name,
                     Link = this.GetEmbed(v.Video.Link),

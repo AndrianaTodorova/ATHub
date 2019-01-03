@@ -80,17 +80,7 @@ namespace ATHub.Web
             app.UseExceptionHandler("/Home/Error");
             app.UseHsts();
             app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //    app.UseDatabaseErrorPage();
-            //}
-            //else
-            //{
-
-            //    
-            //}
-
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles(); // For the wwwroot folder
             string pth = Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles");

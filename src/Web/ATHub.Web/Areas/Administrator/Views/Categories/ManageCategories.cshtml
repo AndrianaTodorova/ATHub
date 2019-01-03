@@ -1,4 +1,4 @@
-﻿@model ATHub.Web.Areas.Administrator.Models.CreateCategoryViewModel
+﻿@model ATHub.Services.Data.Models.AllCategoriesVidewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -6,38 +6,71 @@
 
 
 <hr />
-<div class="row">
-    <div class="col-md-6">
-        <h2>Create</h2>
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div id="newCategoryModal" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="modal-body">
+                <form id="newCategoryForm" class="form-inline my-2 my-lg-0" asp-area="Administrator" asp-controller="Categories" asp-action="Create">
+                    <input required type="text" id="newCategoryName" class="awesomplete form-control mr-sm-2" name="name" />
+  
+                </form>
             </div>
-        </form>
-
-    </div>
-    <div class="col-md-6">
-        <h2>Delete</h2>
-        <form asp-action="Delete">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="modal-footer">
+                <button type="submit" form="newCategoryForm" class="btn btn-primary">Create</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Delete" class="btn btn-default" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-6">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#newCategoryModal"><span>Add new category</span></button>
 
+    </div>
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr align="center">
+            <th scope="col"><span>Name</span></th>
+            <th scope="col"><span>Created On</span></th>
+            <th scope="col"><span>Videos Count</span></th>
+            <th scope="col"><span>Actions</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.AllCategories.Count(); i++)
+        {
+            var category = Model.AllCategories[i];
+            if (i % 2 == 0)
+            {
+        <tr class="table-active" align="center">
+            <th scope="row">@category.Name</th>
+            <td>@category.CreatedOn</td>
+            <td>@category.VideosCount</td>
+            <td><form method="post" class="form-check-inline" asp-area="Administrator" asp-controller="Categories" asp-action="Delete" asp-route-id=@category.Id><button type="submit" class="btn btn-danger">Delete</button></form><button class="btn btn-success">Edit</button></td>
+        </tr>
+            }
+            else
+            {
+        <tr align="center">
+            <th scope="row">@category.Name</th>
+            <td>@category.CreatedOn</td>
+            <td>@category.VideosCount</td>
+            <td><form  method="post" class="form-check-inline" asp-area="Administrator" asp-controller="Categories" asp-action="Delete" asp-route-id=@category.Id><button type="submit" class="btn btn-danger">Delete</button></form>
+            <button class="btn btn-success">Edit</button></td>
+        </tr>
+            }
+        }
+
+
+    </tbody>
+</table>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

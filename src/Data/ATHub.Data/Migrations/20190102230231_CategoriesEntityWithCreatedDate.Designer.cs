@@ -4,14 +4,16 @@ using ATHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ATHub.Data.Migrations
 {
     [DbContext(typeof(ATHubContext))]
-    partial class ATHubContextModelSnapshot : ModelSnapshot
+    [Migration("20190102230231_CategoriesEntityWithCreatedDate")]
+    partial class CategoriesEntityWithCreatedDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,8 +85,6 @@ namespace ATHub.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn");
-
-                    b.Property<DateTime?>("DeletedOn");
 
                     b.Property<string>("Name");
 

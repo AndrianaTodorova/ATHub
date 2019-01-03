@@ -4,12 +4,12 @@
 }
 
 <h2>ManageUsers</h2>
-<div class="form-group col-md-5">
-    <label for="exampleFormControlSelect1">Select User</label>
-    <select class="form-control" id="exampleFormControlSelect1">
+<div class="form-group">
+    <label for="userDropDown">Select User</label>
+    <select class="custom-select" id="userDropDown">
         @foreach (var user in @Model.Users)
         {
-            <option>
+            <option id="@user.Id">
                 @user.Username
             </option>
         }

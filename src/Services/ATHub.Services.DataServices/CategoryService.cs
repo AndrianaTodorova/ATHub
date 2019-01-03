@@ -1,5 +1,6 @@
 ﻿using ATHub.Data.Common;
 using ATHub.Data.Models;
+using ATHub.Services.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,16 +37,30 @@ namespace ATHub.Services.DataServices
             return category.Id;
         }
 
-        public async Task<int> DeleteCategory(string name)
+        public async Task<int> DeleteCategory(int id)
         {
-            var category = this.ctegoriesRepository.All().FirstOrDefault(x => x.Name == name);
+            var category = this.ctegoriesRepository.All().FirstOrDefault(x => x.Id == id);
             if (category == null)
             {
-                throw new NullReferenceException(string.Format(ServicesDataConstants.InvalidCategoryName, name));
+                throw new NullReferenceException(string.Format(ServicesDataConstants.InvalidCategoryName, id));
             }
-            this.ctegoriesRepository.Delete(category);
+            category.DeletedOn = DateTime.UtcNow;
             await this.ctegoriesRepository.SaveChangesAsync();
             return category.Id;
+        }
+
+        public IList<SingleCategoryViewModel> GetAllCategories()
+        {
+            var model = this.ctegoriesRepository.All().Where(c => c.DeletedOn == null).Select(a =>
+            new SingleCategoryViewModel()
+            {
+                Id = a.Id,
+                Name = a.Name,
+                VideosCount = a.Videos.Count(),
+                CreatedOn = a.CreatedOn.ToShortDateString()
+            }).OrderBy(x => x.CreatedOn).ToList();
+
+            return model;
         }
     }
 }

@@ -5,47 +5,26 @@
 <body>
     <script>
         $(document).ready(function () {
-            search();
-        });
-
-      
-        jQuery(function ($) {
-
-            $(".sidebar-dropdown > a").click(function () {
-                $(".sidebar-submenu").slideUp(200);
-                if ($(this).parent().hasClass("active")) {
-                    $(".sidebar-dropdown").removeClass("active");
-                    $(this).parent().removeClass("active");
-                } else {
-                    $(".sidebar-dropdown").removeClass("active");
-                    $(this).next(".sidebar-submenu").slideDown(200);
-                    $(this).parent().addClass("active");
-                }
-
-            });
-
-            $("#toggle-sidebar").click(function () {
-                $(".page-wrapper").toggleClass("toggled");
-            });
-
-
+            //search();
+            //initialSideBarEvents();
+            initNewNavBArEvents();
         });
     </script>
 
     <!------ Include the above in your HEAD tag ---------->
+ 
     <div class="page-wrapper chiller-theme toggled">
         <nav id="sidebar" class="sidebar-wrapper">
+            <div id="toggle-sidebar">
+             
+            </div>
             <div class="sidebar-content">
-                <div id="toggle-sidebar">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
+
                 <div class="sidebar-brand">
-                    <a href="#">ATHub</a>
+                    <a href="/Home">ATHub</a>
                 </div>
                 <div class="sidebar-header">
-                    
+
                     <div class="user-info">
                         <span class="user-name">
                             <partial name="_LoginPartial" />
@@ -58,7 +37,7 @@
                         <div class="input-group">
                             <form class="form-inline my-2 my-lg-0" asp-area="" asp-controller="Home" asp-action="Search">
                                 <input id="search" class="awesomplete form-control search-menu mr-sm-2" name="searchParam" placeholder="Search..." />
-                             
+
                             </form>
                         </div>
                     </div>
@@ -66,6 +45,18 @@
                 <!-- sidebar-search  -->
                 <div class="sidebar-menu">
                     <ul>
+                        @if (this.User.IsInRole("Admin"))
+                        {
+                            <li class="sidebar-brand">
+                                <a href="#">Administration</a>
+                            </li>
+                            <li>
+                                <a asp-area="Administrator" asp-controller="Categories" asp-action="ManageCategories" class="nav-link">Manage Categories</a>
+                            </li>
+                            <li>
+                                <a asp-area="Administrator" asp-controller="Users" asp-action="ManageUsers" class="nav-link">Manage Users</a>
+                            </li>
+                        }
                         <li class="sidebar-brand">
                             <a href="#">Actions</a>
                         </li>
@@ -89,19 +80,6 @@
                             </li>
                         }
 
-                        @if (this.User.IsInRole("Admin"))
-                        {
-                            <li class="sidebar-brand">
-                                <a href="#">Administration</a>
-                            </li>
-                            <li>
-                                <a asp-area="Administrator" asp-controller="Categories" asp-action="ManageCategories" class="nav-link">Manage Categories</a>
-                            </li>
-                            <li>
-                                <a asp-area="Administrator" asp-controller="Users" asp-action="ManageUsers" class="nav-link">Manage Users</a>
-                            </li>
-                        }
-
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->
@@ -120,7 +98,7 @@
         </main>
         <!-- page-content" -->
     </div>
- 
+
     @RenderSection("Scripts", required: false)
 
 </body>
