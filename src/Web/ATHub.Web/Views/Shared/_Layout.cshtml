@@ -5,8 +5,8 @@
 <body>
     <script>
         $(document).ready(function () {
-            //search();
-            //initialSideBarEvents();
+            search();
+            initialSideBarEvents();
             initNewNavBArEvents();
         });
     </script>
@@ -55,6 +55,9 @@
                             </li>
                             <li>
                                 <a asp-area="Administrator" asp-controller="Users" asp-action="ManageUsers" class="nav-link">Manage Users</a>
+                            </li>
+                            <li>
+                                <a asp-area="Administrator" asp-controller="Videos" asp-action="ManageVideos" class="nav-link">Manage Videos</a>
                             </li>
                         }
                         <li class="sidebar-brand">

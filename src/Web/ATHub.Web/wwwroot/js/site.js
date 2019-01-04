@@ -152,6 +152,27 @@ function requester(url, method, data, successFunction) {
     })
 }
 
+function editVideoModalEvent() {
+    $('.btn-success').each(function () {
+        let src = $(this).data("src");
+        let id = $(this).attr('id');
+      
+        $(this).click(function () {
+            let modal = $('#editVideoModal');
+            modal.on('show.bs.modal', () => {
+                console.log('asd' + id);
+                requester("/Administrator/Videos/EditVideo", "GET", { 'id': id }, (model) => {
+                    console.log(model);
+                });
+            });
+            //$('#editVideoModal').on('hide.bs.modal', function (b) {
+
+            //    $("#video").attr('src', src);
+            //});
+        });
+    });
+}
+
 function initNewNavBArEvents() {
   
         var trigger = $('.hamburger'),

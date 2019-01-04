@@ -15,6 +15,12 @@ namespace ATHub.Services.DataServices
 
         DetailsVideoModel GetDetailsVideoModel(int id);
 
+        IList<SingleAdminVideoModel> GetAdminVideoModel();
+
         IEnumerable<CommentsDetailsVideoModel> GetComments(int id);
+
+        Task<int> DeleteVideo(int id);
+        EditAdminVideoViewModel GetEditVideoData(int id);
+
     }
 }

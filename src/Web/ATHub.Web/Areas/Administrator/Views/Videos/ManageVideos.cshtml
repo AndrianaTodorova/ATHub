@@ -1,0 +1,101 @@
+﻿@model ATHub.Services.Data.Models.AdminAllVideosModel
+@{
+    ViewData["Title"] = "ManageVideos";
+}
+<script>
+    $(document).ready(function () {
+
+        editVideoModalEvent();
+    });
+</script>
+<div id="editVideoModal" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Video</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @*<iframe
+                                src="https://www.youtube.com/embed/BGDT7Z3gza8"></iframe>
+                        <p style="word-break:break-word;padding-bottom:10px; height:auto;text-align:left">Some Title</p>
+                        <p>Som description</p>
+                        <p>Som name</p>
+                        <p>Uploaded on some date</p>
+                    </div>*@
+                @Html.Partial("EditVideosPartial")
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="editVideoForm" class="btn btn-primary">Edit</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr align="center">
+            <th scope="col"><span>Name</span></th>
+            <th scope="col"><span>Uploaded On</span></th>
+            <th scope="col"><span>Author</span></th>
+            <th scope="col"><span>Actions</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Videos.Count(); i++)
+        {
+            var video = Model.Videos[i];
+            if (i % 2 == 0)
+            {
+                <tr class="table-active" align="center">
+                    <th scope="row">@video.Name.Substring(0, Math.Min(video.Name.Length, 20))</th>
+                    <td>@video.UploadedOn</td>
+                    <td>@video.Author</td>
+                    <td>
+                        <form method="post" class="form-check-inline" asp-area="Administrator" asp-controller="Videos" asp-action="Delete" asp-route-id=@video.Id>
+                            @if (video.DeletedOn == null)
+                            {
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-danger">Recover</button>
+                            }
+                            <button id=@video.Id type="button" class="btn btn-success" data-toggle="modal" data-target="#editVideoModal" data-src='@video'>Edit</button>
+
+                        </form>
+
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr align="center">
+                    <th scope="row">@video.Name.Substring(0, Math.Min(video.Name.Length, 20))</th>
+                    <td>@video.UploadedOn</td>
+                    <td>@video.Author</td>
+                    <td>
+                        <form method="post" class="form-check-inline" asp-area="Administrator" asp-controller="Videos" asp-action="Delete" asp-route-id=@video.Id>
+                            @if (video.DeletedOn == null)
+                            {
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-danger">Recover</button>
+                            }
+                            <button id=@video.Id type="button" class="btn btn-success" data-toggle="modal" data-target="#editVideoModal" data-src='@video'>Edit</button>
+
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        }
+
+
+    </tbody>
+</table>

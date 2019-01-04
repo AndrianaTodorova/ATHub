@@ -21,7 +21,7 @@ namespace ATHub.Data.Models
 
         public string Link { get; set; }
 
-       
+        public DateTime? DeletedOn { get; set; }
 
         public DateTime UploadDate { get; set; }
 

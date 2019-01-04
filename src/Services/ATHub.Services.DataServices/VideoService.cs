@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,8 @@ namespace ATHub.Services.DataServices
                 Link = link,
                 Category = categoryRepository.All().FirstOrDefault(c => c.Name == category),
                 Uploader = uploader,
-                UploadDate = DateTime.UtcNow
+                UploadDate = DateTime.UtcNow,
+             
             };
 
            await this.videoRepository.AddAsync(video);
@@ -48,12 +50,8 @@ namespace ATHub.Services.DataServices
 
         public DetailsVideoModel GetDetailsVideoModel(int id)
         {
-            if (id==3)
-            {
-                throw new ArgumentException("Fuck off");
-            }
             this.UpdateViews(id);
-            var model = this.videoRepository.All().Where(p => p.Id == id).Select(x => new DetailsVideoModel()
+            var model = this.videoRepository.All().Where(p => p.Id == id && p.DeletedOn == null).Select(x => new DetailsVideoModel()
             {
                 Id = x.Id,
                 Title = x.Name,
@@ -75,7 +73,7 @@ namespace ATHub.Services.DataServices
         }
         public IEnumerable<VideoModel> GetRandomVideos(int count)
         {
-            var videos = this.videoRepository.All()
+            var videos = this.videoRepository.All().Where(v => v.DeletedOn == null)
                 .OrderBy(x => Guid.NewGuid())
                .Select(x =>
              new VideoModel()
@@ -91,7 +89,7 @@ namespace ATHub.Services.DataServices
         public IEnumerable<VideoModel> SearchVideos(string search)
         {
             var videos = this.videoRepository.All()
-               .Where(x => x.Name.Contains(search))
+               .Where(x => x.Name.Contains(search) && x.DeletedOn == null)
                .Select(x =>
              new VideoModel()
              {
@@ -136,5 +134,47 @@ namespace ATHub.Services.DataServices
         
         }
 
+        public IList<SingleAdminVideoModel> GetAdminVideoModel()
+        {
+            
+            var model = this.videoRepository.All().Select(v => new SingleAdminVideoModel()
+            {
+                Id = v.Id,
+                Name = v.Name,
+                UploadedOn = v.UploadDate.ToShortDateString(),
+                Author = v.Uploader.UserName,
+                DeletedOn = v.DeletedOn.HasValue ? v.DeletedOn.Value.ToString("yyyy-MM-dd") : null
+            }).ToList();
+
+            return model;
+        }
+
+        public EditAdminVideoViewModel GetEditVideoData(int id)
+        {
+            var model = this.videoRepository.All().Where(x => x.Id == id).Select(s => new EditAdminVideoViewModel()
+            {
+                Name = s.Name
+            }).FirstOrDefault();
+            return model;
+        }
+        public async Task<int> DeleteVideo(int id)
+        {
+            var currentVideo = this.videoRepository.All().FirstOrDefault(v => v.Id == id);
+            if(currentVideo == null)
+            {
+                throw new ArgumentException("Invalid id");
+            }
+            if(currentVideo.DeletedOn == null)
+            {
+                currentVideo.DeletedOn = DateTime.UtcNow;
+            }
+            else
+            {
+                currentVideo.DeletedOn = null;
+            }
+          
+            await this.videoRepository.SaveChangesAsync();
+            return id;
+        }
     }
 }

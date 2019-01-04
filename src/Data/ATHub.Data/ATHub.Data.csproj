@@ -10,6 +10,8 @@
     <Compile Remove="Migrations\20181214120331_initial.Designer.cs" />
     <Compile Remove="Migrations\20190102230231_CategoriesEntityWithCreatedDate.cs" />
     <Compile Remove="Migrations\20190102230231_CategoriesEntityWithCreatedDate.Designer.cs" />
+    <Compile Remove="Migrations\20190102232402_CategoriesEntityWithDeletedOn.cs" />
+    <Compile Remove="Migrations\20190102232402_CategoriesEntityWithDeletedOn.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
