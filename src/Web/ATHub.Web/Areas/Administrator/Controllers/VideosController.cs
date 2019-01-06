@@ -1,5 +1,6 @@
 ﻿using ATHub.Services.Data.Models;
 using ATHub.Services.DataServices;
+using ATHub.Web.Areas.Videos.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -36,12 +37,19 @@ namespace ATHub.Web.Areas.Administrator.Controllers
 
         public JsonResult EditVideo(int id)
         {
-            var a = new Dictionary<int, string>();
-            a.Add(id, "tuk");
+          
            var model =  this.videoService.GetEditVideoData(id);
             return new JsonResult(model);
         }
-     
 
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditVideo(VideoEditModel model)
+        {
+            //TODO update video in database! May be it will better if you check for changes before save(update) the object :)
+            
+            var video = await this.videoService.EditVideo(model.Id,model.Name, model.Link, model.Description, model.Category);
+            return this.RedirectToAction("ManageVideos", "Videos", new { area = "Administrator" });
+        }
     }
 }

@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ATHub.Services.Data.Models
+namespace ATHub.Web.Areas.Videos.Models
 {
-    public class EditAdminVideoViewModel
+    public class VideoEditModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public string Description { get; set; }
+
         public string Link { get; set; }
-        
-        public HashSet<string> categoryNames { get; set; }
 
         public string Category { get; set; }
+
     }
 }

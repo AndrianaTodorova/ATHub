@@ -22,5 +22,7 @@ namespace ATHub.Services.DataServices
         Task<int> DeleteVideo(int id);
         EditAdminVideoViewModel GetEditVideoData(int id);
 
+        Task<int> EditVideo( int id,string name, string link, string desc, string category);
+
     }
 }

@@ -154,21 +154,24 @@ function requester(url, method, data, successFunction) {
 
 function editVideoModalEvent() {
     $('.btn-success').each(function () {
-        let src = $(this).data("src");
         let id = $(this).attr('id');
       
         $(this).click(function () {
-            let modal = $('#editVideoModal');
-            modal.on('show.bs.modal', () => {
-                console.log('asd' + id);
-                requester("/Administrator/Videos/EditVideo", "GET", { 'id': id }, (model) => {
-                    console.log(model);
-                });
+            requester("/Administrator/Videos/EditVideo", "GET", { 'id': id }, (model) => {
+                $('#name').val(model.name);
+                $('#link').val(model.link);
+                $('#description').val(model.description);
+                $('#videoId').val(id);
+                let categorySelect = $('#category');
+                for (categoryName of model.categoryNames) {
+                    if (model.category != categoryName) {
+                        categorySelect.append(`<option>${categoryName}</option>`)
+                    } else {
+                        categorySelect.append(`<option selected=true>${categoryName}</option>`)
+                    }
+                }
             });
-            //$('#editVideoModal').on('hide.bs.modal', function (b) {
-
-            //    $("#video").attr('src', src);
-            //});
+          
         });
     });
 }

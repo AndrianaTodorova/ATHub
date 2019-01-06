@@ -153,7 +153,11 @@ namespace ATHub.Services.DataServices
         {
             var model = this.videoRepository.All().Where(x => x.Id == id).Select(s => new EditAdminVideoViewModel()
             {
-                Name = s.Name
+                Link = s.Link,
+                Name = s.Name,
+                Description = s.Description,
+                Category = s.Category.Name,
+                categoryNames = this.categoryRepository.All().Where(x => x.DeletedOn == null).Select(c => c.Name).ToHashSet()
             }).FirstOrDefault();
             return model;
         }
@@ -175,6 +179,28 @@ namespace ATHub.Services.DataServices
           
             await this.videoRepository.SaveChangesAsync();
             return id;
+        }
+
+        public async Task<int> EditVideo(int id,string name, string link, string desc, string category)
+        {
+            var video = this.videoRepository.All().FirstOrDefault(v => v.Id == id);
+            if(video == null)
+            {
+                throw new ArgumentException($"Video with id {id} does not exist");
+            }
+            video.Name = name;
+            video.Description = desc;
+            video.Link = link;
+            var videoCategory = this.categoryRepository.All().FirstOrDefault(c => c.Name == category && c.DeletedOn == null);
+            if(videoCategory == null)
+            {
+                //TODO
+            }
+            video.Category = videoCategory;
+            videoCategory.Videos.Add(video);
+            
+            await videoRepository.SaveChangesAsync();
+            return video.Id;
         }
     }
 }
