@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Trending";
+}
+@model ATHub.Services.Data.Models.TrendingViewModel
+<script>
+    $(document).ready(function () {
+        initYouTubeModal();
+    });
+</script>
+@foreach (var cat in Model.Categories)
+{
+    @Html.Partial("../Modals/Video/SingleVideo")
+    if (cat.Videos.Count > 0)
+    {
+        <p>@cat.Name</p>
+        foreach (var video in cat.Videos)
+        {
+            <div class="col-4">
+                <p style="word-break:break-word;padding-bottom:10px; height:auto;text-align:left">@string.Concat(@video.Title.Substring(0, Math.Min(30, @video.Title.Length)), @video.Title.Length > 30 ? "..." : "")</p>
+                <div style="padding-top:220px; cursor:pointer;">
+                    <img id="@video.Id" width="250" height="200" style="padding-top:3px" src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg" class="video" data-toggle="modal" data-src="https://www.youtube.com/embed/@video.Link" data-target="#myModal" />
+                </div>
+            </div>
+        }
+    }
+
+
+}
+

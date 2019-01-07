@@ -34,6 +34,7 @@ namespace ATHub.Services.DataServices
             };
             if(user.UserProfileId != null)
             {
+                
                 profile.FacebookLink = user.UserProfile.FacebookLink;
                 profile.InstagramLink = user.UserProfile.InstagramLink;
                 profile.Birthdate = user.UserProfile.Birthdate;

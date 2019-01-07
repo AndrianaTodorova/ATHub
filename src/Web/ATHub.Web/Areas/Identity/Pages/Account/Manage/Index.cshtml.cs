@@ -76,7 +76,7 @@ namespace ATHub.Web.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var email = await _userManager.GetEmailAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            
+
 
             Username = userName;
 
@@ -84,7 +84,7 @@ namespace ATHub.Web.Areas.Identity.Pages.Account.Manage
             {
                 Email = email,
                 PhoneNumber = phoneNumber,
-                
+
             };
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
@@ -126,20 +126,37 @@ namespace ATHub.Web.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
             }
-            if(user.UserProfileId != null)
+            if (user.UserProfileId != null)
             {
-                user.UserProfile.Birthdate = this.Input.Birthdate;
-                user.UserProfile.Country = this.Input.Country;
-                user.UserProfile.FacebookLink = this.Input.FacebookLink;
-                user.UserProfile.Phone = this.Input.PhoneNumber;
-                user.UserProfile.InstagramLink = this.Input.InstagramLink;
+                if (this.Input.Birthdate != null)
+                {
+                    user.UserProfile.Birthdate = this.Input.Birthdate;
+                }
+                if (this.Input.Country != null)
+                {
+                    user.UserProfile.Country = this.Input.Country;
+                }
+                if (this.Input.FacebookLink != null)
+                {
+                    user.UserProfile.FacebookLink = this.Input.FacebookLink;
+                }
+                if (this.Input.PhoneNumber != null)
+                {
+                    user.UserProfile.Phone = this.Input.PhoneNumber;
+                }
+                if (this.Input.InstagramLink != null)
+                {
+                    user.UserProfile.InstagramLink = this.Input.InstagramLink;
+                }
+
                 await this.userProfile.SaveChangesAsync();
-                
+
             }
             else
             {
                 var profile = new UserProfile()
                 {
+
                     Phone = this.Input.PhoneNumber,
                     Birthdate = this.Input.Birthdate,
                     Country = this.Input.Country,
@@ -152,7 +169,7 @@ namespace ATHub.Web.Areas.Identity.Pages.Account.Manage
             }
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
-            
+
             return RedirectToPage();
         }
 

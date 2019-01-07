@@ -202,5 +202,18 @@ namespace ATHub.Services.DataServices
             await videoRepository.SaveChangesAsync();
             return video.Id;
         }
+
+        public TrendingViewModel GetTrendingVideoModel()
+        {
+            var model = new TrendingViewModel();
+            var categories = this.categoryRepository.All().Select(c =>
+            new CategoriesViewModel()
+            {
+                Name = c.Name,
+                Videos = c.Videos.OrderByDescending(p => p.Views).Take(6).Select(v => new VideoModel() { Id = v.Id, Link = this.GetEmbed(v.Link), Title = v.Name }).ToList()
+            }).OrderBy(n => n.Name).ToList();
+            model.Categories = categories;
+            return model;
+        }
     }
 }

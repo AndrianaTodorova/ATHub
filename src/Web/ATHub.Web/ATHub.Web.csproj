@@ -75,7 +75,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Administrator\Data\" />
     <Folder Include="StaticFiles\images\thumbs\" />
   </ItemGroup>
 

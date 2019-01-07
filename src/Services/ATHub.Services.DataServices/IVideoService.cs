@@ -15,6 +15,8 @@ namespace ATHub.Services.DataServices
 
         DetailsVideoModel GetDetailsVideoModel(int id);
 
+        TrendingViewModel GetTrendingVideoModel();
+
         IList<SingleAdminVideoModel> GetAdminVideoModel();
 
         IEnumerable<CommentsDetailsVideoModel> GetComments(int id);
