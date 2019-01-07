@@ -48,10 +48,30 @@
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="text-center">
-            <button type="submit" class="btn btn-default">Save</button>
+            <div class="form-group">
+                <label asp-for="Input.Birthdate"></label>
+                <input asp-for="Input.Birthdate" class="form-control" />
+                <span asp-validation-for="Input.Birthdate" class="text-danger"></span>
             </div>
-           
+            <div class="form-group">
+                <label asp-for="Input.Country"></label>
+                <input asp-for="Input.Country" class="form-control" />
+                <span asp-validation-for="Input.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.FacebookLink"></label>
+                <input asp-for="Input.FacebookLink" class="form-control" />
+                <span asp-validation-for="Input.FacebookLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.InstagramLink"></label>
+                <input asp-for="Input.InstagramLink" class="form-control" />
+                <span asp-validation-for="Input.InstagramLink" class="text-danger"></span>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-default">Save</button>
+            </div>
+
         </form>
     </div>
 </div>

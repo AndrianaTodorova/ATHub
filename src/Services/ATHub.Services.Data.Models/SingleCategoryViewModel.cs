@@ -13,6 +13,8 @@ namespace ATHub.Services.Data.Models
 
         public string CreatedOn { get; set; }
 
+        public string DeletedOn { get; set; }
+
         public int VideosCount { get; set; }
     }
 }

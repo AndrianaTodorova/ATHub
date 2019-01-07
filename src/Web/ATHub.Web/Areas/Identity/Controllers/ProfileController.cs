@@ -12,6 +12,7 @@ using System.Drawing.Imaging;
 using Image = ATHub.Data.Models.Image;
 using ATHub.Services.DataServices;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ATHub.Web.Areas.Identity.Controllers
 {
@@ -26,6 +27,7 @@ namespace ATHub.Web.Areas.Identity.Controllers
             this.profileService = profileService;
             this._manager = manager;
         }
+        [Authorize]
         public async Task<IActionResult> FileUpload(IFormFile file)
         {
             var currenUser = this._manager.GetUserAsync(HttpContext.User).Result;
@@ -38,9 +40,12 @@ namespace ATHub.Web.Areas.Identity.Controllers
             return RedirectToAction("Index", "Home", new { area = ""});
         }
 
+        [Authorize]
         public IActionResult MyProfile()
         {
-            return this.View();
+            var currenUser = this._manager.GetUserAsync(HttpContext.User).Result;
+            var profile = this.profileService.GetProfile(currenUser);
+            return this.View(profile);
         }
     }
 }

@@ -24,6 +24,26 @@ namespace ATHub.Services.DataServices
             this.imageRepository = imageRepository;
             this.userProfileRepository = userProfileRepository;
         }
+
+        public MyProfileViewModel GetProfile(ATHubUser user)
+        {
+            var profile = new MyProfileViewModel()
+            {
+                Username = user.UserName,
+                Email = user.Email
+            };
+            if(user.UserProfileId != null)
+            {
+                profile.FacebookLink = user.UserProfile.FacebookLink;
+                profile.InstagramLink = user.UserProfile.InstagramLink;
+                profile.Birthdate = user.UserProfile.Birthdate;
+                profile.Country = user.UserProfile.Country;
+                profile.Phone = user.UserProfile.Phone;
+                profile.ImageUrl = user.UserProfile.Image.Url;
+            }
+            return profile;
+        }
+
         public async Task<int> UploadImg(IFormFile file, ATHubUser user)
         {
             string baseImagePath = Directory.GetCurrentDirectory() + "/StaticFiles";

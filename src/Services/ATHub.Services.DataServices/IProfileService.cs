@@ -1,4 +1,5 @@
 ﻿using ATHub.Data.Models;
+using ATHub.Services.Data.Models;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace ATHub.Services.DataServices
 {
     public interface IProfileService
     {
+        MyProfileViewModel GetProfile(ATHubUser user);
         Task<int> UploadImg(IFormFile file, ATHubUser user);
     }
 }

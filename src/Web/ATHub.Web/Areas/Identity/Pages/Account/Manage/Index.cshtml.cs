@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using ATHub.Data.Common;
 using ATHub.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -17,15 +18,18 @@ namespace ATHub.Web.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<ATHubUser> _userManager;
         private readonly SignInManager<ATHubUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly IRepository<UserProfile> userProfile;
 
         public IndexModel(
             UserManager<ATHubUser> userManager,
             SignInManager<ATHubUser> signInManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IRepository<UserProfile> userProfile)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            this.userProfile = userProfile;
         }
 
         public string Username { get; set; }
@@ -47,6 +51,18 @@ namespace ATHub.Web.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Birthdate")]
+            public DateTime? Birthdate { get; set; }
+
+            [Display(Name = "Country")]
+            public string Country { get; set; }
+
+            [Display(Name = "Facebook Link")]
+            public string FacebookLink { get; set; }
+
+            [Display(Name = "Instagram Link")]
+            public string InstagramLink { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -60,13 +76,15 @@ namespace ATHub.Web.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var email = await _userManager.GetEmailAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            
 
             Username = userName;
 
             Input = new InputModel
             {
                 Email = email,
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                
             };
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
@@ -108,9 +126,33 @@ namespace ATHub.Web.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
             }
-
+            if(user.UserProfileId != null)
+            {
+                user.UserProfile.Birthdate = this.Input.Birthdate;
+                user.UserProfile.Country = this.Input.Country;
+                user.UserProfile.FacebookLink = this.Input.FacebookLink;
+                user.UserProfile.Phone = this.Input.PhoneNumber;
+                user.UserProfile.InstagramLink = this.Input.InstagramLink;
+                await this.userProfile.SaveChangesAsync();
+                
+            }
+            else
+            {
+                var profile = new UserProfile()
+                {
+                    Phone = this.Input.PhoneNumber,
+                    Birthdate = this.Input.Birthdate,
+                    Country = this.Input.Country,
+                    FacebookLink = this.Input.FacebookLink,
+                    InstagramLink = this.Input.InstagramLink
+                };
+                await this.userProfile.AddAsync(profile);
+                await this.userProfile.SaveChangesAsync();
+                user.UserProfileId = profile.Id;
+            }
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
+            
             return RedirectToPage();
         }
 

@@ -1,7 +1,113 @@
 ﻿@{
     ViewData["Title"] = "About";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+<link href="~/css/site - Copy.css" rel="stylesheet" />
+<body class="home-page js-home-header">
+    <header class="page-header js-page-header" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px; opacity: 1; background-color: rgb(255, 255, 255);">
+        <a href="https://www.youtube.com" class="page-header__logo js-header-logo" aria-hidden="false" style="visibility: inherit; opacity: 1;">
+            <span class="page-header__logo-label">Начална страница на YouTube</span>
+            <svg version="1" class="page-header__header-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 130"><path fill="#fff" d="M181.7 20.7c-2.1-7.9-8.4-14.2-16.3-16.3C151.1.5 93.6.5 93.6.5s-57.6.1-71.9 4C13.8 6.6 7.5 12.9 5.4 20.8 1.6 35.1 1.6 65 1.6 65s0 29.9 3.9 44.3c2.1 7.9 8.4 14.2 16.3 16.3 14.3 3.9 71.8 3.9 71.8 3.9s57.5 0 71.8-3.9c7.9-2.1 14.2-8.4 16.3-16.3 3.9-14.3 3.9-44.3 3.9-44.3s0-29.9-3.9-44.3zM75.2 92.6V37.4L123 65 75.2 92.6z" class="page-header__logo-bg js-header-logo-background"></path><g fill="#282828"><path d="M268.6 117.8c-3.7-2.5-6.3-6.3-7.8-11.5s-2.2-12-2.2-20.7V74c0-8.6.8-15.7 2.6-20.9 1.8-5.3 4.5-9.1 8.3-11.5 3.8-2.4 8.6-3.7 14.6-3.7 5.9 0 10.8 1.2 14.3 3.7s6.3 6.3 7.9 11.5 2.5 12.2 2.5 20.8v11.7c0 8.6-.8 15.5-2.5 20.7-1.7 5.2-4.3 9-7.9 11.5-3.7 2.4-8.6 3.7-14.8 3.7-6.4 0-11.3-1.3-15-3.7zm20.5-12.6c1.1-2.6 1.5-7 1.5-12.9V67.1c0-5.8-.5-10-1.5-12.6-1.1-2.7-2.8-4-5.3-4s-4.1 1.3-5.2 4c-1.1 2.7-1.5 6.9-1.5 12.6v25.2c0 5.9.5 10.3 1.4 12.9.9 2.6 2.7 3.9 5.3 3.9 2.4 0 4.2-1.3 5.3-3.9zM548 85.9V90c0 5.2.1 9.1.5 11.7.4 2.6.9 4.5 1.9 5.7.9 1.2 2.5 1.8 4.5 1.8 2.7 0 4.6-1.1 5.6-3.2 1.1-2.1 1.5-5.7 1.7-10.5l15.7.9c.1.7.1 1.7.1 2.8 0 7.4-2 13-6.1 16.7-4.1 3.7-9.8 5.6-17.2 5.6-9 0-15.2-2.8-18.8-8.4-3.5-5.6-5.4-14.3-5.4-26V72.8c0-12 1.9-20.9 5.6-26.5 3.8-5.6 10.2-8.4 19.1-8.4 6.3 0 11 1.2 14.3 3.4 3.3 2.2 5.7 5.8 7.1 10.6s2 11.5 2 20v13.8H548v.2zm2.4-34c-.9 1.2-1.5 3-1.9 5.6-.4 2.6-.5 6.5-.5 11.8V75h13.2v-5.8c0-5.2-.1-9.1-.5-11.8s-.9-4.6-1.9-5.7c-.9-1.1-2.4-1.7-4.3-1.7-1.9.2-3.3.8-4.1 1.9zM224.4 84.4L203.8 9.7h18.1l7.2 33.8c1.9 8.4 3.2 15.5 4.1 21.3h.5c.6-4.3 2-11.2 4.1-21.1l7.4-33.9h18.1l-20.9 74.5V120h-17.8V84.4h-.2zM367.4 39.5v80.7h-14.2l-1.5-9.9h-.4c-3.9 7.4-9.7 11.2-17.4 11.2-5.3 0-9.3-1.8-11.8-5.3-2.6-3.5-3.8-9-3.8-16.4V39.5h18.2v59.2c0 3.5.4 6.1 1.2 7.7.8 1.5 2.1 2.2 3.9 2.2 1.5 0 3.1-.5 4.5-1.4 1.4-.9 2.5-2.2 3.2-3.7v-64h18.1zM460.6 39.5v80.7h-14.2l-1.5-9.9h-.4c-3.9 7.4-9.7 11.2-17.4 11.2-5.3 0-9.3-1.8-11.8-5.3-2.6-3.5-3.8-9-3.8-16.4V39.5h18.2v59.2c0 3.5.4 6.1 1.2 7.7.8 1.5 2.1 2.2 3.9 2.2 1.5 0 3.1-.5 4.5-1.4s2.5-2.2 3.2-3.7v-64h18.1z" class="js-header-logo-text"></path><path d="M416.8 24.4h-18.1v95.8H381V24.4h-18.1V9.7h53.8v14.6h.1zM520.6 52.4c-1.1-5.1-2.8-8.7-5.3-11.1-2.5-2.2-5.8-3.4-10.2-3.4-3.3 0-6.5.9-9.3 2.8-3 1.9-5.1 4.4-6.7 7.4h-.1V5.6h-17.5V120h15l1.9-7.7h.4c1.4 2.7 3.5 4.8 6.3 6.5 2.8 1.5 5.9 2.4 9.3 2.4 6.1 0 10.6-2.8 13.6-8.5 2.8-5.7 4.4-14.5 4.4-26.5V73.5c-.2-9-.7-16.1-1.8-21.1zm-16.7 32.9c0 5.9-.2 10.5-.7 13.8-.5 3.3-1.3 5.7-2.5 7.1-1.2 1.4-2.7 2.1-4.6 2.1-1.5 0-2.8-.4-4.1-1.1-1.3-.7-2.2-1.8-3.1-3.2V58.3c.6-2.2 1.7-4 3.2-5.4 1.5-1.4 3.1-2.1 4.8-2.1 1.9 0 3.3.7 4.3 2.1 1.1 1.4 1.7 3.9 2.1 7.3.4 3.4.6 8.3.6 14.6v10.5z" class="js-header-logo-text"></path></g></svg>
+        </a>
+    </header>    <div class="js-intro-animation animation-wrapper" style="">
+        <section class="hero">
+            <div class="hero__inner">
+                <h1 class="hero__title">
+                    <span class="hero__title-text">Всичко за YouTube</span>
+                    <img src="~/StaticFiles/images/small_logo.png" />
 
-<p>Use this area to provide additional information.</p>
+                </h1>
+                <h2 class="hero__mission-intro js-header-sub-logo">Мисията ни е да дадем поле за изява и да отворим света пред всички.</h2>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/RVonJchNPEA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <span class="hero__iframe-wrapper js-hero-video-wrapper">
+                        <span class="hero__iframe js-hero-video-yt" data-video="kwmFPKQAX4g"></span>
+                    </span>
+                <p class="hero__mission">Считаме, че всеки има право на глас и че светът става по-добър, когато слушаме, споделяме и изграждаме общност чрез историите си.</p>
+            </div>
+            <div class="hero__angle-container">
+                <div class="hero__angle hero__angle--top js-parallaxed" data-speed="0.03" style="transform: matrix(0.99452, -0.10453, 0.10453, 0.99452, 0, -8.79232);"></div>
+                <div class="hero__angle hero__angle--bottom js-parallaxed" data-speed="0.03" style="transform: matrix(0.99452, 0.10453, -0.10453, 0.99452, 0, -8.67317);"></div>
+            </div>
+        </section><section class="freedoms">
+            <div class="freedoms__inner js-freedom-ribbons">
+                <h2 class="freedoms__section-title">Ценностите ни се основават на четири основни свободи, които са определящи за същността ни.</h2>
+                <div class="freedoms__item js-parallaxed" data-speed="0.03" style="transform: matrix(1, 0, 0, 1, 0, -1.00191);">
+                    <h3 class="freedoms__title">Свобода на <span class="freedoms__ribbon js-freedom-ribbon freedoms__ribbon--active">словото</span></h3>
+                    <p class="freedoms__copy">Считаме, че хората трябва да имат възможност да говорят свободно, да споделят мнението си, да насърчават открития диалог, както и че творческата свобода разкрива нови гласове, формати и възможности.</p>
+                </div>
+                <div class="freedoms__item js-parallaxed" data-speed="0.08" style="transform: matrix(1, 0, 0, 1, 0, -19.4032);">
+                    <h3 class="freedoms__title">Свободен достъп до <span class="freedoms__ribbon js-freedom-ribbon freedoms__ribbon--active">информация</span></h3>
+                    <p class="freedoms__copy">Считаме, че всички трябва да имат лесен и свободен достъп до информация и че видеоклиповете са мощно средство за обучение, изграждане на разбирателство и документиране на малки и големи световни събития.</p>
+                </div>
+                <div class="freedoms__item js-parallaxed" data-speed="0.03" style="transform: matrix(1, 0, 0, 1, 0, -5.49508);">
+                    <h3 class="freedoms__title">Свободен достъп до <span class="freedoms__ribbon js-freedom-ribbon freedoms__ribbon--active">възможности</span></h3>
+                    <p class="freedoms__copy">Считаме, че всички трябва да имат възможност да бъдат откривани, да развиват бизнес и да постигат целите си. Хората решават кое е популярно, а не медиите.</p>
+                </div>
+                <div class="freedoms__item js-parallaxed" data-speed="0.08" style="transform: matrix(1, 0, 0, 1, 0, -19.3977);">
+                    <h3 class="freedoms__title">Свобода на <span class="freedoms__ribbon js-freedom-ribbon freedoms__ribbon--active">принадлежност</span></h3>
+                    <p class="freedoms__copy">Считаме, че всички трябва да имат възможност да намират подкрепа в общности, да преодоляват пречки, да прекрачват граници и да се обединяват около общи интереси и любими занимания.</p>
+                </div>
+            </div>
+        </section><section class="news js-blogs">
+            <div class="news__angle js-parallaxed" data-speed="0.03" style="transform: matrix(0.99452, -0.10453, 0.10453, 0.99452, 0, -8.77089);"></div>
+            <div class="news__inner">
+                <div class="news__item">
+                    <h3 class="news__item-title">The latest news from YouTube</h3>
+                    <p class="news__item-copy js-youtube-blog-headline">"GNI YouTube innovation funding: supporting 87 news organizations in 23 countries to build video capabilities and innovate with new formats "</p>
+                    <a class="news__item-link js-youtube-blog-post-link" target="_blank" href="http://youtube.googleblog.com/2018/12/gni-youtube-innovation-funding.html">
+                        <span class="news__link-text">Read the story</span>
+                    </a>
+                    <a class="news__item-link" href="https://youtube.googleblog.com/" target="_blank">
+                        <span class="news__link-text">Visit the YouTube Blog</span>
+                    </a>
+                </div>
+                <div class="news__item">
+                    <h3 class="news__item-title">Trending topics and videos on YouTube</h3>
+                    <p class="news__item-copy js-trends-blog-headline">"YouTube Reacts: Oscars 2018 edition"</p>
+                    <a class="news__item-link js-trends-blog-post-link" target="_blank" href="http://youtube-trends.blogspot.com/2018/02/youtube-reacts-oscars-2018-edition.html">
+                        <span class="news__link-text">Read the story</span>
+                    </a>
+                    <a class="news__item-link" href="http://youtube-trends.blogspot.com/" target="_blank">
+                        <span class="news__link-text">Visit the Trends Blog</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <div class="social-links">
+            <div class="social-links__inner">
+                <a class="social-links__link" target="_blank" href="https://twitter.com/YouTube">
+                    <svg class="social-links__icon-circle-svg" aria-hidden="true" focusable="false" tabindex="-1" pointer-events="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40"><circle class="fill" cx="20" cy="20" r="20" fill="#292929" shape-rendering="geometricPrecision" stroke-linejoin="round"></circle></svg>
+                    <span class="social-links__text">Twitter</span>
+                    <span class="social-links__icon"><svg class="social-links__icon-svg" aria-hidden="true" focusable="false" tabindex="-1" pointer-events="none" width="16" height="14" viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg"><path d="M4.892 13.345c5.87 0 9.08-5.13 9.08-9.576 0-.147-.002-.292-.01-.437.625-.475 1.166-1.067 1.594-1.742-.572.27-1.188.45-1.833.53.66-.416 1.165-1.076 1.403-1.86-.617.384-1.3.665-2.026.816C12.517.42 11.688.012 10.77.012c-1.763 0-3.192 1.508-3.192 3.366 0 .264.028.52.083.767-2.65-.14-5.003-1.48-6.577-3.516C.808 1.125.65 1.703.65 2.32c0 1.168.564 2.2 1.42 2.802-.523-.017-1.015-.17-1.445-.42v.042c0 1.63 1.1 2.99 2.56 3.3-.268.077-.55.118-.84.118-.207 0-.407-.02-.6-.06.405 1.337 1.583 2.31 2.98 2.337-1.092.902-2.468 1.44-3.964 1.44-.256 0-.51-.015-.76-.047 1.412.955 3.09 1.512 4.892 1.512" fill="#FFF" fill-rule="evenodd"></path></svg></span>
+                </a>
+                <a class="social-links__link" target="_blank" href="https://www.instagram.com/youtube/">
+                    <svg class="social-links__icon-circle-svg" aria-hidden="true" focusable="false" tabindex="-1" pointer-events="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40"><circle class="fill" cx="20" cy="20" r="20" fill="#292929" shape-rendering="geometricPrecision" stroke-linejoin="round"></circle></svg>
+                    <span class="social-links__text">Instagram</span>
+                    <span class="social-links__icon"><svg class="social-links__icon-svg" aria-hidden="true" focusable="false" tabindex="-1" pointer-events="none" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><g fill="#FFF" fill-rule="evenodd"><path d="M8 1.66c2.057 0 2.3.007 3.113.044.75.035 1.16.16 1.43.266.36.14.617.306.886.576.27.27.436.526.575.886.106.27.23.68.266 1.43.038.812.046 1.056.046 3.113s-.008 2.3-.045 3.113c-.034.75-.16 1.16-.265 1.43-.14.36-.306.617-.576.886-.27.27-.527.437-.887.577-.27.106-.68.232-1.43.266-.812.037-1.056.045-3.113.045s-2.3-.007-3.113-.044c-.75-.034-1.16-.16-1.43-.265-.36-.14-.617-.306-.886-.576-.27-.27-.436-.526-.575-.886-.106-.27-.23-.68-.266-1.43-.038-.812-.046-1.056-.046-3.113s.008-2.3.045-3.113c.034-.75.16-1.16.265-1.43.14-.36.306-.617.576-.886.27-.27.527-.437.887-.576.27-.106.68-.23 1.43-.266C5.7 1.667 5.943 1.66 8 1.66M8 .27C5.908.27 5.645.28 4.824.32c-.82.037-1.38.167-1.87.358-.507.197-.936.46-1.365.888-.43.43-.692.858-.89 1.365C.51 3.42.38 3.98.344 4.8.305 5.62.296 5.882.296 7.974c0 2.092.01 2.355.047 3.176.037.82.167 1.38.358 1.87.198.508.46.937.89 1.366.428.428.857.69 1.364.888.49.19 1.05.32 1.87.358.82.038 1.084.047 3.176.047s2.355-.01 3.176-.048c.82-.037 1.38-.167 1.87-.358.507-.197.936-.46 1.365-.888.43-.43.692-.858.89-1.365.19-.49.32-1.05.357-1.87.038-.82.047-1.083.047-3.175 0-2.092-.01-2.355-.047-3.176-.037-.82-.167-1.38-.358-1.87-.198-.508-.46-.937-.89-1.366-.428-.428-.857-.69-1.364-.888-.49-.19-1.05-.32-1.87-.358C10.356.28 10.092.27 8 .27"></path><path d="M8 4.123c-2.127 0-3.852 1.725-3.852 3.852S5.873 11.827 8 11.827s3.852-1.725 3.852-3.852S10.127 4.123 8 4.123zm0 6.352c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM12.708 3.695c0 .473-.383.856-.856.856s-.856-.382-.856-.855.383-.856.856-.856.856.382.856.855"></path></g></svg></span>
+                </a>
+                <a class="social-links__link" target="_blank" href="https://www.facebook.com/youtube/?ref=br_rs">
+                    <svg class="social-links__icon-circle-svg" aria-hidden="true" focusable="false" tabindex="-1" pointer-events="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40"><circle class="fill" cx="20" cy="20" r="20" fill="#292929" shape-rendering="geometricPrecision" stroke-linejoin="round"></circle></svg>
+                    <span class="social-links__text">Facebook</span>
+                    <span class="social-links__icon"><svg class="social-links__icon-svg" aria-hidden="true" focusable="false" tabindex="-1" pointer-events="none" width="8" height="15" viewBox="0 0 8 15" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="a" d="M4 15h4V0H0v15h4z"></path></defs><g fill="none" fill-rule="evenodd"><mask id="b" fill="#fff"><use xlink:href="#a"></use></mask><path d="M5.193 15V8.158H7.55l.354-2.667h-2.71v-1.7c0-.773.22-1.3 1.356-1.3H8V.105C7.75.073 6.888 0 5.887 0c-2.09 0-3.522 1.243-3.522 3.525V5.49H0V8.16h2.365V15h2.828z" fill="#FEFEFE" mask="url(#b)"></path></g></svg></span>
+                </a>
+                <a class="social-links__link" target="_blank" href="https://plus.google.com/+youtube">
+                    <svg class="social-links__icon-circle-svg" aria-hidden="true" focusable="false" tabindex="-1" pointer-events="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40"><circle class="fill" cx="20" cy="20" r="20" fill="#292929" shape-rendering="geometricPrecision" stroke-linejoin="round"></circle></svg>
+                    <span class="social-links__text">Google+</span>
+                    <span class="social-links__icon"><svg class="social-links__icon-svg" style="margin-left:2px;" aria-hidden="true" focusable="false" tabindex="-1" pointer-events="none" width="22" height="14" viewBox="0 0 22 14" xmlns="http://www.w3.org/2000/svg"><path d="M7.143 6v2.4h4.05c-.162 1.03-1.224 3.02-4.05 3.02-2.44 0-4.43-1.98-4.43-4.42s1.99-4.42 4.43-4.42c1.388 0 2.316.58 2.847 1.08l1.94-1.83C10.683.69 9.07 0 7.142 0 3.193 0 0 3.13 0 7s3.194 7 7.143 7C11.265 14 14 11.16 14 7.16c0-.46-.05-.81-.112-1.16H7.143zM22 6h-2V4h-2v2h-2v2h2v2h2V8h2V6z" fill="#FFF" fill-rule="evenodd"></path></svg></span>
+                </a>
+                <a class="social-links__link" target="_blank" href="http://youtube.tumblr.com/">
+                    <svg class="social-links__icon-circle-svg" aria-hidden="true" focusable="false" tabindex="-1" pointer-events="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40"><circle class="fill" cx="20" cy="20" r="20" fill="#292929" shape-rendering="geometricPrecision" stroke-linejoin="round"></circle></svg>
+                    <span class="social-links__text">Tumblr</span>
+                    <span class="social-links__icon"><svg class="social-links__icon-svg" aria-hidden="true" focusable="false" tabindex="-1" pointer-events="none" width="8" height="14" viewBox="0 0 8 14" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="a" d="M8 0H0v13.702h8V0z"></path></defs><g fill="none" fill-rule="evenodd"><mask id="b" fill="#fff"><use xlink:href="#a"></use></mask><path d="M7.33 10.944c-.258.122-.753.228-1.122.237-1.115.03-1.33-.77-1.34-1.35V5.566h2.795V3.49H4.877V0H2.84c-.035 0-.093.03-.1.102C2.62 1.172 2.11 3.045 0 3.795v1.77h1.41v4.476c0 1.535 1.147 3.712 4.18 3.66 1.023-.017 2.16-.438 2.41-.802l-.67-1.954" fill="#FEFEFE" mask="url(#b)"></path></g></svg></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/feedback/api.js"></script>
+    <script src="https://www.gstatic.com/external_hosted/gsap/v1_18_0/TweenMax.min.js"></script>
+    <script src="https://www.gstatic.com/external_hosted/gsap/v1_18_0/utils/Draggable.min.js"></script>
+    <script src="https://www.gstatic.com/external_hosted/gsap/v1_18_0/plugins/ScrollToPlugin.min.js"></script>
+    <script src="https://www.gstatic.com/external_hosted/greensock/plugins/ThrowPropsPlugin.js"></script>
+    <script src="https://www.gstatic.com/external_hosted/clipboardjs/clipboard.min.js"></script>
+    <script src="/yt/about/js/site.min.js"></script>
+
+</body>
