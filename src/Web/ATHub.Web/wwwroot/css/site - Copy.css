@@ -1,4 +1,4 @@
-﻿/* global css and utils */
+﻿/*/* global css and utils */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -91,7 +91,7 @@ html {
 body {
     font-family: Roboto, arial, sans-serif;
     font-weight: 300;
-    background-color: #fff;
+    
     color: #292929;
     min-width: 320px;
     overflow-x: hidden;
@@ -492,7 +492,7 @@ body {
     }
 
 .brand-resources-page {
-    background-color: #f5f5f5;
+    
 }
 
 @media only screen and (max-width: 767px) {
@@ -1953,7 +1953,7 @@ body {
 }
 
 .featured-card__video {
-    background-color: #000;
+    
     cursor: pointer;
     display: block;
     height: 90%;
@@ -2486,6 +2486,7 @@ body {
 }
 
 .hero__iframe-wrapper, .hero__iframe {
+   
     height: 100%;
     left: 0;
     position: absolute;
@@ -3425,7 +3426,7 @@ body {
 .policies-page,
 .copyright-page,
 .experiences-page {
-    background-color: #f5f5f5;
+    
     background-image: url(../media/svgs/page-hero-angle.svg);
     background-position-x: 0;
     background-position-y: 0;
@@ -3496,7 +3497,7 @@ body {
         -ms-flex-align: start;
         -ms-grid-row-align: flex-start;
         align-items: flex-start;
-        background-color: #fff;
+        
         margin-bottom: 24px;
         padding: 0;
     }
@@ -4051,7 +4052,7 @@ body {
 
 .policies-page .tabs,
 .copyright-page .tabs {
-    background-color: transparent;
+    
 }
 
 .policies-page .tabs__snippets,
@@ -6045,4 +6046,4 @@ body {
     padding: 16px;
     position: absolute;
     text-shadow: 0 0 15px #000;
-}
+}*@

@@ -19,17 +19,20 @@ namespace ATHub.Web.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<ATHubUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly IRepository<UserProfile> userProfile;
+        private readonly IRepository<ATHubUser> user;
 
         public IndexModel(
             UserManager<ATHubUser> userManager,
             SignInManager<ATHubUser> signInManager,
             IEmailSender emailSender,
-            IRepository<UserProfile> userProfile)
+            IRepository<UserProfile> userProfile,
+            IRepository<ATHubUser> user)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             this.userProfile = userProfile;
+            this.user = user;
         }
 
         public string Username { get; set; }
@@ -167,6 +170,7 @@ namespace ATHub.Web.Areas.Identity.Pages.Account.Manage
                 await this.userProfile.AddAsync(profile);
                 await this.userProfile.SaveChangesAsync();
                 user.UserProfileId = profile.Id;
+                user.UserProfile = profile;
             }
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

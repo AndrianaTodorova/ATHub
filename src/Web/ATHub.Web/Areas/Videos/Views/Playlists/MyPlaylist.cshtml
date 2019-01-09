@@ -8,29 +8,41 @@
         initPlaylistPlayer();
     })
 </script>
-<div style="margin-top:50px" id="videoPlayerMyPlaylist"></div>
-<div style="float:right">
-    <h3>My Playlist</h3>
-    <hr class="my-1" style="background:white" />
+@if (Model.Videos.Count() > 0)
+{
+    <div style="margin-top:50px" id="videoPlayerMyPlaylist"></div>
+    <div style="float:right">
+        <h3>My Playlist</h3>
+        <hr class="my-1" style="background:white" />
 
-    <div class="panel-body" runat="server" style="overflow-y: scroll; height: 400px; float:right;margin:10px !important ">
-        <table class="table table-hover">
- 
-            <tbody>
-                @for (int i = 0; i < @Model.Videos.Count; i ++)
-                {
-                    var video = Model.Videos[i]; 
-                    <tr class="table-active">
-                        <th scope="row"  style="min-height:200px;min-width:150px"> <img id="@i" width="120" height="100" style="padding-top:3px" src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg" data-toggle="modal" data-src="@video.Link"/></th>
-                        
-                        <td style="text-align:center;vertical-align:middle">
-                            @video.Title.Substring(0, Math.Min(video.Title.Length, 20))
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <div class="panel-body" runat="server" style="overflow-y: scroll; height: 400px; float:right;margin:10px !important ">
+            <table class="table table-hover">
+
+                <tbody>
+                    @for (int i = 0; i < @Model.Videos.Count; i++)
+                    {
+                        var video = Model.Videos[i];
+                        <tr class="table-active">
+                            <th scope="row" style="min-height:200px;min-width:150px"> <img id="@i" class="playlistVideo" width="120" height="100" style="padding-top:3px" src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg" data-toggle="modal" data-src="@video.Link" /></th>
+
+                            <td style="text-align:center;vertical-align:middle">
+                                @video.Title.Substring(0, Math.Min(video.Title.Length, 20))
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+}
+else
+{
+    <h3>My Playlist</h3>
+    <h4>No videos in the playlist</h4>
+    <form asp-action="Index" asp-controller="Home" asp-area="">      
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Add Some Music</button>
+    </form>
+}
+
 
 

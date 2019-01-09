@@ -42,7 +42,7 @@
 };
 
 function initPlaylistPlayer() {
-    let videoCollection = $('img');
+    let videoCollection = $('.playlistVideo');
     let currentIndex = 0;
 
     if (videoCollection.length > 0) {
@@ -66,11 +66,13 @@ function initPlaylistPlayer() {
         }
 
         function onPlayerStateChange(event) {
+          
             if (event.data == YT.PlayerState.ENDED) {
                 let index = ++currentIndex % videoCollection.length;
+                console.log(index);
                 videoCollection[index].click();
+                console.log(videoCollection[index]);
             }
-                
             
         }
     }

@@ -13,10 +13,14 @@
 
                 @if (users.All().FirstOrDefault(u => u.UserName == UserManager.GetUserName(User)).UserProfileId != null)
                 {
-                    <div>
-                        <a id="loggedInUser" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="btn btn-link navbar-btn navbar-link ">@UserManager.GetUserName(User)!</a>
-                        <img asp-area="Identity" class="avatar-image" asp-page="/Account/Manage/Index" src="/StaticFiles/@users.All().FirstOrDefault(u => u.UserName == UserManager.GetUserName(User)).UserProfile.Image.Thumbnail" alt="User picture">
-                    </div>
+                <div>
+                    <a id="loggedInUser" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="btn btn-link navbar-btn navbar-link ">@UserManager.GetUserName(User)!</a>
+                    @if (@users.All().FirstOrDefault(u => u.UserName == UserManager.GetUserName(User)).UserProfile?.Image?.Thumbnail != null)
+                    {
+                        <img asp-area="Identity" class="avatar-image" asp-page="/Account/Manage/Index" src="/StaticFiles/@users.All().FirstOrDefault(u => u.UserName == UserManager.GetUserName(User))?.UserProfile?.Image?.Thumbnail" alt="User picture">
+                    }
+
+                </div>
 
                 }
                 else
