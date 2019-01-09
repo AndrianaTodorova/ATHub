@@ -2,6 +2,7 @@
 using ATHub.Data.Models;
 using ATHub.Services.Data.Models;
 using ATHub.Services.DataServices;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System;
@@ -21,20 +22,20 @@ namespace ATHub.Tets
         {
             var videos = new List<Video>()
             {
-                new Video(){Id = 1, Link = "prosto link", Description = "description"},
-                 new Video(){Id = 2, Link = "prosto drug link", Description = "description"},
-                  new Video(){Id = 3, Link = "prosto treti link", Description = "description"},
+                new Video(){Link = "prosto link", Description = "description"},
+                 new Video(){ Link = "prosto drug link", Description = "description"},
+                  new Video(){ Link = "prosto treti link", Description = "description"},
             };
             await this.DbContext.Videos.AddRangeAsync(videos);
             await this.DbContext.SaveChangesAsync();
-            this.DbContext.Categories.Add(new Category()
+            await this.DbContext.Categories.AddAsync(new Category()
             {
-                Id = 1,
+                
                 Name = "FirstCategory",
                 CreatedOn = DateTime.UtcNow,
                 Videos = videos
             });
-            this.DbContext.SaveChanges();
+            await this.DbContext.SaveChangesAsync();
             var expected = this.DbContext.Categories.Select(a =>
              new SingleCategoryViewModel()
            {
@@ -56,7 +57,7 @@ namespace ATHub.Tets
         public async Task CreateCategory()
         {
             string categoryName = "MyCategory";
-            var expected = new Category() { Id = 1,Name = categoryName };
+            var expected = new Category() { Name = categoryName };
             await this.DbContext.Categories.AddAsync(expected);
             await this.DbContext.SaveChangesAsync();
 
@@ -68,18 +69,19 @@ namespace ATHub.Tets
         {
             string categoryName = "MyCategory";
             string newName = "NewCategoryName";
-            var expected = new Category() { Id = 1, Name = categoryName };
+            var expected = new Category() { Name = categoryName };
             await this.DbContext.Categories.AddAsync(expected);
             await this.DbContext.SaveChangesAsync();
-            int id = 1;
-            var category = this.DbContext.Categories.FirstOrDefault(x => x.Id == id);
+            var cat = this.DbContext.Categories.FirstOrDefault(x => x.Name == categoryName);
+            var category = this.DbContext.Categories.FirstOrDefault(x => x.Id == cat.Id);
         
             category.Name = newName;
             await this.DbContext.SaveChangesAsync();
 
-            var actual = this.CategoryService.EditCategory(id, newName);
+            var actual = this.CategoryService.EditCategory(cat.Id, newName);
 
-            Assert.That(expected.Name.Equals(this.DbContext.Categories.Find(id).Name));
+            Assert.That(newName.Equals(this.DbContext.Categories.Find(cat.Id).Name));
+   
         }
 
         [Test]

@@ -22,7 +22,7 @@ namespace ATHub.Tets
         [Test]
         public async Task GetProfile()
         {
-            var user = this.AddTestingUserToDb();
+            
             var userProfile = new UserProfile()
             {
                 FacebookLink = FacebookLink,
@@ -38,40 +38,42 @@ namespace ATHub.Tets
             };
             await this.DbContext.UsersProfiles.AddAsync(userProfile);
             await this.DbContext.SaveChangesAsync();
-            user.UserProfile = userProfile;
+            this.uploader.UserProfile = userProfile;
             await this.DbContext.SaveChangesAsync();
             var profile = new MyProfileViewModel()
             {
-                Username = user.UserName,
-                Email = user.Email
+                Username = this.uploader.UserName,
+                Email = this.uploader.Email
             };
 
-            profile.FacebookLink = user.UserProfile.FacebookLink;
-            profile.InstagramLink = user.UserProfile.InstagramLink;
-            profile.Birthdate = user.UserProfile.Birthdate;
-            profile.Country = user.UserProfile.Country;
-            profile.Phone = user.UserProfile.Phone;
-            profile.ImageUrl = user.UserProfile.Image.Url;
+            profile.FacebookLink = this.uploader.UserProfile.FacebookLink;
+            profile.InstagramLink = this.uploader.UserProfile.InstagramLink;
+            profile.Birthdate = this.uploader.UserProfile.Birthdate;
+            profile.Country = this.uploader.UserProfile.Country;
+            profile.Phone = this.uploader.UserProfile.Phone;
+            profile.ImageUrl = this.uploader.UserProfile.Image.Url;
            
 
-            var actual = this.ProfileServiceMock.GetProfile(user.Id);
+            var actual = this.ProfileServiceMock.GetProfile(this.uploader.Id);
             var asd = profile.InstagramLink;
             Assert.That(profile.InstagramLink.Equals(actual.InstagramLink));
             Assert.That(profile.FacebookLink.Equals(actual.FacebookLink));
             Assert.That(profile.Country.Equals(actual.Country));
 
         }
-        private ATHubUser AddTestingUserToDb()
-        {
-            var result = new ATHubUser
-            {
-                Id = "1",
-                UserName = "testName",
-                Email = "test@mail.bg",
-            };
-            this.DbContext.Users.Add(result);
-            this.DbContext.SaveChangesAsync();
-            return result;
-        }
+
+        ////TODO test upload image some way
+        //private ATHubUser AddTestingUserToDb()
+        //{
+        //    var result = new ATHubUser
+        //    {
+        //        Id = "1",
+        //        UserName = "testName",
+        //        Email = "test@mail.bg",
+        //    };
+        //    this.DbContext.Users.Add(result);
+        //    this.DbContext.SaveChangesAsync();
+        //    return result;
+        //}
     }
 }

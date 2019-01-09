@@ -14,12 +14,20 @@ namespace ATHub.Tets
         private IPlaylistService PlaylistService => this.ServiceProvider.GetRequiredService<IPlaylistService>();
 
         [Test]
-        public async Task AddToPlaylistInvalidId()
+        public void AddToPlaylistInvalidId()
         {
             var exception = Assert.ThrowsAsync<NullReferenceException>(() =>
                this.PlaylistService.AddToPlaylist(1, null));
             Assert.That(string.Format(ServicesDataConstants.NullVideo, 1).Equals(exception.Message));
 
+        }
+
+        [Test]
+        public void RemoveInvalidPlaylist()
+        {
+            var exception = Assert.ThrowsAsync<NullReferenceException>(() =>
+              this.PlaylistService.Remove(4, null));
+            Assert.That((ServicesDataConstants.VideoAlreadyExists).Equals(exception.Message));
         }
     }
 }
