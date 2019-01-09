@@ -23,7 +23,6 @@ namespace ATHub.Data.Models
         public virtual ICollection<Video> Videos { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
-
       
         public int PlaylistId { get; set; }
         public virtual Playlist Playlist { get; set; }

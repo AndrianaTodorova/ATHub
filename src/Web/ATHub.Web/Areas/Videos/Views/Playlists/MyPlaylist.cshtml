@@ -3,23 +3,34 @@
     ViewData["Title"] = "MyPlaylist";
 }
 <script>
-        $(document).ready(function () {
-            initYouTubeModal();
-        });
+    $(document).ready(function () {
 
+        initPlaylistPlayer();
+    })
 </script>
+<div style="margin-top:50px" id="videoPlayerMyPlaylist"></div>
+<div style="float:right">
+    <h3>My Playlist</h3>
+    <hr class="my-1" style="background:white" />
 
-<h2>MyPlaylist</h2>
-<h3>@Model.VideosCount videos</h3>
-@foreach (var video in @Model.Videos)
-{
-    @Html.Partial("../Modals/Video/SingleVideo")
-<div class="col-12">
-    <p style="word-break:break-word;padding-bottom:10px; height:auto;text-align:left">@video.Title</p>
-    <div style="padding-top:220px; cursor:pointer;">
-        <img id="@video.Id" width="250" height="200" style="padding-top:3px" src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg" class="video" data-toggle="modal" data-src="https://www.youtube.com/embed/@video.Link" data-target="#myModal" />
+    <div class="panel-body" runat="server" style="overflow-y: scroll; height: 400px; float:right;margin:10px !important ">
+        <table class="table table-hover">
+ 
+            <tbody>
+                @for (int i = 0; i < @Model.Videos.Count; i ++)
+                {
+                    var video = Model.Videos[i]; 
+                    <tr class="table-active">
+                        <th scope="row"  style="min-height:200px;min-width:150px"> <img id="@i" width="120" height="100" style="padding-top:3px" src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg" data-toggle="modal" data-src="@video.Link"/></th>
+                        
+                        <td style="text-align:center;vertical-align:middle">
+                            @video.Title.Substring(0, Math.Min(video.Title.Length, 20))
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-    <a class="btn btn-default stat-item" asp-route-id="@video.Id" asp-area="Videos" asp-controller="Playlists" asp-action="Remove"><u>Remove</u></a>
 </div>
-}
+
 

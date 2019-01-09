@@ -161,7 +161,8 @@ namespace ATHub.Web.Areas.Identity.Pages.Account.Manage
                     Birthdate = this.Input.Birthdate,
                     Country = this.Input.Country,
                     FacebookLink = this.Input.FacebookLink,
-                    InstagramLink = this.Input.InstagramLink
+                    InstagramLink = this.Input.InstagramLink, 
+                    
                 };
                 await this.userProfile.AddAsync(profile);
                 await this.userProfile.SaveChangesAsync();

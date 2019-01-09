@@ -2,8 +2,6 @@
 using ATHub.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,7 +10,7 @@ namespace ATHub.Web.Middlewares
     public class SeedDataMiddleware
     {
         private const string ROLE_ADMIN = "Admin";
-        private const string ROLE_MODERATOR = "Moderator";
+        private const string ROLE_USER = "User";
 
         private readonly RequestDelegate _next;
 
@@ -38,15 +36,15 @@ namespace ATHub.Web.Middlewares
                 await roleManager.CreateAsync(new Role(ROLE_ADMIN));
             }
 
-            if (!await roleManager.RoleExistsAsync(ROLE_MODERATOR))
+            if (!await roleManager.RoleExistsAsync(ROLE_USER))
             {
-                await roleManager.CreateAsync(new Role(ROLE_MODERATOR));
+                await roleManager.CreateAsync(new Role(ROLE_USER));
             }
         }
 
         private static async Task SeedUserInRoles(UserManager<ATHubUser> userManager)
         {
-            if (userManager.Users.Count() == 1)
+            if (userManager.Users.Count() == 0)
             {
                 var user = new ATHubUser
                 {

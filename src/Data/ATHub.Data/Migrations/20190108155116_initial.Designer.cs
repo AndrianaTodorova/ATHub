@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ATHub.Data.Migrations
 {
     [DbContext(typeof(ATHubContext))]
-    [Migration("20190102230231_CategoriesEntityWithCreatedDate")]
-    partial class CategoriesEntityWithCreatedDate
+    [Migration("20190108155116_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,6 +85,8 @@ namespace ATHub.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
 
                     b.Property<string>("Name");
 
@@ -215,7 +217,7 @@ namespace ATHub.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UsersRoles");
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("ATHub.Data.Models.Video", b =>
@@ -225,6 +227,8 @@ namespace ATHub.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CategoryId");
+
+                    b.Property<DateTime?>("DeletedOn");
 
                     b.Property<string>("Description");
 

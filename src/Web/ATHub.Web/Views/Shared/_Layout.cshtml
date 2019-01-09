@@ -8,13 +8,15 @@
             search();
             initialSideBarEvents();
             initNewNavBArEvents();
+            $('.alert').hide();
         });
     </script>
-
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>    </div>
     <!------ Include the above in your HEAD tag ---------->
 
     <div class="page-wrapper chiller-theme toggled">
-        <nav id="sidebar" class="sidebar-wrapper">
+        <nav id="sidebar" class="sidebar-wrapper" style="min-width:304px">
             <div id="toggle-sidebar">
 
             </div>
@@ -92,20 +94,24 @@
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->
-            </div>
-            <!-- sidebar-content  -->
-        </nav>
-        <!-- sidebar-wrapper  -->
-        <main class="page-content">
-            <div class="container body-content">
-                @RenderBody()
                 <footer>
                     <hr class="my-1" style="background:white" />
                     <div class="footer-copyright text-center py-2">&copy; CopyRight ATHub 2018. All rights reserved</div>
                 </footer>
             </div>
+            <!-- sidebar-content  -->
+
+        </nav>
+        <!-- sidebar-wrapper  -->
+        <main class="page-content">
+            <div class="container body-content">
+                @RenderBody()
+
+            </div>
         </main>
+
         <!-- page-content" -->
+
     </div>
 
     @RenderSection("Scripts", required: false)

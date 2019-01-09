@@ -194,7 +194,7 @@ namespace ATHub.Services.DataServices
             var videoCategory = this.categoryRepository.All().FirstOrDefault(c => c.Name == category && c.DeletedOn == null);
             if(videoCategory == null)
             {
-                //TODO
+                throw new ArgumentException(string.Format(ServicesDataConstants.InvalidCategoryName,category));
             }
             video.Category = videoCategory;
             videoCategory.Videos.Add(video);

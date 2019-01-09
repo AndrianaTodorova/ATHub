@@ -43,7 +43,7 @@ namespace ATHub.Services.DataServices
             
             if (category == null)
             {
-                throw new ArgumentException("Invalid id");
+                throw new ArgumentException(ServicesDataConstants.InvalidId);
             }
             if (category.DeletedOn == null)
             {
@@ -73,16 +73,16 @@ namespace ATHub.Services.DataServices
             return model;
         }
 
-        public async Task<int> EditCategory(int id, string name)
+        public async Task EditCategory(int id, string name)
         {
             var category = this.ctegoriesRepository.All().FirstOrDefault(x => x.Id == id);
             if(category == null)
             {
-                //TODO exception
+                throw new ArgumentException(ServicesDataConstants.InvalidId);
             }
             category.Name = name;
             await this.ctegoriesRepository.SaveChangesAsync();
-            return category.Id;
+         
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ATHub.Data.Models;
 using ATHub.Services.DataServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,20 +28,29 @@ namespace ATHub.Web.Areas.Videos.Controllers
             this._manager = _manager;
         }
 
+        [Authorize]
         public IActionResult MyPlaylist()
         {
             var username = this.User.Identity.Name;
             var model = this.playlistService.GetPlaylistModel(username);
             return this.View(model);
         }
+      
+       
         public async Task<IActionResult> AddToPlaylist(int id)
         {
             var currenUser = this._manager.GetUserAsync(HttpContext.User).Result;
+          
+            if(currenUser == null)
+            {
+                return Redirect("/Identity/Account/Login?returnUrl=%2F");
+            }
             int videoPlaylistId = await this.playlistService.AddToPlaylist(id, currenUser);
 
             return  this.Redirect("MyPlaylist");
         }
 
+        [Authorize]
         public async Task<IActionResult> Remove(int id)
         {
             var currenUser = this._manager.GetUserAsync(HttpContext.User).Result;

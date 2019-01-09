@@ -4,15 +4,15 @@
     ViewData["Title"] = "Details";
 }
 <hr />
-<iframe width="550" height="315"
-        src="https://www.youtube.com/embed/@Model.Link"></iframe>
-<p style="word-break:break-word;padding-bottom:10px; height:auto;text-align:left">@Model.Title</p>
 <script type="text/javascript">
     $(document).ready(function () {
         comments(@Model.Id);
         newCommentEvent(@Model.Id);
+        initDetailsPlayer('@Model.Link');
     });
 </script>
+<div id="videoPlayerDetailsPage"></div>
+<p style="word-break:break-word;padding-bottom:10px; height:auto;text-align:left">@Model.Title</p>
 <p class="lead">
     <a asp-route-id="@Model.Id" asp-area="Videos" asp-action="AddToPlaylist" asp-controller="Playlists" class="btn btn-primary btn-lg" role="button">Add To Playlist</a>
 </p>
@@ -20,7 +20,7 @@
 <p>@Model.UploaderName</p>
 <p>Uploaded on @Model.UploadDate</p>
 <div class="form-group">
-    
+
     <form id="add_new_comment">
         <label for="addComment">Add comment</label>
         <textarea name="content" id="content" style="width:50%;padding:2%;font-size:1.2em;background-color:silver;" class="form-control" rows="3"></textarea>
@@ -29,4 +29,4 @@
         </p>
     </form>
 </div>
-<div  id="all_comment" class="row"></div>
+<div id="all_comment" class="row"></div>

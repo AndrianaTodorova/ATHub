@@ -10,7 +10,7 @@ namespace ATHub.Services.DataServices
 {
     public interface IProfileService
     {
-        MyProfileViewModel GetProfile(ATHubUser user);
+        MyProfileViewModel GetProfile(string id);
         Task<int> UploadImg(IFormFile file, ATHubUser user);
     }
 }

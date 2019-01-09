@@ -7,6 +7,6 @@ namespace ATHub.Web.Areas.Administrator.Models
 {
     public class AllUsersViewModel
     {
-        public ICollection<ManageUserViewModel> Users { get; set; }
+        public IList<ManageUserViewModel> Users { get; set; }
     }
 }

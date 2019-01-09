@@ -49,7 +49,7 @@ namespace ATHub.Web.Areas.Administrator.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(EditCategoryViewModel model)
         {
-            var categoryId = await this.categoryService.EditCategory(model.Id, model.Name);
+            await this.categoryService.EditCategory(model.Id, model.Name);
             return this.RedirectToAction("ManageCategories", "Categories", new { area = "Administrator" });
         }
     }

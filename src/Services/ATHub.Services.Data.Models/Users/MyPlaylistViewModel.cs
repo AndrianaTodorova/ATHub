@@ -9,6 +9,6 @@ namespace ATHub.Services.Data.Models
     {
         public int VideosCount { get; set; }
 
-        public ICollection<VideoModel> Videos { get; set; }
+        public IList<VideoModel> Videos { get; set; }
     }
 }

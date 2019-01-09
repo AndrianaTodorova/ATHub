@@ -41,10 +41,10 @@ namespace ATHub.Web.Areas.Identity.Controllers
         }
 
         [Authorize]
-        public IActionResult MyProfile()
+        public IActionResult MyProfile(string id)
         {
-            var currenUser = this._manager.GetUserAsync(HttpContext.User).Result;
-            var profile = this.profileService.GetProfile(currenUser);
+           
+            var profile = this.profileService.GetProfile(id);
             return this.View(profile);
         }
     }

@@ -4,14 +4,61 @@
 }
 
 <h2>ManageUsers</h2>
-<div class="form-group">
-    <label for="userDropDown">Select User</label>
-    <select class="custom-select" id="userDropDown">
-        @foreach (var user in @Model.Users)
+@*<div class="form-group">
+        <label for="userDropDown">Select User</label>
+        <select class="custom-select" id="userDropDown">
+            @foreach (var user in @Model.Users)
+            {
+                <option id="@user.Id">
+                    @user.Username
+                </option>
+            }
+        </select>
+    </div>*@
+<table class="table table-hover">
+    <thead>
+        <tr align="center">
+            <th scope="col"><span>Name</span></th>
+            <th scope="col"><span>Role</span></th>
+            <th scope="col"><span>Actions</span></th>
+        </tr>
+    </thead>
+    <tbody>
+   
+        @for (int i = 0; i < Model.Users.Count(); i++)
         {
-            <option id="@user.Id">
-                @user.Username
-            </option>
+            var user = Model.Users[i];
+            if (i % 2 == 0)
+            {
+        <tr class="table-active" align="center">
+            <th scope="row">@user.Username</th>
+            <th scope="row">@user.Role</th>
+            <td>
+                <form method="post" class="form-check-inline" asp-area="Identity" asp-controller="Profile" asp-action="MyProfile" asp-route-id=@user.Id>
+
+                    <button type="submit" class="btn btn-danger">View Profile</button>
+
+                </form>
+
+            </td>
+        </tr>
+            }
+            else
+            {
+        <tr align="center">
+            <th scope="row">@user.Username</th>
+            <th scope="row">@user.Role</th>
+            <td>
+                <form method="post" class="form-check-inline" asp-area="Identity" asp-controller="Profile" asp-action="MyProfile" asp-route-id=@user.Id>
+                    <button type="submit" class="btn btn-danger">View Profile</button>
+                </form>
+
+            </td>
+        </tr>
+            }
         }
-    </select>
-</div>
+
+
+    </tbody>
+</table>
+

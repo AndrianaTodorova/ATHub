@@ -215,7 +215,7 @@ namespace ATHub.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UsersRoles");
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("ATHub.Data.Models.Video", b =>

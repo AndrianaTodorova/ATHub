@@ -56,6 +56,10 @@ namespace ATHub.Services.DataServices
         public async Task<int> Edit(string content,int id)
         {
             var comment = this.commentsRepository.All().FirstOrDefault(c => c.Id == id);
+            if(comment == null)
+            {
+                throw new ArgumentException(ServicesDataConstants.InvalidId);
+            }
             comment.Text = content;
            int x = await this.commentsRepository.SaveChangesAsync();
             return x;
