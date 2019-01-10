@@ -27,7 +27,12 @@
 
                             <td style="text-align:center;vertical-align:middle">
                                 @video.Title.Substring(0, Math.Min(video.Title.Length, 20))
+                                <form asp-action="Remove" asp-controller="Playlists" asp-area="Videos" asp-route-id="@video.Id">
+<button class="btn-primary">Remove From Playlist</button>
+</form>
                             </td>
+
+
                         </tr>
                     }
                 </tbody>
@@ -39,8 +44,8 @@ else
 {
     <h3>My Playlist</h3>
     <h4>No videos in the playlist</h4>
-    <form asp-action="Index" asp-controller="Home" asp-area="">      
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Add Some Music</button>
+    <form asp-action="Index" asp-controller="Home" asp-area="">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Add Some Music</button>
     </form>
 }
 
