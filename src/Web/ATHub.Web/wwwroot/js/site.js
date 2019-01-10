@@ -243,10 +243,7 @@ function requester(url, method, data, successFunction) {
         data: data,
         success: successFunction,
         error: function (request, status, error) {
-            $('.alert').html();
-            $('.alert').append(`<strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
-`);
-            $('.alert').show();
+            alert("Something went wrong!");
         }
 
     })

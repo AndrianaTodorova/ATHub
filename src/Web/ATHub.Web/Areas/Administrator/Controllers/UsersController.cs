@@ -30,7 +30,8 @@ namespace ATHub.Web.Areas.Administrator.Controllers
             var model = this.user.All().Where(p => p.UserName != this.User.Identity.Name).Select(u => new ManageUserViewModel()
             {
                 Username = u.UserName,
-                Role = "asd",
+                Email = u.Email,
+                Videos = u.Videos.Count(),
                 Id = u.Id
             }).ToList();
 

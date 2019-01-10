@@ -19,7 +19,8 @@
     <thead>
         <tr align="center">
             <th scope="col"><span>Name</span></th>
-            <th scope="col"><span>Role</span></th>
+            <th scope="col"><span>Email</span></th>
+            <th scope="col"><span>VideosCount</span></th>
             <th scope="col"><span>Actions</span></th>
         </tr>
     </thead>
@@ -32,7 +33,8 @@
             {
         <tr class="table-active" align="center">
             <th scope="row">@user.Username</th>
-            <th scope="row">@user.Role</th>
+            <th scope="row">@user.Email</th>
+            <th scope="row">@user.Videos</th>
             <td>
                 <form method="post" class="form-check-inline" asp-area="Identity" asp-controller="Profile" asp-action="MyProfile" asp-route-id=@user.Id>
 
@@ -47,7 +49,8 @@
             {
         <tr align="center">
             <th scope="row">@user.Username</th>
-            <th scope="row">@user.Role</th>
+            <th scope="row">@user.Email</th>
+            <th scope="row">@user.Videos</th>
             <td>
                 <form method="post" class="form-check-inline" asp-area="Identity" asp-controller="Profile" asp-action="MyProfile" asp-route-id=@user.Id>
                     <button type="submit" class="btn btn-danger">View Profile</button>

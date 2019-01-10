@@ -92,7 +92,8 @@ body {
     font-family: Roboto, arial, sans-serif;
     font-weight: 300;
     
-    color: #292929;
+  
+
     min-width: 320px;
     overflow-x: hidden;
     -ms-touch-action: manipulation;
@@ -253,7 +254,7 @@ body {
 }
 
 .accordion__trigger {
-    color: #292929;
+    color: white;
     display: inline-block;
     font-size: 12px;
     font-weight: 500;
@@ -268,7 +269,7 @@ body {
 }
 
     .accordion__trigger-open-text:before, .accordion__trigger-close-text:before {
-        background: #292929;
+        background: white;
         bottom: 0;
         content: "";
         height: 2px;
@@ -425,7 +426,7 @@ body {
 }
 
 .api-device-partners__item-link {
-    color: #292929;
+    color: white;
     display: inline-block;
     font-size: 12px;
     font-weight: 500;
@@ -455,7 +456,7 @@ body {
 }
 
     .api-device-partners__link-text:before {
-        background: #292929;
+        background: white;
         bottom: 0;
         content: "";
         height: 2px;
@@ -906,7 +907,7 @@ body {
     font-size: 18px;
     font-weight: 400;
     line-height: 1.44444;
-    color: #292929;
+    color: white;
     display: inline-block;
     overflow: hidden;
     position: relative;
@@ -947,7 +948,7 @@ body {
 }
 
 .card__copy {
-    color: #292929;
+    color: white;
     font-size: 14px;
     font-weight: 300;
     line-height: 1.57143;
@@ -967,7 +968,7 @@ body {
 }
 
 .card__cta {
-    color: #292929;
+    color: white;
     display: inline-block;
     font-size: 12px;
     font-weight: 500;
@@ -983,7 +984,7 @@ body {
 }
 
     .card__cta:before {
-        background: #292929;
+        background: white;
         bottom: 0;
         content: "";
         height: 2px;
@@ -1293,7 +1294,7 @@ body {
 }
 
 .card--resource--dark-bg {
-    background: #292929;
+    background: white;
 }
 
     .card--resource--dark-bg .card__title {
@@ -1359,7 +1360,7 @@ body {
 }
 
 .card--resource-brand-color .card__icon-check--dark {
-    fill: #292929;
+    fill: white;
 }
 
 .card--resource-brand-color .card__title {
@@ -1374,7 +1375,7 @@ body {
 }
 
 .card--resource-brand-color .card__info-item {
-    color: #292929;
+    color: white;
     font-size: 14px;
     font-weight: 300;
     line-height: 1.57143;
@@ -1391,7 +1392,7 @@ body {
 
 .card--resource-brand-color .card__message,
 .card--resource-brand-color .card__message-copied {
-    color: #292929;
+    color: white;
     font-size: 14px;
     font-weight: 500;
     line-height: 1.57143;
@@ -1629,7 +1630,7 @@ body {
 }
 
 .connect__item-link {
-    color: #292929;
+    color: white;
     display: inline-block;
     font-size: 12px;
     font-weight: 500;
@@ -1643,7 +1644,7 @@ body {
 }
 
     .connect__item-link:before {
-        background: #292929;
+        background: white;
         bottom: 0;
         content: "";
         height: 2px;
@@ -1704,12 +1705,12 @@ body {
     display: inline-block;
     padding-bottom: 9px;
     position: relative;
-    color: #292929;
+    color: white;
     font-weight: 500;
 }
 
     .connect__press-link:before {
-        background: #292929;
+        background: white;
         bottom: 0;
         content: "";
         height: 2px;
@@ -1886,7 +1887,7 @@ body {
 
 @media only screen and (max-width: 767px) {
     .featured-card__player {
-        background: #292929;
+        background: white;
         cursor: pointer;
         padding: 0;
         position: relative;
@@ -2142,7 +2143,7 @@ body {
 }
 
 .freedoms__copy {
-    color: #292929;
+    color: white;
     font-size: 14px;
     font-weight: 300;
     line-height: 1.57143;
@@ -2348,7 +2349,8 @@ body {
 }
 
 .hero__title {
-    margin-top: 100px;
+    margin-top: 30px;
+    padding-bottom: 75px;
     /* For IE browser. */
 }
 
@@ -2719,7 +2721,7 @@ body {
 }
 
 .site-menu__link {
-    color: #292929;
+    color: white;
     font-size: 14px;
     font-weight: 300;
     line-height: 1.57143;
@@ -2761,11 +2763,11 @@ body {
 }
 
 .site-menu__alt-close-btn {
-    color: #292929;
+    color: white;
     font-size: 14px;
     font-weight: 300;
     line-height: 1.57143;
-    color: #292929;
+    color: white;
     display: block;
     font-weight: 500;
     opacity: 0;
@@ -2888,7 +2890,7 @@ body {
 }
 
 .news__item-link {
-    color: #292929;
+    color: white;
     display: inline-block;
     font-size: 12px;
     font-weight: 500;
@@ -2906,7 +2908,7 @@ body {
 }
 
     .news__link-text:before {
-        background: #292929;
+        background: white;
         bottom: 0;
         content: "";
         height: 2px;
@@ -3095,7 +3097,7 @@ body {
 }
 
 .photo-module__text {
-    color: #292929;
+    color: white;
     font-size: 14px;
     font-weight: 300;
     line-height: 1.57143;
@@ -3344,7 +3346,7 @@ body {
 }
 
 .page-angle-hero__link {
-    color: #292929;
+    color: white;
     display: inline-block;
     font-size: 12px;
     font-weight: 500;
@@ -3387,7 +3389,7 @@ body {
 }
 
     .page-angle-hero__link-text:before {
-        background: #292929;
+        background: white;
         bottom: 0;
         content: "";
         height: 2px;
@@ -3537,7 +3539,7 @@ body {
 }
 
 .page-hero__intro {
-    color: #292929;
+    color: white;
     font-size: 14px;
     font-weight: 300;
     line-height: 1.57143;
@@ -3770,7 +3772,7 @@ body {
 }
 
 .statistics__item {
-    color: #292929;
+    color: white;
     font-size: 14px;
     font-weight: 300;
     line-height: 1.57143;
@@ -4081,7 +4083,7 @@ body {
 .policies-page .tabs__opening-snippet, .policies-page .tabs__closing-snippet,
 .copyright-page .tabs__opening-snippet,
 .copyright-page .tabs__closing-snippet {
-    color: #292929;
+    color: white;
     font-size: 14px;
     font-weight: 300;
     line-height: 1.57143;
@@ -4288,7 +4290,7 @@ body {
 }
 
 .tabs__left-arrow, .tabs__right-arrow {
-    fill: #292929;
+    fill: white;
     margin: 0 auto;
 }
 
@@ -4308,7 +4310,7 @@ body {
 .tabs__nav-button {
     font-size: 18px;
     font-weight: 500;
-    color: #292929;
+    color: white;
     cursor: pointer;
     margin: 0 30px;
     padding: 16px;
@@ -4390,7 +4392,7 @@ body {
 }
 
 .tabs__nav-button:hover, .tabs__nav-button:focus {
-    color: #292929;
+    color: white;
     outline: 0;
 }
 
@@ -4645,7 +4647,7 @@ body {
     font-size: 14px;
     font-weight: 300;
     line-height: 1.71429;
-    color: #292929;
+    color: white;
     font-weight: 500;
     transition: color 0.3s ease-in;
     font-weight: 500;
@@ -4665,7 +4667,7 @@ body {
     }
 
 .resource-detail__inline-link {
-    color: #292929;
+    color: white;
     font-weight: 500;
     transition: color 0.3s ease-in;
 }
@@ -4746,7 +4748,7 @@ body {
 }
 
 .resource-detail__visual-asset-description {
-    color: #292929;
+    color: white;
     font-size: 12px;
     line-height: 1.5;
 }
@@ -4897,7 +4899,7 @@ body {
     font-size: 18px;
     font-weight: 400;
     line-height: 1.44444;
-    color: #292929;
+    color: white;
     margin: 0 0 20px;
 }
 
@@ -4960,7 +4962,7 @@ body {
 
 .resource-detail-content__inline-link,
 .resource-detail-content a {
-    color: #292929;
+    color: white;
     font-weight: 500;
     transition: color 0.3s ease-in;
 }
@@ -4972,7 +4974,7 @@ body {
     }
 
 .resource-detail-content__link {
-    color: #292929;
+    color: white;
     display: inline-block;
     font-size: 12px;
     font-weight: 500;
@@ -5062,7 +5064,7 @@ body {
     font-size: 18px;
     font-weight: 400;
     line-height: 1.44444;
-    color: #292929;
+    color: white;
     margin: 0 0 20px;
 }
 
@@ -5136,7 +5138,7 @@ body {
         font-size: 14px;
         font-weight: 300;
         line-height: 1.71429;
-        color: #292929;
+        color: white;
         font-weight: 500;
         transition: color 0.3s ease-in;
         font-weight: 500;
@@ -5156,7 +5158,7 @@ body {
         }
 
 .resource-detail-indented-content a {
-    color: #292929;
+    color: white;
     font-weight: 500;
     transition: color 0.3s ease-in;
 }
@@ -5166,7 +5168,7 @@ body {
     }
 
 .resource-detail-indented-content__link {
-    color: #292929;
+    color: white;
     display: inline-block;
     font-size: 12px;
     font-weight: 500;
@@ -5245,7 +5247,7 @@ body {
 }
 
 .resource-disclaimer__link {
-    color: #292929;
+    color: white;
     display: inline-block;
     font-size: 12px;
     font-weight: 500;
@@ -5261,7 +5263,7 @@ body {
 }
 
     .resource-disclaimer__link-text:before {
-        background: #292929;
+        background: white;
         bottom: 0;
         content: "";
         height: 2px;
@@ -5380,7 +5382,7 @@ body {
 }
 
     .social-links__link .social-links__icon-circle-svg .fill {
-        fill: #292929;
+        fill: white;
         transition: all 0.25s ease-in-out;
     }
 
@@ -5400,7 +5402,7 @@ body {
 
 .social-links__text {
     clip: rect(1px, 1px, 1px, 1px);
-    color: #292929;
+    color: white;
     height: 1px;
     margin: 0;
     overflow: hidden;
@@ -5498,7 +5500,7 @@ body {
     }
 
         .fair-use__list-item a:hover {
-            color: #292929;
+            color: white;
         }
 
 .yt-accordion__expandable--is-expanded .yt-accordion__btn {
@@ -5552,7 +5554,7 @@ body {
         }
 
 .yt-accordion__label {
-    color: #292929;
+    color: white;
     line-height: 2.5em;
     font-size: 20px;
     font-weight: 400;
@@ -5561,7 +5563,7 @@ body {
 }
 
 .yt-accordion__expand-icon {
-    fill: #292929;
+    fill: white;
     width: 20px;
     height: 20px;
     margin-left: 16px;
@@ -5983,7 +5985,7 @@ body {
 }
 
 .video-gallery__title {
-    color: #292929;
+    color: white;
     display: block;
     line-height: 1.325em;
     font-size: 24px;
@@ -6001,7 +6003,7 @@ body {
     }
 
         .video-gallery__author a:hover {
-            color: #292929;
+            color: white;
         }
 
 .video-gallery__thumbs {
