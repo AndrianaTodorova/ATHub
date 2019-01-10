@@ -35,6 +35,13 @@ namespace ATHub.Web.Areas.Videos.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Trending()
+        {
+            var model = this.videoService.GetTrendingVideoModel();
+            return View(model);
+        }
+
         public IActionResult Details(int id)
         {
             if (!this.User.Identity.IsAuthenticated)

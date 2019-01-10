@@ -13,10 +13,10 @@
     <div class="row justify-content-between">
         @foreach (var video in Model.Videos)
         {
-            <div class="col-12">
-                <p style="word-break:break-word;padding-bottom:10px; height:auto;text-align:center">@video.Title</p>
+            <div class="col-4">
+                <p style="word-break:break-word;padding-bottom:10px; height:auto;text-align:center">@string.Concat(video.Title.Substring(0, Math.Min(30, video.Title.Length)), video.Title.Length > 30 ? "..." : "")</p>
                 <div style="padding-top:220px; cursor:pointer">
-                    <img class="searchImg video" id="@video.Id" width="250" height="200" src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg"  data-toggle="modal" data-src="https://www.youtube.com/embed/@video.Link" data-target="#myModal" />
+                    <img class="searchImg video" id="@video.Id" width="250" height="200" src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg"  data-toggle="modal" data-src="@video.Link" data-target="#myModal" />
                 </div>
             </div>
         }

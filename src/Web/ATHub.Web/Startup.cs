@@ -41,6 +41,9 @@ namespace ATHub.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.ConfigureApplicationCookie(opt =>
+            { opt.LoginPath = "/Identity/Account/Login"; }
+            );
 
             services.AddDbContext<ATHubContext>(options =>
                 options.UseSqlServer(

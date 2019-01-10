@@ -26,14 +26,6 @@
         <textarea class="form-control" id="description" rows="4" placeholder="Description..."
                   name="description"></textarea>
     </div>
-    @*<div class="channel-tags-holder mt-4">
-            <div class="form-group">
-                <div class="d-flex justify-content-center">
-                    <label for="category" class="text-dark">Category</label>
-                </div>
-                <input type="text" class="form-control" id="category" placeholder="Category..." name="category">
-            </div>
-        </div>*@
     <select class="form-control form-control-sm w-50 justify-content-around" id="category" name="category">
       @foreach(var item in categoryService.GetCategories())
       {

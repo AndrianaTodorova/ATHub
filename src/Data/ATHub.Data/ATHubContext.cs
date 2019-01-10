@@ -22,7 +22,7 @@ namespace ATHub.Data
 
         public DbSet<UserProfile> UsersProfiles { get; set; }
 
-        public DbSet<UserRole> UsersRoles { get; set; }
+       // public DbSet<UserRole> UsersRoles { get; set; }
 
         public DbSet<VideoPlaylist> VideosPlaylists { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)

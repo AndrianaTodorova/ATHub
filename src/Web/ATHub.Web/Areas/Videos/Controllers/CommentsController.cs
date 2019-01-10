@@ -33,6 +33,7 @@ namespace ATHub.Web.Areas.Videos.Controllers
         public JsonResult Add(string content, int id)
         {
             var currenUser = this._manager.GetUserAsync(HttpContext.User).Result;
+            
             var commentId = this.commentsService.Add(content, currenUser, id).Result;
             var asd = new
             {

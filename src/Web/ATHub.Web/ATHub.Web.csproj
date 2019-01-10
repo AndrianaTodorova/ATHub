@@ -23,6 +23,9 @@
     <Content Update="Areas\Administrator\Views\Users\ManageUsers.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="Areas\Administrator\Views\Videos\ManageVideos.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Areas\Administrator\Views\_ViewImports.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -72,7 +75,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Administrator\Data\" />
     <Folder Include="StaticFiles\images\thumbs\" />
   </ItemGroup>
 

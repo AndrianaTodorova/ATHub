@@ -28,7 +28,9 @@ namespace ATHub.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -233,7 +235,7 @@ namespace ATHub.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UsersRoles",
+                name: "UserRole",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -243,15 +245,15 @@ namespace ATHub.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersRoles", x => x.Id);
+                    table.PrimaryKey("PK_UserRole", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UsersRoles_AspNetRoles_RoleId",
+                        name: "FK_UserRole_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_UsersRoles_AspNetUsers_UserId",
+                        name: "FK_UserRole_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -267,6 +269,7 @@ namespace ATHub.Data.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Link = table.Column<string>(nullable: true),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     UploadDate = table.Column<DateTime>(nullable: false),
                     UploaderId = table.Column<string>(nullable: true),
                     Views = table.Column<long>(nullable: false),
@@ -406,19 +409,19 @@ namespace ATHub.Data.Migrations
                 filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersProfiles_ImageId",
-                table: "UsersProfiles",
-                column: "ImageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UsersRoles_RoleId",
-                table: "UsersRoles",
+                name: "IX_UserRole_RoleId",
+                table: "UserRole",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersRoles_UserId",
-                table: "UsersRoles",
+                name: "IX_UserRole_UserId",
+                table: "UserRole",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersProfiles_ImageId",
+                table: "UsersProfiles",
+                column: "ImageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Videos_CategoryId",
@@ -462,7 +465,7 @@ namespace ATHub.Data.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "UsersRoles");
+                name: "UserRole");
 
             migrationBuilder.DropTable(
                 name: "VideosPlaylists");

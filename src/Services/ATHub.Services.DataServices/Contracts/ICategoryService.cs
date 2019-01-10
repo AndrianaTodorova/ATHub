@@ -12,6 +12,6 @@ namespace ATHub.Services.DataServices
         Task<int> DeleteCategory(int id);
         IEnumerable<string> GetCategories();
         IList<SingleCategoryViewModel> GetAllCategories();
-        Task<int> EditCategory(int id, string name);
+        Task EditCategory(int id, string name);
     }
 }

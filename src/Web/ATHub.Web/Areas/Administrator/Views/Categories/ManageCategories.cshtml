@@ -17,15 +17,10 @@
 
                     $('#editCategoryName').val(src);
                     $('#editCategoryId').val(id);
-                  
                 });
-                //$('#editCategoryModal').on('hide.bs.modal', function (b) {
-
-                //    $("#video").attr('src', src);
-                //});
             });
+        });
     });
-});
 </script>
 <hr />
 <div id="newCategoryModal" class="modal">
@@ -40,7 +35,7 @@
             <div class="modal-body">
                 <form id="newCategoryForm" class="form-inline my-2 my-lg-0" asp-area="Administrator" asp-controller="Categories" asp-action="Create">
                     <input required type="text" id="newCategoryName" class="awesomplete form-control mr-sm-2" name="name" />
-  
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -93,30 +88,49 @@
             var category = Model.AllCategories[i];
             if (i % 2 == 0)
             {
-        <tr class="table-active" align="center">
-            <th scope="row">@category.Name</th>
-            <td>@category.CreatedOn</td>
-            <td>@category.VideosCount</td>
-            <td><form method="post" class="form-check-inline" asp-area="Administrator" asp-controller="Categories" asp-action="Delete" asp-route-id=@category.Id><button type="submit" class="btn btn-danger">Delete</button></form>
-            <button id=@category.Id class="btn btn-success" data-toggle="modal" data-target="#editCategoryModal" data-src='@category.Name'>Edit</button></td>
-        </tr>
+                <tr class="table-active" align="center">
+                    <th scope="row">@category.Name</th>
+                    <td>@category.CreatedOn</td>
+                    <td>@category.VideosCount</td>
+                    <td>
+                        <form method="post" class="form-check-inline" asp-area="Administrator" asp-controller="Categories" asp-action="Delete" asp-route-id=@category.Id>
+                            @if (category.DeletedOn == null)
+                            {
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-danger">Recover</button>
+                            }
+                        </form>
+                        <button id=@category.Id class="btn btn-success" data-toggle="modal" data-target="#editCategoryModal" data-src='@category.Name'>Edit</button>
+                    </td>
+                </tr>
             }
             else
             {
-        <tr align="center">
-            <th scope="row">@category.Name</th>
-            <td>@category.CreatedOn</td>
-            <td>@category.VideosCount</td>
-            <td><form  method="post" class="form-check-inline" asp-area="Administrator" asp-controller="Categories" asp-action="Delete" asp-route-id=@category.Id><button type="submit" class="btn btn-danger">Delete</button></form>
-            <button id=@category.Id class="btn btn-success"  data-toggle="modal" data-target="#editCategoryModal" data-src='@category.Name'>Edit</button></td>
-        </tr>
+                <tr align="center">
+                    <th scope="row">@category.Name</th>
+                    <td>@category.CreatedOn</td>
+                    <td>@category.VideosCount</td>
+                    <td>
+                        <form method="post" class="form-check-inline" asp-area="Administrator" asp-controller="Categories" asp-action="Delete" asp-route-id=@category.Id>
+                            @if (category.DeletedOn == null)
+                            {
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-danger">Recover</button>
+                            }
+                        </form>
+                        <button id=@category.Id class="btn btn-success" data-toggle="modal" data-target="#editCategoryModal" data-src='@category.Name'>Edit</button>
+                    </td>
+                </tr>
             }
         }
 
 
     </tbody>
 </table>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 

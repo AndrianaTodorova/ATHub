@@ -5,23 +5,22 @@
 <body>
     <script>
         $(document).ready(function () {
-            //search();
-            //initialSideBarEvents();
+            search();
+            initialSideBarEvents();
             initNewNavBArEvents();
+            $('.alert').hide();
         });
     </script>
-
-    <!------ Include the above in your HEAD tag ---------->
- 
+  
     <div class="page-wrapper chiller-theme toggled">
-        <nav id="sidebar" class="sidebar-wrapper">
+        <nav id="sidebar" class="sidebar-wrapper" style="min-width:304px">
             <div id="toggle-sidebar">
-             
+
             </div>
             <div class="sidebar-content">
 
                 <div class="sidebar-brand">
-                    <a href="/Home">ATHub</a>
+                    <a style="text-align:center" href="/Home"><img style=" height:90px" src="/StaticFiles/images/cutmypic.png"/></a>
                 </div>
                 <div class="sidebar-header">
 
@@ -51,52 +50,66 @@
                                 <a href="#">Administration</a>
                             </li>
                             <li>
-                                <a asp-area="Administrator" asp-controller="Categories" asp-action="ManageCategories" class="nav-link">Manage Categories</a>
+                                <a asp-area="Administrator" asp-controller="Categories" asp-action="ManageCategories" class="nav-link">🔧 Manage Categories</a>
                             </li>
                             <li>
-                                <a asp-area="Administrator" asp-controller="Users" asp-action="ManageUsers" class="nav-link">Manage Users</a>
+                                <a asp-area="Administrator" asp-controller="Users" asp-action="ManageUsers" class="nav-link">🔧 Manage Users</a>
+                            </li>
+                            <li>
+                                <a asp-area="Administrator" asp-controller="Videos" asp-action="ManageVideos" class="nav-link">🔧 Manage Videos</a>
                             </li>
                         }
                         <li class="sidebar-brand">
                             <a href="#">Actions</a>
                         </li>
                         <li>
-                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home <span class="sr-only">(current)</span></a>
+
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">
+                                &#x1F3E0; Home <span class="sr-only">(current)</span>
+                            </a>
                         </li>
+
                         <li>
-                            <a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a>
+                            <a asp-area="Videos" asp-controller="Videos" asp-action="Trending" class="nav-link">💞 Trending</a>
                         </li>
 
                         @if (this.User.Identity.IsAuthenticated)
                         {
                             <li>
-                                <a asp-area="Videos" asp-controller="Videos" asp-action="Create" class="nav-link">Create</a>
+                                <a asp-area="Videos" asp-controller="Videos" asp-action="Create" class="nav-link">&#x2702; Create</a>
                             </li>
                             <li>
-                                <a asp-area="Videos" asp-controller="Playlists" asp-action="MyPlaylist" class="nav-link">My playlist</a>
+                                <a asp-area="Videos" asp-controller="Playlists" asp-action="MyPlaylist" class="nav-link">🎵 My playlist</a>
                             </li>
                         }
-
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">&#x27AE; About</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">&#x260F; Contact</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->
+                <footer>
+                    <hr class="my-1" style="background:white" />
+                    <div class="footer-copyright text-center py-2">&copy; CopyRight ATHub 2018.</div>
+                    <div class="footer-copyright text-center py-2"> All rights reserved</div>
+                </footer>
             </div>
             <!-- sidebar-content  -->
+
         </nav>
         <!-- sidebar-wrapper  -->
         <main class="page-content">
             <div class="container body-content">
                 @RenderBody()
-                <footer>
-                    <hr class="my-1" style="background:white" />
-                    <div class="footer-copyright text-center py-2">&copy; CopyRight ATHub 2018. All rights reserved</div>
-                </footer>
+
             </div>
         </main>
+
         <!-- page-content" -->
+
     </div>
 
     @RenderSection("Scripts", required: false)

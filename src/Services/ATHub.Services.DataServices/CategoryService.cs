@@ -40,39 +40,49 @@ namespace ATHub.Services.DataServices
         public async Task<int> DeleteCategory(int id)
         {
             var category = this.ctegoriesRepository.All().FirstOrDefault(x => x.Id == id);
+            
             if (category == null)
             {
-                throw new NullReferenceException(string.Format(ServicesDataConstants.InvalidCategoryName, id));
+                throw new ArgumentException(ServicesDataConstants.InvalidId);
             }
-            category.DeletedOn = DateTime.UtcNow;
+            if (category.DeletedOn == null)
+            {
+                category.DeletedOn = DateTime.UtcNow;
+            }
+            else
+            {
+                category.DeletedOn = null;
+            }
+
             await this.ctegoriesRepository.SaveChangesAsync();
-            return category.Id;
+            return id;
         }
 
         public IList<SingleCategoryViewModel> GetAllCategories()
         {
-            var model = this.ctegoriesRepository.All().Where(c => c.DeletedOn == null).Select(a =>
+            var model = this.ctegoriesRepository.All().Select(a =>
             new SingleCategoryViewModel()
             {
                 Id = a.Id,
                 Name = a.Name,
                 VideosCount = a.Videos.Count(),
-                CreatedOn = a.CreatedOn.ToShortDateString()
+                CreatedOn = a.CreatedOn.ToShortDateString(),
+                DeletedOn = a.DeletedOn.HasValue ? a.DeletedOn.Value.ToString("yyyy-MM-dd") : null
             }).OrderBy(x => x.CreatedOn).ToList();
 
             return model;
         }
 
-        public async Task<int> EditCategory(int id, string name)
+        public async Task EditCategory(int id, string name)
         {
             var category = this.ctegoriesRepository.All().FirstOrDefault(x => x.Id == id);
             if(category == null)
             {
-                //TODO exception
+                throw new ArgumentException(ServicesDataConstants.InvalidId);
             }
             category.Name = name;
             await this.ctegoriesRepository.SaveChangesAsync();
-            return category.Id;
+         
         }
     }
 }

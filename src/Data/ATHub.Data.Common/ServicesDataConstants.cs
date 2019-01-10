@@ -11,6 +11,7 @@ namespace ATHub.Data.Common
         public const string NullContent = "Content cannot be null";
         public const string NullVideo = "Video with id {0} does not exist";
         public const string VideoAlreadyExists = "Video already exists in the playlist";
+        public const string InvalidId = "Invalid id";
 
     }
 }

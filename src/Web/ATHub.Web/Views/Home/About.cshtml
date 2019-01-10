@@ -1,7 +1,74 @@
 ﻿@{
     ViewData["Title"] = "About";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+<link href="~/css/site - Copy.css" rel="stylesheet" />
+<body class="home-page js-home-header">
+    <div class="js-intro-animation animation-wrapper" style="">
+        <section class="hero">
+            <div class="hero__inner">
+                <h1 class="hero__title">
+                    <span class="hero__title-text">Всичко за YouTube</span>
+                    <img src="~/StaticFiles/images/cutmypic.png" />
 
-<p>Use this area to provide additional information.</p>
+                </h1>
+                <h2 class="hero__mission-intro js-header-sub-logo">
+                    Our mission is to provide a space for expression and to open the world to everyone.
+                </h2>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/qEKHEg8Zr5E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <span class="hero__iframe-wrapper js-hero-video-wrapper">
+                    <span class="hero__iframe js-hero-video-yt" data-video="kwmFPKQAX4g"></span>
+                </span>
+                <p class="hero__mission">We believe that everyone has the right to vote and that the world is getting better when we listen, share and build a community through our stories.</p>
+            </div>
+            <div class="hero__angle-container">
+                <div class="hero__angle hero__angle--top js-parallaxed" data-speed="0.03" style="transform: matrix(0.99452, -0.10453, 0.10453, 0.99452, 0, -8.79232);"></div>
+                <div class="hero__angle hero__angle--bottom js-parallaxed" data-speed="0.03" style="transform: matrix(0.99452, 0.10453, -0.10453, 0.99452, 0, -8.67317);"></div>
+            </div>
+        </section><section class="freedoms">
+            <div class="freedoms__inner js-freedom-ribbons">
+                <h2 class="freedoms__section-title">
+                    Our values ​​are based on four fundamental freedoms that are fundamental to our essence.
+                </h2>
+                <div class="freedoms__item js-parallaxed" data-speed="0.03" style="transform: matrix(1, 0, 0, 1, 0, -1.00191);">
+                    <h3 class="freedoms__title">
+                        Freedom of <span class="freedoms__ribbon js-freedom-ribbon freedoms__ribbon--active">speech</span>
+                    </h3>
+                    <p class="freedoms__copy">
+                        We believe that people should be able to speak freely, share their opinions, promote open dialogue, and that creative freedom reveals new voices, formats and opportunities.
+                    </p>
+                </div>
+                <div class="freedoms__item js-parallaxed" data-speed="0.08" style="transform: matrix(1, 0, 0, 1, 0, -19.4032);">
+                    <h3 class="freedoms__title">
+                        Free access to <span class="freedoms__ribbon js-freedom-ribbon freedoms__ribbon--active">information</span>
+                    </h3>
+                    <p class="freedoms__copy">
+                        We believe that everyone should have easy and free access to information and that videos are a powerful tool for learning, building understanding and documenting small and large world events.
+                    </p>
+                </div>
+                <div class="freedoms__item js-parallaxed" data-speed="0.03" style="transform: matrix(1, 0, 0, 1, 0, -5.49508);">
+                    <h3 class="freedoms__title">
+                        Free access to <span class="freedoms__ribbon js-freedom-ribbon freedoms__ribbon--active">opportunities</span>
+                    </h3>
+                    <p class="freedoms__copy">
+                        We believe that everyone should be able to be found, develop a business, and achieve their goals. People decide what is popular, not the media.
+                    </p>
+                </div>
+                <div class="freedoms__item js-parallaxed" data-speed="0.08" style="transform: matrix(1, 0, 0, 1, 0, -19.3977);">
+                    <h3 class="freedoms__title">
+                        Freedom of <span class="freedoms__ribbon js-freedom-ribbon freedoms__ribbon--active">belonging</span>
+                    </h3>
+                    <p class="freedoms__copy">
+                        We believe that everyone should be able to find support in communities, overcome obstacles, cross borders, and unite around common interests and favorite activities.
+                    </p>
+                </div>
+            </div>
+    </div>
+    <script src="https://www.gstatic.com/feedback/api.js"></script>
+    <script src="https://www.gstatic.com/external_hosted/gsap/v1_18_0/TweenMax.min.js"></script>
+    <script src="https://www.gstatic.com/external_hosted/gsap/v1_18_0/utils/Draggable.min.js"></script>
+    <script src="https://www.gstatic.com/external_hosted/gsap/v1_18_0/plugins/ScrollToPlugin.min.js"></script>
+    <script src="https://www.gstatic.com/external_hosted/greensock/plugins/ThrowPropsPlugin.js"></script>
+    <script src="https://www.gstatic.com/external_hosted/clipboardjs/clipboard.min.js"></script>
+    <script src="/yt/about/js/site.min.js"></script>
+
+</body>

@@ -3,10 +3,8 @@ using ATHub.Data.Models;
 using ATHub.Web.Areas.Administrator.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace ATHub.Web.Areas.Administrator.Controllers
 {
@@ -14,20 +12,29 @@ namespace ATHub.Web.Areas.Administrator.Controllers
     public class UsersController : Controller
     {
         public readonly IRepository<ATHubUser> user;
+        public readonly IRepository<UserRole> roles;
 
-        public UsersController(IRepository<ATHubUser> user)
+        public UsersController(IRepository<ATHubUser> user,
+            IRepository<UserRole> roles)
         {
             this.user = user;
+            this.roles = roles;
         }
 
         [Authorize(Roles = "Admin")]
         public IActionResult ManageUsers()
         {
+            var roless = ((ClaimsIdentity)User.Identity).Claims
+                .Where(c => c.Type == ClaimTypes.Role)
+                .Select(c => c.Value);
             var model = this.user.All().Where(p => p.UserName != this.User.Identity.Name).Select(u => new ManageUserViewModel()
             {
                 Username = u.UserName,
+                Email = u.Email,
+                Videos = u.Videos.Count(),
                 Id = u.Id
             }).ToList();
+
             var users = new AllUsersViewModel()
             {
                 Users = model

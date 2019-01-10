@@ -215,7 +215,7 @@ namespace ATHub.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UsersRoles");
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("ATHub.Data.Models.Video", b =>
@@ -225,6 +225,8 @@ namespace ATHub.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CategoryId");
+
+                    b.Property<DateTime?>("DeletedOn");
 
                     b.Property<string>("Description");
 

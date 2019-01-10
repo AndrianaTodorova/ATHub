@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATHub.Services.DataServices
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATHub.Services.Data.Models", "Services\ATHub.Services.Data.Models\ATHub.Services.Data.Models.csproj", "{D0E0CC60-D966-42F3-90B7-728A6A79ABDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "ATHub.Tets\Tests.csproj", "{3665C1E6-3A6C-4CE6-A89F-90F5DEC5559F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{D0E0CC60-D966-42F3-90B7-728A6A79ABDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0E0CC60-D966-42F3-90B7-728A6A79ABDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0E0CC60-D966-42F3-90B7-728A6A79ABDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3665C1E6-3A6C-4CE6-A89F-90F5DEC5559F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3665C1E6-3A6C-4CE6-A89F-90F5DEC5559F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3665C1E6-3A6C-4CE6-A89F-90F5DEC5559F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3665C1E6-3A6C-4CE6-A89F-90F5DEC5559F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

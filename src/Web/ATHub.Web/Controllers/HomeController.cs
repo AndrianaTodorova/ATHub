@@ -64,7 +64,7 @@ namespace ATHub.Web.Controllers
         {
             List<SearchModel> modelList = this.videoRepository
                 .All()
-                .Where(x => x.Name.Contains(searchParam))
+                .Where(x => x.Name.Contains(searchParam) && x.DeletedOn == null)
                 .Select(v => new SearchModel()
                 {
                     Id = v.Id,

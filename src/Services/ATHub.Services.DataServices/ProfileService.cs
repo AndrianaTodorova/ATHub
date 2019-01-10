@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATHub.Data.Common;
@@ -24,11 +25,33 @@ namespace ATHub.Services.DataServices
             this.imageRepository = imageRepository;
             this.userProfileRepository = userProfileRepository;
         }
+
+        public MyProfileViewModel GetProfile(string id)
+        {
+            var user = this.userRepository.All().FirstOrDefault(u => u.Id == id);
+            var profile = new MyProfileViewModel()
+            {
+                Username = user.UserName,
+                Email = user.Email
+            };
+            if (user.UserProfileId != null)
+            {
+
+                profile.FacebookLink = user.UserProfile.FacebookLink;
+                profile.InstagramLink = user.UserProfile.InstagramLink;
+                profile.Birthdate = user.UserProfile.Birthdate;
+                profile.Country = user.UserProfile.Country;
+                profile.Phone = user.UserProfile.Phone;
+                profile.ImageUrl = user.UserProfile.Image.Url;
+            }
+            return profile;
+        }
+
         public async Task<int> UploadImg(IFormFile file, ATHubUser user)
         {
             string baseImagePath = Directory.GetCurrentDirectory() + "/StaticFiles";
             string baseImageFile = baseImagePath + "/images/" + file.FileName;
-            using (var stream = new FileStream( baseImageFile, FileMode.Create))
+            using (var stream = new FileStream(baseImageFile, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
@@ -38,7 +61,7 @@ namespace ATHub.Services.DataServices
 
             var image = System.Drawing.Image.FromFile(baseImageFile);
             var thumb = image.GetThumbnailImage(120, 120, () => false, IntPtr.Zero);
-             thumb.Save(Path.ChangeExtension(thumbDirectory, "png"));
+            thumb.Save(Path.ChangeExtension(thumbDirectory, "png"));
             var img = new Image()
             {
                 Url = "/images/" + file.FileName,
